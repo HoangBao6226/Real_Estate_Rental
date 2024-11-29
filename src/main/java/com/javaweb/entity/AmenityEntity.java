@@ -13,7 +13,7 @@ public class AmenityEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int amenityID; 
 	
-	@Column(name = "amenityName")
+	@Column(name = "amenityName", unique = true)
     private String amenityName;
 	
 	@Column(name = "description")
