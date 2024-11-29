@@ -13,7 +13,7 @@ public class RentTypeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int rentTypeID; 
 	
-	@Column(name = "rentTypeName")
+	@Column(name = "rentTypeName", unique = true)
     private String rentTypeName;
 	
 	@Column(name = "description")
