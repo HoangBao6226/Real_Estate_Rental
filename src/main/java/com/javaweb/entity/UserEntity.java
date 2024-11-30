@@ -40,10 +40,14 @@ public class UserEntity {
     @OneToMany(mappedBy = "lessorID")
     private List<AccomEntity> listAccom = new ArrayList<AccomEntity>();
 
-    
+	@OneToMany(mappedBy = "userID")
+	private List<AccountEntity> listAccount = new ArrayList<AccountEntity>();
+
+	@OneToMany(mappedBy = "salesID")
+	private List<ReservationEntity> listReverse = new ArrayList<ReservationEntity>();
     //////////////////////////////////////////////////////////////////////////////////
 
-    
+
 	public int getUserID() {
 		return userID;
 	}
@@ -107,5 +111,20 @@ public class UserEntity {
 	public void setListAccom(List<AccomEntity> listAccom) {
 		this.listAccom = listAccom;
 	}
-    
+
+	public List<AccountEntity> getListAccount() {
+		return listAccount;
+	}
+
+	public void setListAccount(List<AccountEntity> listAccount) {
+		this.listAccount = listAccount;
+	}
+
+	public List<ReservationEntity> getListReverse() {
+		return listReverse;
+	}
+
+	public void setListReverse(List<ReservationEntity> listReverse) {
+		this.listReverse = listReverse;
+	}
 }

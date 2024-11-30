@@ -44,9 +44,9 @@ public class AccomConverter {
 	public AccomDTO toAccomDTO (AccomEntity item) {
 		
 		AccomDTO ac = modelMapper.map(item, AccomDTO.class);
-		
+
 		ac.setAccommadationName(item.getAccommodationName());
-		ac.setAddress(item.getStreet() + ", " + item.getWard() + ", " + item.getDistrict() + ", " + item.getCity() + ", " + item.getProvince());
+		ac.setAddress(item.getStreet() + ", " + item.getWard() + ", " + item.getDistrict() + ", " + item.getCity());
 		
 		List<DetailAmenityEntity> am = deAmenityRepo.findAllByaccommodationID(item);
 		String amenityName = am.stream().map(it -> "" + it.getAmenityID().getAmenityName()).collect(Collectors.joining(", "));

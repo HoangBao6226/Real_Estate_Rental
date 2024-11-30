@@ -7,11 +7,11 @@ public class AccomDTO {
 	private String direction;
 	private float size;
 	private int numberOfRooms;
-	private String description;
 	private int lessorID;
 	private String amenity;
 	private String rentType;
 	private String price;
+	private String accomType;
 
 	public String getAccommadationName() {
 		return accommadationName;
@@ -53,14 +53,6 @@ public class AccomDTO {
 		this.numberOfRooms = numberOfRooms;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public int getLessorID() {
 		return lessorID;
 	}
@@ -91,6 +83,14 @@ public class AccomDTO {
 
 	public void setPrice(String price) {
 		this.price = price;
+	}
+
+	public String getAccomType() {
+		return accomType;
+	}
+
+	public void setAccomType(String accomType) {
+		this.accomType = accomType;
 	}
 
 }

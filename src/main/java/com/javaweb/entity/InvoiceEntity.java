@@ -35,12 +35,95 @@ public class InvoiceEntity {
     @Column(name = "status")
     private Status status;
 
-    @Column(name = "accommodationID")
-    private int accommodationID;
+    @ManyToOne
+    @JoinColumn(name = "accommodationID")
+    private AccomEntity accommodationID;
 
-    @Column(name = "lesseeID")
-    private int lesseeID;
+    @ManyToOne
+    @JoinColumn(name = "lesseeID")
+    private LesseeEntity lesseeID;
 
-    @Column(name = "rentTypeID")
-    private int rentTypeID;
+    @ManyToOne
+    @JoinColumn(name = "rentTypeID")
+    private RentTypeEntity rentTypeID;
+
+    public int getInvoiceID() {
+        return invoiceID;
+    }
+
+    public void setInvoiceID(int invoiceID) {
+        this.invoiceID = invoiceID;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Date getInvoiceDate() {
+        return invoiceDate;
+    }
+
+    public void setInvoiceDate(Date invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public String getInvoiceType() {
+        return invoiceType;
+    }
+
+    public void setInvoiceType(String invoiceType) {
+        this.invoiceType = invoiceType;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public AccomEntity getAccommodationID() {
+        return accommodationID;
+    }
+
+    public void setAccommodationID(AccomEntity accommodationID) {
+        this.accommodationID = accommodationID;
+    }
+
+    public LesseeEntity getLesseeID() {
+        return lesseeID;
+    }
+
+    public void setLesseeID(LesseeEntity lesseeID) {
+        this.lesseeID = lesseeID;
+    }
+
+    public RentTypeEntity getRentTypeID() {
+        return rentTypeID;
+    }
+
+    public void setRentTypeID(RentTypeEntity rentTypeID) {
+        this.rentTypeID = rentTypeID;
+    }
 }

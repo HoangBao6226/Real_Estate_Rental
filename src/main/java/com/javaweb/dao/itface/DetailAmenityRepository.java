@@ -8,7 +8,7 @@ import com.javaweb.entity.AccomEntity;
 import com.javaweb.entity.DetailAmenityEntity;
 import com.javaweb.entity.id.DetailAmenityID;
 
-public interface DetailAmenityRepository extends JpaRepository<DetailAmenityEntity, DetailAmenityID> {
+public interface DetailAmenityRepository extends JpaRepository<DetailAmenityEntity, Integer> {
 	
 	List<DetailAmenityEntity> findAllByaccommodationID(AccomEntity accomID);
 }

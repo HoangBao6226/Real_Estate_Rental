@@ -8,7 +8,7 @@ import com.javaweb.entity.AccomEntity;
 import com.javaweb.entity.DetailRentTypeEntity;
 import com.javaweb.entity.id.DetailRentTypeID;
 
-public interface DetailRTRepository extends JpaRepository<DetailRentTypeEntity, DetailRentTypeID> {
+public interface DetailRTRepository extends JpaRepository<DetailRentTypeEntity, Integer> {
 	
 	List<DetailRentTypeEntity> findAllByaccommodationID(AccomEntity accomID);
 }

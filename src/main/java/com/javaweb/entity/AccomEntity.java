@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 @Entity
 @Table(name = "accommodation")
 public class AccomEntity {
@@ -42,12 +40,13 @@ public class AccomEntity {
 	@Column(name = "numberOfRooms")
     private int numberOfRooms;
 	
-	@Column(name = "description")
-    private String description;
-	
 	@ManyToOne
     @JoinColumn(name = "lessorID")
     private UserEntity lessorID;
+
+	@ManyToOne
+	@JoinColumn(name = "accomTypeID")
+	private AccomTypeEntity accomTypeID;
    
     @OneToMany(mappedBy = "accommodationID")
     private List<DetailRentTypeEntity> listDetailRT = new ArrayList<DetailRentTypeEntity>();
@@ -55,10 +54,15 @@ public class AccomEntity {
     @OneToMany(mappedBy = "accommodationID")
     private List<DetailAmenityEntity> listDetailAmenity = new ArrayList<DetailAmenityEntity>();
 
-    
+	@OneToMany(mappedBy = "accommodationID")
+	private List<DetailStatusEntity> listDetailStatus = new ArrayList<DetailStatusEntity>();
+
+	@OneToMany(mappedBy = "accommodationID")
+	private List<InvoiceEntity> listInvoice= new ArrayList<InvoiceEntity>();
+
+	@OneToMany(mappedBy = "accommodationID")
+	private List<ReservationEntity> listReserve = new ArrayList<ReservationEntity>();
     //////////////////////////////////////////////////////////////////////////////////
-    
-     
 	public int getAccommodationID() {
 		return accommodationID;
 	}
@@ -139,20 +143,20 @@ public class AccomEntity {
 		this.numberOfRooms = numberOfRooms;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public UserEntity getLessorID() {
 		return lessorID;
 	}
 
 	public void setLessorID(UserEntity lessorID) {
 		this.lessorID = lessorID;
+	}
+
+	public AccomTypeEntity getAccomTypeID() {
+		return accomTypeID;
+	}
+
+	public void setAccomTypeID(AccomTypeEntity accomTypeID) {
+		this.accomTypeID = accomTypeID;
 	}
 
 	public List<DetailRentTypeEntity> getListDetailRT() {
@@ -171,7 +175,28 @@ public class AccomEntity {
 		this.listDetailAmenity = listDetailAmenity;
 	}
 
+	public List<DetailStatusEntity> getListDetailStatus() {
+		return listDetailStatus;
+	}
 
+	public void setListDetailStatus(List<DetailStatusEntity> listDetailStatus) {
+		this.listDetailStatus = listDetailStatus;
+	}
 
-    
+	public List<InvoiceEntity> getListInvoice() {
+		return listInvoice;
+	}
+
+	public void setListInvoice(List<InvoiceEntity> listInvoice) {
+		this.listInvoice = listInvoice;
+	}
+
+	public List<ReservationEntity> getListReserve() {
+		return listReserve;
+	}
+
+	public void setListReserve(List<ReservationEntity> listReserve) {
+		this.listReserve = listReserve;
+	}
+
 }
