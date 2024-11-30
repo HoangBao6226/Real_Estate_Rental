@@ -6,25 +6,31 @@ import com.javaweb.entity.id.DetailAmenityID;
 
 @Entity
 @Table(name = "detailamenity")
-@IdClass(DetailAmenityID.class)
 public class DetailAmenityEntity {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int detailAmenityID;
+
     @ManyToOne
     @JoinColumn(name = "accommodationID")
 	private AccomEntity accommodationID;
-    
-	@Id
+
     @ManyToOne
     @JoinColumn(name = "amenityID")
     private AmenityEntity amenityID;
 
 
-
-	
     //////////////////////////////////////////////////////////////////////////////////
 
-	
+	public int getDetailAmenityID() {
+		return detailAmenityID;
+	}
+
+	public void setDetailAmenityID(int detailAmenityID) {
+		this.detailAmenityID = detailAmenityID;
+	}
+
 	public AccomEntity getAccommodationID() {
 		return accommodationID;
 	}
@@ -40,7 +46,4 @@ public class DetailAmenityEntity {
 	public void setAmenityID(AmenityEntity amenityID) {
 		this.amenityID = amenityID;
 	}
-	
-	
-
 }

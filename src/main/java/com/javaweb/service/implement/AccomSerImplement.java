@@ -1,8 +1,6 @@
 package com.javaweb.service.implement;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,19 +38,44 @@ public class AccomSerImplement implements AccomService {
 		}
 		return listAccomDTO;
 	}
-	
-//	@Override
-	public List<AccomDTO> findAll(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName) {
-		
-		List<AccomEntity> listAccomEntity = accomRepoCustom.searchAccom(params, amenityName, rentTypeName);
+
+	@Override
+	public List<AccomDTO> findAllAccomAvailable() {
+
+		List<AccomEntity> listAccomEntity = accomRepoCustom.findAllAccomAvailable();
 		List<AccomDTO> listAccomDTO = new ArrayList<AccomDTO>();
-		
+
 		for(AccomEntity item : listAccomEntity) {
 			AccomDTO ac = accomConverter.toAccomDTO(item);
 			listAccomDTO.add(ac);
 		}
 		return listAccomDTO;
-//		return null;
+	}
+
+	@Override
+	public List<AccomDTO> findRandomAccomAvailable() {
+
+		List<AccomEntity> listAccomEntity = accomRepoCustom.findRandomAccomAvailable();
+		List<AccomDTO> listAccomDTO = new ArrayList<AccomDTO>();
+
+		for(AccomEntity item : listAccomEntity) {
+			AccomDTO ac = accomConverter.toAccomDTO(item);
+			listAccomDTO.add(ac);
+		}
+		return listAccomDTO;
+	}
+
+	@Override
+	public List<AccomDTO> findAll(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName) {
+
+		List<AccomEntity> listAccomEntity = accomRepoCustom.searchAccom(params, amenityName, rentTypeName);
+		List<AccomDTO> listAccomDTO = new ArrayList<AccomDTO>();
+
+		for(AccomEntity item : listAccomEntity) {
+			AccomDTO ac = accomConverter.toAccomDTO(item);
+			listAccomDTO.add(ac);
+		}
+		return listAccomDTO;
 	}
 
 }

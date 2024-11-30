@@ -15,7 +15,7 @@ import com.javaweb.service.model.AccomDTO;
 
 
 @Controller
-@RequestMapping("/accommodation")
+@RequestMapping("/accommodation2")
 public class SearchController {
 
 	@Autowired
@@ -28,7 +28,7 @@ public class SearchController {
 //		"accommodation" giống như key để gửi qua bên FE
 		model.addAttribute("accommodation", acDTO);
 
-		return "accommodation/list-accom";
+		return "list-accom";
 	}
 	
 	@PostMapping(value = "/search")

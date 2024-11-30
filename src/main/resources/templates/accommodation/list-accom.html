@@ -8,22 +8,39 @@
     <title>Danh sách bất động sản</title>
 </head>
 <body>
+<!--    <div class="container">-->
+<!--        <h3>List Accommodation</h3>-->
+<!--        <hr>-->
+<!--        <table class="table table-bordered table-striped">-->
+<!--            <thead class="thead-dark">-->
+<!--            <tr>-->
+<!--                <th>Name</th>-->
+<!--                <th>Address</th>-->
+<!--                <th>Amenity</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="item : ${accommodation}">-->
+<!--                <td th:text="${item.getAccommadationName()}"></td>-->
+<!--                <td th:text="${item.getAddress()}"></td>-->
+<!--                <td th:text="${item.getAmenity()}"></td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+
     <div class="container">
-        <h3>Employee Directory</h3>
+        <h3>List Accommodation Type</h3>
         <hr>
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
             <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Amenity</th>
+                <th>Type</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${accommodation}">
-                <td th:text="${item.getAccommadationName()}"></td>
-                <td th:text="${item.getAddress()}"></td>
-                <td th:text="${item.getAmenity()}"></td>
+            <tr th:each="item2 : ${accomType}">
+                <td th:text="${item2.getType()}"></td>
             </tr>
             </tbody>
         </table>

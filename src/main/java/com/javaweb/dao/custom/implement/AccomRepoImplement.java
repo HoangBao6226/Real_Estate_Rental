@@ -1,7 +1,6 @@
 package com.javaweb.dao.custom.implement;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -21,6 +20,11 @@ public class AccomRepoImplement implements AccomRepoCustom {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	public static void joinTableStatus(StringBuilder sql) {
+
+		sql.append(" join detailstatus on accommodation.accommodationID = detailstatus.accommodationID");
+	}
 
 	public static void joinTableAccom(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName, StringBuilder sql) {
 
@@ -110,6 +114,37 @@ public class AccomRepoImplement implements AccomRepoCustom {
 			where.append(" ) ");
 		}
 
+	}
+
+	@Override
+	public List<AccomEntity> findAllAccomAvailable() {
+
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accomTypeID from accommodation ");
+		joinTableStatus(sql);
+		StringBuilder where = new StringBuilder(" where detailstatus.statusID = 1 ");
+		sql.append(where);
+		Query query = entityManager.createNativeQuery(sql.toString(), AccomEntity.class);
+
+		return query.getResultList();
+	}
+
+	@Override
+	public List<AccomEntity> findRandomAccomAvailable() {
+
+		Set<Integer> randomIdsSet = new HashSet<>();
+		while (randomIdsSet.size() < 3) {
+			randomIdsSet.add((int) (Math.random() * 15 + 1));
+		}
+		List<Integer> randomIds = new ArrayList<>(randomIdsSet);
+
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accomTypeID from accommodation ");
+		joinTableStatus(sql);
+		StringBuilder where = new StringBuilder(" where detailstatus.statusID = 1 ORDER BY RAND() LIMIT 3");
+		sql.append(where);
+		System.out.println(sql.toString());
+		Query query = entityManager.createNativeQuery(sql.toString(), AccomEntity.class);
+
+		return query.getResultList();
 	}
 
 	@Override

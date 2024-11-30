@@ -22,7 +22,8 @@ public class RentTypeEntity {
     @OneToMany(mappedBy = "rentTypeID")
     private List<DetailRentTypeEntity> listDetailRT = new ArrayList<DetailRentTypeEntity>();
 
-    
+	@OneToMany(mappedBy = "rentTypeID")
+	private List<InvoiceEntity> listInvoice = new ArrayList<InvoiceEntity>();
     //////////////////////////////////////////////////////////////////////////////////
 
     
@@ -58,5 +59,11 @@ public class RentTypeEntity {
 		this.listDetailRT = listDetailRT;
 	}
 
-    
+	public List<InvoiceEntity> getListInvoice() {
+		return listInvoice;
+	}
+
+	public void setListInvoice(List<InvoiceEntity> listInvoice) {
+		this.listInvoice = listInvoice;
+	}
 }

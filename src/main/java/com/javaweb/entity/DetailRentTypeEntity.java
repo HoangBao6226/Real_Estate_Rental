@@ -6,15 +6,16 @@ import com.javaweb.entity.id.DetailRentTypeID;
 
 @Entity
 @Table(name = "detailrenttype")
-@IdClass(DetailRentTypeID.class)
 public class DetailRentTypeEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int detailRentTypeID;
+
     @ManyToOne
     @JoinColumn(name = "accommodationID")
     private AccomEntity accommodationID;
-    
-	@Id
+
     @ManyToOne
     @JoinColumn(name = "rentTypeID")
     private RentTypeEntity rentTypeID;
@@ -27,11 +28,12 @@ public class DetailRentTypeEntity {
 	
     //////////////////////////////////////////////////////////////////////////////////
 
+	public int getDetailRentTypeID() {
+		return detailRentTypeID;
+	}
 
-
-
-	public int getPrice() {
-		return price;
+	public void setDetailRentTypeID(int detailRentTypeID) {
+		this.detailRentTypeID = detailRentTypeID;
 	}
 
 	public AccomEntity getAccommodationID() {
@@ -50,6 +52,10 @@ public class DetailRentTypeEntity {
 		this.rentTypeID = rentTypeID;
 	}
 
+	public int getPrice() {
+		return price;
+	}
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
@@ -61,5 +67,4 @@ public class DetailRentTypeEntity {
 	public void setDeposit(int deposit) {
 		this.deposit = deposit;
 	}
-	
 }

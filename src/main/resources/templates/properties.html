@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
   <head>
 
@@ -10,21 +10,15 @@
     <title>Villa Agency - Property Listing by TemplateMo</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-villa-agency.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-<!--
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-villa-agency.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
-TemplateMo 591 villa agency
-
-https://templatemo.com/tm-591-villa-agency
-
--->
   </head>
 
 <body>
@@ -50,7 +44,7 @@ https://templatemo.com/tm-591-villa-agency
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
-                        <h1>Villa</h1>
+                        <h1>RER</h1>
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
@@ -83,179 +77,71 @@ https://templatemo.com/tm-591-villa-agency
     </div>
   </div>
 
+  <div class="section best-deal">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="tabs-content">
+            <div class="row">
+              <div class="nav-wrapper ">
+                <!--                Danh sách Accommodation Type-->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item" role="presentation" th:each="item : ${accomType}" >
+                    <button
+                            class="nav-link"
+                            th:class="${item.getType() == 'Apartment'} ? 'nav-link active' : 'nav-link'"
+                            id="${item.getType()}-tab"
+                            th:id="${item.getType()} + '-tab'"
+                            data-bs-toggle="tab"
+                            th:data-bs-target="'#' + ${item.getType()}"
+                            type="button"
+                            role="tab"
+                            th:aria-controls="${item.getType()}"
+                            th:text="${item.getType()}">
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <!--              -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="section properties">
     <div class="container">
       <ul class="properties-filter">
         <li>
-          <a class="is_active" href="#!" data-filter="*">Show All</a>
+          <a
+                  class="is_active"
+                  href="#!"
+                  data-filter="*">
+                  Show All
+          </a>
         </li>
-        <li>
-          <a href="#!" data-filter=".adv">Apartment</a>
-        </li>
-        <li>
-          <a href="#!" data-filter=".str">Villa House</a>
-        </li>
-        <li>
-          <a href="#!" data-filter=".rac">Penthouse</a>
+        <li th:each="item : ${accomType}">
+          <a
+                  href="#!"
+                  th:data-filter="'.' + ${item.getType()}"
+                  th:text="${item.getType()}">
+          </a>
         </li>
       </ul>
       <div class="row properties-box">
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 adv">
+        <div
+                th:each="ac : ${accommodation}"
+                th:class="'col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6' + ${ac.getAccomType()}">
           <div class="item">
             <a href="property-details.html"><img src="assets/images/property-01.jpg" alt=""></a>
-            <span class="category">Luxury Villa</span>
+            <span class="category"><p th:text="${ac.getAccomType()}"></p></span>
             <h6>$2.264.000</h6>
-            <h4><a href="property-details.html">18 Old Street Miami, OR 97219</a></h4>
+            <h4><a href="property-details.html"><p th:text="${ac.getAccommadationName()}"></p></a></h4>
             <ul>
-              <li>Bedrooms: <span>8</span></li>
-              <li>Bathrooms: <span>8</span></li>
-              <li>Area: <span>545m2</span></li>
-              <li>Floor: <span>3</span></li>
-              <li>Parking: <span>6 spots</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 str">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-02.jpg" alt=""></a>
-            <span class="category">Luxury Villa</span>
-            <h6>$1.180.000</h6>
-            <h4><a href="property-details.html">54 New Street Florida, OR 27001</a></h4>
-            <ul>
-              <li>Bedrooms: <span>6</span></li>
-              <li>Bathrooms: <span>5</span></li>
-              <li>Area: <span>450m2</span></li>
-              <li>Floor: <span>3</span></li>
-              <li>Parking: <span>8 spots</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 adv rac">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-03.jpg" alt=""></a>
-            <span class="category">Luxury Villa</span>
-            <h6>$1.460.000</h6>
-            <h4><a href="property-details.html">26 Mid Street Portland, OR 38540</a></h4>
-            <ul>
-              <li>Bedrooms: <span>5</span></li>
-              <li>Bathrooms: <span>4</span></li>
-              <li>Area: <span>225m2</span></li>
-              <li>Floor: <span>3</span></li>
-              <li>Parking: <span>10 spots</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 str">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-04.jpg" alt=""></a>
-            <span class="category">Apartment</span>
-            <h6>$584.500</h6>
-            <h4><a href="property-details.html">12 Hope Street Portland, OR 12650</a></h4>
-            <ul>
-              <li>Bedrooms: <span>4</span></li>
-              <li>Bathrooms: <span>3</span></li>
-              <li>Area: <span>125m2</span></li>
-              <li>Floor: <span>25th</span></li>
-              <li>Parking: <span>2 cars</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 rac str">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-05.jpg" alt=""></a>
-            <span class="category">Penthouse</span>
-            <h6>$925.600</h6>
-            <h4><a href="property-details.html">34 Hope Street Portland, OR 42680</a></h4>
-            <ul>
-              <li>Bedrooms: <span>4</span></li>
-              <li>Bathrooms: <span>4</span></li>
-              <li>Area: <span>180m2</span></li>
-              <li>Floor: <span>38th</span></li>
-              <li>Parking: <span>2 cars</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 rac adv">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-06.jpg" alt=""></a>
-            <span class="category">Modern Condo</span>
-            <h6>$450.000</h6>
-            <h4><a href="property-details.html">22 Hope Street Portland, OR 16540</a></h4>
-            <ul>
-              <li>Bedrooms: <span>3</span></li>
-              <li>Bathrooms: <span>2</span></li>
-              <li>Area: <span>165m2</span></li>
-              <li>Floor: <span>26th</span></li>
-              <li>Parking: <span>3 cars</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 rac str">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-03.jpg" alt=""></a>
-            <span class="category">Luxury Villa</span>
-            <h6>$980.000</h6>
-            <h4><a href="property-details.html">14 Mid Street Miami, OR 36450</a></h4>
-            <ul>
-              <li>Bedrooms: <span>8</span></li>
-              <li>Bathrooms: <span>8</span></li>
-              <li>Area: <span>550m2</span></li>
-              <li>Floor: <span>3</span></li>
-              <li>Parking: <span>12 spots</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 rac adv">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-02.jpg" alt=""></a>
-            <span class="category">Luxury Villa</span>
-            <h6>$1.520.000</h6>
-            <h4><a href="property-details.html">26 Old Street Miami, OR 12870</a></h4>
-            <ul>
-              <li>Bedrooms: <span>12</span></li>
-              <li>Bathrooms: <span>15</span></li>
-              <li>Area: <span>380m2</span></li>
-              <li>Floor: <span>3</span></li>
-              <li>Parking: <span>14 spots</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 rac adv">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-01.jpg" alt=""></a>
-            <span class="category">Luxury Villa</span>
-            <h6>$3.145.000</h6>
-            <h4><a href="property-details.html">34 New Street Miami, OR 24650</a></h4>
-            <ul>
-              <li>Bedrooms: <span>10</span></li>
-              <li>Bathrooms: <span>12</span></li>
-              <li>Area: <span>860m2</span></li>
-              <li>Floor: <span>3</span></li>
-              <li>Parking: <span>10 spots</span></li>
+              <li>Rooms: <span th:text="${ac.getNumberOfRooms()}"></span></li>
+              <li>Area: <span th:text="${ac.getSize()}"></span></li>
+              <li>Address: <span th:text="${ac.getAddress()}"></span></li>
             </ul>
             <div class="main-button">
               <a href="property-details.html">Schedule a visit</a>
@@ -278,22 +164,22 @@ https://templatemo.com/tm-591-villa-agency
 
   <footer>
     <div class="container">
-      <div class="col-lg-12">
-        <p>Copyright © 2048 Villa Agency Co., Ltd. All rights reserved. 
-        
-        Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+      <div class="col-lg-8">
+        <p>Copyright © 2048 RER Agency Co., Ltd. All rights reserved.
+
+          Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/counter.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/assets/js/isotope.min.js"></script>
+  <script src="/assets/js/owl-carousel.js"></script>
+  <script src="/assets/js/counter.js"></script>
+  <script src="/assets/js/custom.js"></script>
 
   </body>
 </html>

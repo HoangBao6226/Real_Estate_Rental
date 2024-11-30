@@ -7,5 +7,9 @@ import com.javaweb.entity.AccomEntity;
 
 public interface AccomRepoCustom {
 
+	List<AccomEntity> findAllAccomAvailable();
+
+	List<AccomEntity> findRandomAccomAvailable();
+
 	List<AccomEntity> searchAccom(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName);
 }
