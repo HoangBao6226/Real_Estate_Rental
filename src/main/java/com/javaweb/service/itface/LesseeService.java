@@ -6,4 +6,5 @@ import com.javaweb.service.model.LesseeDTO;
 public interface LesseeService {
 
     public LesseeEntity saveLessee(LesseeDTO lesseeDTO);
+
 }

@@ -22,9 +22,6 @@ public class InvoiceEntity {
     @Column(name = "invoiceDate")
     private Date invoiceDate;
 
-    @Column(name = "invoiceType")
-    private String invoiceType;
-
     @Column(name = "startDate")
     private Date startDate;
 
@@ -69,14 +66,6 @@ public class InvoiceEntity {
 
     public void setInvoiceDate(Date invoiceDate) {
         this.invoiceDate = invoiceDate;
-    }
-
-    public String getInvoiceType() {
-        return invoiceType;
-    }
-
-    public void setInvoiceType(String invoiceType) {
-        this.invoiceType = invoiceType;
     }
 
     public Date getStartDate() {

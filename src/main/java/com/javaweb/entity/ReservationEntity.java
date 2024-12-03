@@ -1,8 +1,11 @@
 package com.javaweb.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "reservation")
@@ -26,6 +29,9 @@ public class ReservationEntity {
 
     @Column(name = "viewDate")
     private Date viewDate;
+
+    @Column(name = "viewTime")
+    private LocalTime viewTime;
 
     @Column(name = "note")
     private String note;
@@ -68,6 +74,14 @@ public class ReservationEntity {
 
     public void setViewDate(Date viewDate) {
         this.viewDate = viewDate;
+    }
+
+    public LocalTime getViewTime() {
+        return viewTime;
+    }
+
+    public void setViewTime(LocalTime viewTime) {
+        this.viewTime = viewTime;
     }
 
     public String getNote() {
