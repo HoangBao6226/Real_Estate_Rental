@@ -1,4 +1,4 @@
-package com.javaweb.dao.custom;
+package com.javaweb.repository.custom;
 
 import java.util.List;
 import java.util.Map;

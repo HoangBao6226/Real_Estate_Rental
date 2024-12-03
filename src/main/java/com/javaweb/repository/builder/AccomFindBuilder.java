@@ -1,4 +1,4 @@
-package com.javaweb.dao.builder;
+package com.javaweb.repository.builder;
 
 import java.util.List;
 

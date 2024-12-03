@@ -1,6 +1,6 @@
 package com.javaweb.service.converter;
 
-import com.javaweb.dao.itface.AdvantageRepository;
+import com.javaweb.repository.itface.AdvantageRepository;
 import com.javaweb.entity.*;
 import com.javaweb.service.model.AccomTypeDTO;
 import org.modelmapper.ModelMapper;

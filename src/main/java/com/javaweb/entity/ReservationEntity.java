@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "renttype")
+@Table(name = "reservation")
 public class ReservationEntity {
 
     @Id

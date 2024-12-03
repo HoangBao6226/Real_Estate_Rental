@@ -2,7 +2,8 @@ package com.javaweb.service.model;
 
 public class AccomDTO {
 
-	private String accommadationName;
+	private int accommodationID;
+	private String accommodationName;
 	private String address;
 	private String direction;
 	private float size;
@@ -13,12 +14,20 @@ public class AccomDTO {
 	private String price;
 	private String accomType;
 
-	public String getAccommadationName() {
-		return accommadationName;
+	public int getAccommodationID() {
+		return accommodationID;
 	}
 
-	public void setAccommadationName(String accommadationName) {
-		this.accommadationName = accommadationName;
+	public void setAccommodationID(int accommodationID) {
+		this.accommodationID = accommodationID;
+	}
+
+	public String getAccommodationName() {
+		return accommodationName;
+	}
+
+	public void setAccommodationName(String accommodationName) {
+		this.accommodationName = accommodationName;
 	}
 
 	public String getAddress() {

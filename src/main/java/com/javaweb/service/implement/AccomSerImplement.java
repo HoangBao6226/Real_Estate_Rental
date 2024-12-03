@@ -1,12 +1,18 @@
 package com.javaweb.service.implement;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
+import com.javaweb.repository.itface.DetailAmenityRepository;
+import com.javaweb.repository.itface.DetailRTRepository;
+import com.javaweb.entity.DetailAmenityEntity;
+import com.javaweb.entity.DetailRentTypeEntity;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.javaweb.dao.custom.AccomRepoCustom;
-import com.javaweb.dao.itface.AccomRepository;
+import com.javaweb.repository.custom.AccomRepoCustom;
+import com.javaweb.repository.itface.AccomRepository;
 import com.javaweb.entity.AccomEntity;
 import com.javaweb.service.converter.AccomConverter;
 import com.javaweb.service.itface.AccomService;
@@ -25,7 +31,38 @@ public class AccomSerImplement implements AccomService {
 	
 	@Autowired
 	private AccomConverter accomConverter;
-	
+
+	@Autowired
+	private ModelMapper modelMapper;
+
+	@Autowired
+	private DetailAmenityRepository deAmenityRepo;
+
+	@Autowired
+	private DetailRTRepository deRTRepo;
+
+	@Override
+	public AccomDTO findAccomById(int id) {
+
+		AccomEntity item = accomRepo.findById(id).get();
+		AccomDTO ac = modelMapper.map(item, AccomDTO.class);
+
+		ac.setAccommodationName(item.getAccommodationName());
+		ac.setAddress(item.getStreet() + ", " + item.getWard() + ", " + item.getDistrict() + ", " + item.getCity());
+
+		List<DetailAmenityEntity> am = deAmenityRepo.findAllByaccommodationID(item);
+		String amenityName = am.stream().map(it -> "" + it.getAmenityID().getAmenityName()).collect(Collectors.joining(", "));
+		ac.setAmenity(amenityName);
+
+		List<DetailRentTypeEntity> deRT = deRTRepo.findAllByaccommodationID(item);
+		String rentType = deRT.stream().map(it -> it.getRentTypeID().getRentTypeName()).collect(Collectors.joining(", "));
+		ac.setRentType(rentType);;
+		String detailRentType = deRT.stream().map(it -> "" + it.getPrice()).collect(Collectors.joining(", "));
+		ac.setPrice(detailRentType);
+
+		return ac;
+	}
+
 	@Override
 	public List<AccomDTO> findAllAccom() {
 		
