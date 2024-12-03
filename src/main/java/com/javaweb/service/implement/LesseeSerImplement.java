@@ -36,6 +36,8 @@ public class LesseeSerImplement implements LesseeService {
         lesseeEntity.setAddress(lesseeDTO.getAddress());
         lesseeEntity.setEmail(lesseeDTO.getEmail());
         lesseeEntity.setPhoneNumber(lesseeDTO.getPhone());
+
         return lesseeRepository.save(lesseeEntity);
     }
+
 }

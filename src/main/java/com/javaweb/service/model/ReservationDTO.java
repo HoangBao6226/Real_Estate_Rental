@@ -1,12 +1,17 @@
 package com.javaweb.service.model;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalTime;
 
 public class ReservationDTO {
 
 //    private int accomID;
 //    private int lesseeID;
     private Date viewDate;
+    private LocalTime viewTime;
     private String note;
 
 //    public int getAccomID() {
@@ -31,6 +36,14 @@ public class ReservationDTO {
 
     public void setViewDate(Date viewDate) {
         this.viewDate = viewDate;
+    }
+
+    public LocalTime getViewTime() {
+        return viewTime;
+    }
+
+    public void setViewTime(LocalTime viewTime) {
+        this.viewTime = viewTime;
     }
 
     public String getNote() {

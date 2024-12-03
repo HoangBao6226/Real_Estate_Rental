@@ -12,8 +12,6 @@ import com.javaweb.service.model.ReservationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 @Service
 public class ReservationSerImplement implements ReservationService {
 
@@ -27,7 +25,7 @@ public class ReservationSerImplement implements ReservationService {
     private LesseeRepository lesseeRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private EmailService emailService;
 
     @Override
     public ReservationEntity saveReservation(ReservationDTO reDTO, int accomID, int lesseeID) {
@@ -39,7 +37,11 @@ public class ReservationSerImplement implements ReservationService {
         reEntity.setAccommodationID(ac);
         reEntity.setLesseeID(le);
         reEntity.setViewDate(reDTO.getViewDate());
+        reEntity.setViewTime(reDTO.getViewTime());
         reEntity.setNote(reDTO.getNote());
-        return reRepository.save(reEntity);
+        reRepository.save(reEntity);
+        // Gửi email chào mừng
+        emailService.sendThankYouEmail(le.getEmail(), reEntity.getReservationID());
+        return reEntity;
     }
 }
