@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "account")
+@Table(name = "lessee")
 public class LesseeEntity {
 
     @Id
@@ -19,9 +19,6 @@ public class LesseeEntity {
 
     @Column(name = "firstName", nullable = false)
     private String firstName;
-
-    @Column(name = "identityNumber", unique = true)
-    private String identityNumber;
 
     @Column(name = "address")
     private String address;
@@ -60,14 +57,6 @@ public class LesseeEntity {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getIdentityNumber() {
-        return identityNumber;
-    }
-
-    public void setIdentityNumber(String identityNumber) {
-        this.identityNumber = identityNumber;
     }
 
     public String getAddress() {

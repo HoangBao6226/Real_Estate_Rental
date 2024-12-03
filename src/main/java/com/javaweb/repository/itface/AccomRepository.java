@@ -1,4 +1,4 @@
-package com.javaweb.dao.itface;
+package com.javaweb.repository.itface;
 
 import java.util.List;
 

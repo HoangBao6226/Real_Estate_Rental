@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.javaweb.dao.builder.AccomFindBuilder;
+import com.javaweb.repository.builder.AccomFindBuilder;
 import com.javaweb.util.MapUtil;
 
 @Component

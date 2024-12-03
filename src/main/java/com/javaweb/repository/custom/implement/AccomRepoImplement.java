@@ -1,4 +1,4 @@
-package com.javaweb.dao.custom.implement;
+package com.javaweb.repository.custom.implement;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -9,7 +9,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 
-import com.javaweb.dao.custom.AccomRepoCustom;
+import com.javaweb.repository.custom.AccomRepoCustom;
 import com.javaweb.entity.AccomEntity;
 import com.javaweb.util.ListUtil;
 import com.javaweb.util.NumberUtil;

@@ -8,6 +8,8 @@ import com.javaweb.service.model.AccomDTO;
 
 public interface AccomService {
 
+	AccomDTO findAccomById(int id);
+
 	List<AccomDTO> findAllAccom();
 
 	List<AccomDTO> findAllAccomAvailable();

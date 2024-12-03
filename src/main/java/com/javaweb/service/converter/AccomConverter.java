@@ -7,8 +7,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.javaweb.dao.itface.DetailAmenityRepository;
-import com.javaweb.dao.itface.DetailRTRepository;
+import com.javaweb.repository.itface.DetailAmenityRepository;
+import com.javaweb.repository.itface.DetailRTRepository;
 import com.javaweb.entity.AccomEntity;
 import com.javaweb.entity.DetailAmenityEntity;
 import com.javaweb.entity.DetailRentTypeEntity;
@@ -45,7 +45,7 @@ public class AccomConverter {
 		
 		AccomDTO ac = modelMapper.map(item, AccomDTO.class);
 
-		ac.setAccommadationName(item.getAccommodationName());
+		ac.setAccommodationName(item.getAccommodationName());
 		ac.setAddress(item.getStreet() + ", " + item.getWard() + ", " + item.getDistrict() + ", " + item.getCity());
 		
 		List<DetailAmenityEntity> am = deAmenityRepo.findAllByaccommodationID(item);
