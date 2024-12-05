@@ -21,14 +21,13 @@ public class SaveViewDateController {
     @Autowired
     private DetailStatusService detailStatusService;
 
-    @PostMapping(value = "/save-date/")
-    public ResponseEntity<Map<String, Object>> addReservation(@RequestParam (name = "accommodationID") String id,
+    @PostMapping(value = "/save-date")
+    public ResponseEntity<Map<String, Object>> addReservation(@PathVariable int accommodationID,
                                                               @RequestParam (name = "lesseeID") String id2,
                                                               @RequestBody ReservationDTO reDTO) {
 
         try {
             // 1. Lưu vào cơ sở dữ liệu
-            int accommodationID = Integer.parseInt(id);
             int lesseeID = Integer.parseInt(id2);
             ReservationEntity savedRe = reservationService.saveReservation(reDTO, accommodationID, lesseeID);
             DetailStatusEntity saveDS = detailStatusService.updateStatusID(accommodationID);

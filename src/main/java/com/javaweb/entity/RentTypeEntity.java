@@ -24,6 +24,7 @@ public class RentTypeEntity {
 
 	@OneToMany(mappedBy = "rentTypeID")
 	private List<InvoiceEntity> listInvoice = new ArrayList<InvoiceEntity>();
+
     //////////////////////////////////////////////////////////////////////////////////
 
     

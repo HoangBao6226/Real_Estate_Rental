@@ -44,17 +44,17 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
+                    <a th:href="@{/}" class="logo">
                         <h1>RER</h1>
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li><a href="index.html" class="active">Home</a></li>
-                      <li><a href="properties.html">Properties</a></li>
-                      <li><a href="property-details.html">Property Details</a></li>
+                      <li><a th:href="@{/}" class="active">Home</a></li>
+                      <li><a th:href="@{/properties}">Properties</a></li>
+<!--                      <li><a href="property-details.html">Property Details</a></li>-->
                       <li><a href="contact.html">Contact Us</a></li>
-                      <li><a href="#"><i class="fa fa-calendar"></i>Log in</a></li>
+                      <li><a th:href="@{/login}"><i class="fa fa-calendar"></i>Log in</a></li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -98,7 +98,7 @@
         <div class="col-lg-4">
           <div class="left-image">
             <img src="assets/images/featured.jpg" alt="">
-            <a href="properties.html"><img src="assets/images/featured-icon.png" alt="" style="max-width: 60px; padding: 0px;"></a>
+            <a th:href="@{/properties}"><img src="assets/images/featured-icon.png" alt="" style="max-width: 60px; padding: 0px;"></a>
           </div>
         </div>
         <div class="col-lg-5">
@@ -305,17 +305,17 @@
 <!--        DANH SÁCH BĐS NỔI BẬT-->
         <div class="col-lg-4 col-md-6" th:each="ac : ${accommodation}">
           <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-01.jpg" alt=""></a>
+            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><img src="assets/images/property-01.jpg" alt=""></a>
             <span class="category"><p th:text="${ac.getAccomType()}"></p></span>
             <h6></h6>
-            <h4><a th:href="'property-details.html/?accommodationID=' + ${ac.getAccommodationID()}"><h3 th:text="${ac.getAccommodationName()}"></h3></a></h4>
+            <h4><a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><h3 th:text="${ac.getAccommodationName()}"></h3></a></h4>
             <ul>
               <li>Rooms: <span th:text="${ac.getNumberOfRooms()}"></span></li>
               <li>Area: <span th:text="${ac.getSize()}"></span></li>
               <li>Address: <span th:text="${ac.getAddress()}"></span></li>
             </ul>
             <div class="main-button">
-              <a th:href="'property-details.html/?accommodationID=' + ${ac.getAccommodationID()}">View a detail</a>
+              <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}">View a detail</a>
             </div>
           </div>
         </div>

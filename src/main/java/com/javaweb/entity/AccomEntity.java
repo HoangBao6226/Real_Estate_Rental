@@ -42,7 +42,7 @@ public class AccomEntity {
 	
 	@ManyToOne
     @JoinColumn(name = "lessorID")
-    private UserEntity lessorID;
+    private LessorEntity lessorID;
 
 	@ManyToOne
 	@JoinColumn(name = "accomTypeID")
@@ -62,7 +62,9 @@ public class AccomEntity {
 
 	@OneToMany(mappedBy = "accommodationID")
 	private List<ReservationEntity> listReserve = new ArrayList<ReservationEntity>();
+
     //////////////////////////////////////////////////////////////////////////////////
+
 	public int getAccommodationID() {
 		return accommodationID;
 	}
@@ -143,11 +145,11 @@ public class AccomEntity {
 		this.numberOfRooms = numberOfRooms;
 	}
 
-	public UserEntity getLessorID() {
+	public LessorEntity getLessorID() {
 		return lessorID;
 	}
 
-	public void setLessorID(UserEntity lessorID) {
+	public void setLessorID(LessorEntity lessorID) {
 		this.lessorID = lessorID;
 	}
 

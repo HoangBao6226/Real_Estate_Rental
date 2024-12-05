@@ -10,8 +10,8 @@ public class AccomDTO {
 	private int numberOfRooms;
 	private int lessorID;
 	private String amenity;
-	private String rentType;
-	private String price;
+	private String[] rentType;
+	private String[] price;
 	private String accomType;
 
 	public int getAccommodationID() {
@@ -70,11 +70,11 @@ public class AccomDTO {
 		this.lessorID = lessorID;
 	}
 
-	public String getRentType() {
+	public String[] getRentType() {
 		return rentType;
 	}
 
-	public void setRentType(String rentType) {
+	public void setRentType(String[] rentType) {
 		this.rentType = rentType;
 	}
 
@@ -86,11 +86,11 @@ public class AccomDTO {
 		this.amenity = amenity;
 	}
 
-	public String getPrice() {
+	public String[] getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(String[] price) {
 		this.price = price;
 	}
 

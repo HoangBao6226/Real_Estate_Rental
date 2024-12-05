@@ -17,9 +17,6 @@ public class AccountEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email", nullable = false)
-    private String email;
-
     @Column(name = "isActive")
     private boolean isActive = true;
 
@@ -28,8 +25,16 @@ public class AccountEntity {
     private RoleEntity roleID;
 
     @ManyToOne
-    @JoinColumn(name = "userID")
-    private UserEntity userID;
+    @JoinColumn(name = "employeeID")
+    private EmployeeEntity employeeID;
+
+    @ManyToOne
+    @JoinColumn(name = "lessorID")
+    private LessorEntity lessorID;
+
+    @ManyToOne
+    @JoinColumn(name = "lesseeID")
+    private LesseeEntity lesseeID;
 
     public int getAccountID() {
         return accountID;
@@ -55,14 +60,6 @@ public class AccountEntity {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public boolean isActive() {
         return isActive;
     }
@@ -79,11 +76,27 @@ public class AccountEntity {
         this.roleID = roleID;
     }
 
-    public UserEntity getUserID() {
-        return userID;
+    public EmployeeEntity getEmployeeID() {
+        return employeeID;
     }
 
-    public void setUserID(UserEntity userID) {
-        this.userID = userID;
+    public void setEmployeeID(EmployeeEntity employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public LessorEntity getLessorID() {
+        return lessorID;
+    }
+
+    public void setLessorID(LessorEntity lessorID) {
+        this.lessorID = lessorID;
+    }
+
+    public LesseeEntity getLesseeID() {
+        return lesseeID;
+    }
+
+    public void setLesseeID(LesseeEntity lesseeID) {
+        this.lesseeID = lesseeID;
     }
 }

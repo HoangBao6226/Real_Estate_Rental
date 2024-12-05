@@ -21,7 +21,7 @@ public class LoadPropertyController {
 	@Autowired
 	private AccomService accomSer;
 
-	@GetMapping(value = "/properties.html")
+	@GetMapping(value = "/properties")
 	public String loadProperty(Model model) {
 
 		List<AccomTypeDTO> acDTO = accomTypeSer.findAllAccomType();
