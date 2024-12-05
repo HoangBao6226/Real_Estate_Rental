@@ -11,20 +11,40 @@ CREATE TABLE Account (
     accountID INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    email VARCHAR(100) NOT NULL,
     isActive BOOLEAN DEFAULT TRUE,
     roleID INT,
-    userID INT
+    employeeID INT,
+    lessorID INT,
+    lesseeID INT
 ) ENGINE=InnoDB;
 
-CREATE TABLE User (
-    userID INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE Employee (
+    employeeID INT PRIMARY KEY AUTO_INCREMENT,
     lastName NVARCHAR(50) NOT NULL,
     firstName NVARCHAR(50) NOT NULL,
+	email VARCHAR(100) NOT NULL,
     gender ENUM('Male', 'Female'),
     dateOfBirth DATE,
     address TEXT,
     phoneNumber VARCHAR(20)
+) ENGINE=InnoDB;
+
+CREATE TABLE Lessor (
+    lessorID INT PRIMARY KEY AUTO_INCREMENT,
+    lastName NVARCHAR(50) NOT NULL,
+    firstName NVARCHAR(50) NOT NULL,
+    address TEXT,
+    phoneNumber VARCHAR(20),
+    email VARCHAR(100)
+) ENGINE=InnoDB;
+
+CREATE TABLE Lessee (
+    lesseeID INT PRIMARY KEY AUTO_INCREMENT,
+    lastName NVARCHAR(50) NOT NULL,
+    firstName NVARCHAR(50) NOT NULL,
+    address TEXT,
+    phoneNumber VARCHAR(20),
+    email VARCHAR(100)
 ) ENGINE=InnoDB;
 
 CREATE TABLE AccomType (
@@ -96,15 +116,6 @@ CREATE TABLE DetailRentType (
     deposit INT NOT NULL
 ) ENGINE=InnoDB;
 
-CREATE TABLE Lessee (
-    lesseeID INT PRIMARY KEY AUTO_INCREMENT,
-    lastName NVARCHAR(50) NOT NULL,
-    firstName NVARCHAR(50) NOT NULL,
-    address TEXT,
-    phoneNumber VARCHAR(20),
-    email VARCHAR(100)
-) ENGINE=InnoDB;
-
 CREATE TABLE Reservation (
 	reservationID INT AUTO_INCREMENT PRIMARY KEY,
     salesID INT,
@@ -142,9 +153,13 @@ CREATE TABLE Payment (
 
 ALTER TABLE Account ADD CONSTRAINT fk_Role_Account FOREIGN KEY (roleID) REFERENCES Role(roleID);
 
-ALTER TABLE Account ADD CONSTRAINT fk_Account_User FOREIGN KEY (userID) REFERENCES User(userID);
+ALTER TABLE Account ADD CONSTRAINT fk_Account_Em FOREIGN KEY (employeeID) REFERENCES Employee(employeeID);
 
-ALTER TABLE Accommodation ADD CONSTRAINT fk_Accom_Lessor FOREIGN KEY (lessorID) REFERENCES User(userID);
+ALTER TABLE Account ADD CONSTRAINT fk_Account_Lessor FOREIGN KEY (lessorID) REFERENCES Lessor(lessorID);
+
+ALTER TABLE Account ADD CONSTRAINT fk_Account_Lessee FOREIGN KEY (lesseeID) REFERENCES Lessee(lesseeID);
+
+ALTER TABLE Accommodation ADD CONSTRAINT fk_Accom_Lessor FOREIGN KEY (lessorID) REFERENCES Lessor(lessorID);
 
 ALTER TABLE Accommodation ADD CONSTRAINT fk_Accom_Type FOREIGN KEY (accomTypeID) REFERENCES AccomType(accomTypeID);
 
@@ -174,4 +189,4 @@ ALTER TABLE Reservation ADD CONSTRAINT fk_Reservation_Accom FOREIGN KEY (accommo
 
 ALTER TABLE Reservation ADD CONSTRAINT fk_Reservation_Lessee FOREIGN KEY (lesseeID) REFERENCES Lessee(lesseeID);
 
-ALTER TABLE Reservation ADD CONSTRAINT fk_Reservation_User FOREIGN KEY (salesID) REFERENCES User(userID);
+ALTER TABLE Reservation ADD CONSTRAINT fk_Reservation_Em FOREIGN KEY (salesID) REFERENCES Employee(employeeID);

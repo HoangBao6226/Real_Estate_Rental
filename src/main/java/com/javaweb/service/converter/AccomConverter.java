@@ -54,9 +54,11 @@ public class AccomConverter {
 		
 		List<DetailRentTypeEntity> deRT = deRTRepo.findAllByaccommodationID(item);
 		String rentType = deRT.stream().map(it -> it.getRentTypeID().getRentTypeName()).collect(Collectors.joining(", "));
-		ac.setRentType(rentType);;
+		String[] rt = rentType.split(",");
+		ac.setRentType(rt);
 		String detailRentType = deRT.stream().map(it -> "" + it.getPrice()).collect(Collectors.joining(", "));
-		ac.setPrice(detailRentType);
+		String[] price = detailRentType.split(",");
+		ac.setPrice(price);
 		
 		return ac;
 	}

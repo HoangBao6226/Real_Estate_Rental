@@ -2,7 +2,9 @@ package com.javaweb.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "invoice")
@@ -43,6 +45,9 @@ public class InvoiceEntity {
     @ManyToOne
     @JoinColumn(name = "rentTypeID")
     private RentTypeEntity rentTypeID;
+
+    @OneToMany(mappedBy = "invoiceID")
+    private List<PaymentEntity> listPay = new ArrayList<PaymentEntity>();
 
     public int getInvoiceID() {
         return invoiceID;
@@ -114,5 +119,13 @@ public class InvoiceEntity {
 
     public void setRentTypeID(RentTypeEntity rentTypeID) {
         this.rentTypeID = rentTypeID;
+    }
+
+    public List<PaymentEntity> getListPay() {
+        return listPay;
+    }
+
+    public void setListPay(List<PaymentEntity> listPay) {
+        this.listPay = listPay;
     }
 }

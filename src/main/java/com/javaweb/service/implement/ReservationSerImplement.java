@@ -6,7 +6,6 @@ import com.javaweb.entity.ReservationEntity;
 import com.javaweb.repository.itface.AccomRepository;
 import com.javaweb.repository.itface.LesseeRepository;
 import com.javaweb.repository.itface.ReservationRepository;
-import com.javaweb.repository.itface.UserRepository;
 import com.javaweb.service.itface.ReservationService;
 import com.javaweb.service.model.ReservationDTO;
 import org.springframework.beans.factory.annotation.Autowired;

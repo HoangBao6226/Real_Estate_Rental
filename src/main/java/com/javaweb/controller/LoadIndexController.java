@@ -21,7 +21,7 @@ public class LoadIndexController {
 	@Autowired
 	private AccomService accomSer;
 
-	@GetMapping(value = "")
+	@GetMapping(value = "/")
 	public String loadIndex(Model model) {
 
 		List<AccomTypeDTO> acDTO = accomTypeSer.findAllAccomType();

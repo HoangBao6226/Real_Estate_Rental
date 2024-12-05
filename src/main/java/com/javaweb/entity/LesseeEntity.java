@@ -35,6 +35,9 @@ public class LesseeEntity {
     @OneToMany(mappedBy = "lesseeID")
     private List<InvoiceEntity> listInvoice = new ArrayList<InvoiceEntity>();
 
+    @OneToMany(mappedBy = "lesseeID")
+    private List<AccountEntity> listAccount = new ArrayList<AccountEntity>();
+
     public int getLesseeID() {
         return lesseeID;
     }
@@ -97,5 +100,13 @@ public class LesseeEntity {
 
     public void setListInvoice(List<InvoiceEntity> listInvoice) {
         this.listInvoice = listInvoice;
+    }
+
+    public List<AccountEntity> getListAccount() {
+        return listAccount;
+    }
+
+    public void setListAccount(List<AccountEntity> listAccount) {
+        this.listAccount = listAccount;
     }
 }

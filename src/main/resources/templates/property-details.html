@@ -14,6 +14,33 @@
 
     <!---->
     <style>
+      table {
+        width: 50%;
+        border-collapse: collapse;
+        margin: 20px auto;
+        font-family: Arial, sans-serif;
+      }
+
+      th, td {
+        border: 1px solid #ddd;
+        text-align: center;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
+    <style>
       /* Ẩn form ban đầu */
       #scheduleForm {
         display: none;
@@ -103,15 +130,15 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
+                    <a th:href="@{/}" class="logo">
                         <h1>RER</h1>
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="properties.html">Properties</a></li>
-                      <li><a href="property-details.html" class="active">Property Details</a></li>
+                      <li><a th:href="@{/}">Home</a></li>
+                      <li><a th:href="@{/properties}">Properties</a></li>
+                      <li><a th:href="@{/properties/{id}(id=${accommodation.getAccommodationID()})}" class="active">Property Details</a></li>
                       <li><a href="#" id="scheduleButton"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
                     </ul>
                     <a class='menu-trigger'>
@@ -145,10 +172,13 @@
           </div>
           <div class="main-content">
             <span class="category" th:text="${accommodation.getAccomType()}"></span>
-            <h4 th:text="${accommodation.getAccommodationName()}">24 New Street Miami, OR 24560</h4>
-            <p>Get <strong>the best villa agency</strong> HTML CSS Bootstrap Template for your company website. TemplateMo provides you the <a href="https://www.google.com/search?q=best+free+css+templates" target="_blank">best free CSS templates</a> in the world. Please tell your friends about it. Thank you. Cloud bread kogi bitters pitchfork shoreditch tumblr yr succulents single-origin coffee schlitz enamel pin you probably haven't heard of them ugh hella.
-            
-            <br><br>When you look for free CSS templates, you can simply type TemplateMo in any search engine website. In addition, you can type TemplateMo Digital Marketing, TemplateMo Corporate Layouts, etc. Master cleanse +1 intelligentsia swag post-ironic, slow-carb chambray knausgaard PBR&B DSA poutine neutra cardigan hoodie pop-up.</p>
+            <h4 th:text="${accommodation.getAccommodationName()}"></h4>
+            <p>Address: <strong th:text="${accommodation.getAddress()}"></strong></p>
+            <p>Direction: <strong th:text="${accommodation.getDirection()}"></strong></p>
+            <p>Rooms: <strong th:text="${accommodation.getNumberOfRooms()}"></strong></p>
+            <p>Amenity: <strong th:text="${accommodation.getAmenity()}"></strong></p>
+<!--            <p>Rent type: <strong th:text="${accommodation.getRentType()}"></strong></p>-->
+<!--            <p>Price: <strong th:text="${accommodation.getPrice()}"></strong></p>-->
           </div>
         </div>
         <div class="col-lg-4">
@@ -156,11 +186,12 @@
             <ul>
               <li>
                 <img src="/assets/images/info-icon-01.png" alt="" style="max-width: 52px;">
-                <h4>450 m2<br><span>Total Flat Space</span></h4>
+                <h4 th:text="${accommodation.getSize()}"></h4>
+                <h4><span>Total Flat Space</span></h4>
               </li>
               <li>
                 <img src="/assets/images/info-icon-02.png" alt="" style="max-width: 52px;">
-                <h4>Contract<br><span>Contract Ready</span></h4>
+                <h4>Invoice<br><span>Invoice Ready</span></h4>
               </li>
               <li>
                 <img src="/assets/images/info-icon-03.png" alt="" style="max-width: 52px;">
@@ -171,6 +202,71 @@
                 <h4>Safety<br><span>24/7 Under Control</span></h4>
               </li>
             </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Rent Type</th>
+      <th>Price</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="renttype, iterStat : ${accommodation.getRentType()}">
+      <th:block th:with="price=${accommodation.getPrice()[iterStat.index]}">
+        <td th:text="${renttype}"></td>
+        <td th:text="${price}"></td>
+        <td>
+          <button
+                  type="button"
+                  th:data-name="${renttype}"
+                  th:data-name2="${price}"
+                  th:onclick="rentAction(this.getAttribute('data-name'), this.getAttribute('data-name2'))">
+            Thuê
+          </button>
+        </td>
+      </th:block>
+    </tr>
+
+    </tbody>
+  </table>
+
+  <div class="section best-deal">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="tabs-content">
+            <div class="row">
+              <div class="tab-content">
+                <div class="tab-pane fade show active">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="info-table">
+                        <ul>
+                          <li th:each="renttype : ${accommodation.getRentType()}" th:text="${renttype}"></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <img src="/assets/images/deal-01.jpg" alt="">
+                    </div>
+                    <div class="col-lg-3">
+                      <h4>Extra Info About Property</h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, do eiusmod tempor pack incididunt ut labore et dolore magna aliqua quised ipsum suspendisse.
+                        <br><br>When you need free CSS templates, you can simply type TemplateMo in any search engine website. In addition, you can type TemplateMo Portfolio, TemplateMo One Page Layouts, etc.</p>
+                      <div class="icon-button">
+                        <a th:href="@{/properties/{id}(id=${accommodation.getAccommodationID()})}"><i class="fa fa-calendar"></i> Schedule a visit</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -272,6 +368,12 @@
   </footer>
 
   <!-- Scripts -->
+  <script th:inline="javascript">
+    function rentAction(renttype, price) {
+      alert("Bạn đã chọn thuê " + renttype + " với giá " + price + " VND.");
+      // Thực hiện logic thuê ở đây (gửi request tới server hoặc chuyển trang)
+    }
+  </script>
   <script>
     document.getElementById("contact-form").addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -314,13 +416,10 @@
       const data = Object.fromEntries(formData);
       // Lấy URL hiện tại
       const urlParams = new URLSearchParams(window.location.search);
-
-      // Lấy giá trị của từng tham số
-      const accommodationID = urlParams.get('accommodationID');
+      // const id = parts[4]; // Phần tử thứ 4 là "2"
       const lesseeID = urlParams.get('lesseeID');
-
       try {
-        const response = await fetch(`/save-date/?accommodationID=${accommodationID}&lesseeID=${lesseeID}`, {
+        const response = await fetch(`/save-date`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),

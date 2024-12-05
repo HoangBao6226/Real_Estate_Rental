@@ -4,36 +4,38 @@ INSERT INTO role (roleName, description)
 VALUES 
 ('Manager', 'Quản lý'),
 ('Sales', 'Nhân viên'),
-('Lessor', 'Chủ nhà');
+('Lessor', 'Chủ nhà'),
+('Lessee', 'Người thuê nhà');
 
-INSERT INTO user (lastName, firstName, gender, dateOfBirth, address, phoneNumber)
+INSERT INTO employee (lastName, firstName, email, gender, dateOfBirth, address, phoneNumber)
 VALUES
-	('Nguyễn Văn', 'Anh', 'Male', '1990-01-21', '123 Đường Mã Lò, Quận Bình Tân, Thành phố Hồ Chí Minh', '0912345678'),
-    ('Trần Thị', 'Mai', 'Female', '1991-02-14', '456 Đường Lê Lợi, Quận 2, Thành phố Hồ Chí Minh', '0912345679'),
-    ('Lê Ngọc', 'Hùng', 'Male', '1992-03-23', '789 Đường Trần Quốc Toản, Quận 3, Thành phố Hồ Chí Minh', '0912345680'),
-    ('Hoàng Ngọc', 'Linh', 'Female', '1991-04-04', '1011 Đường Điện Biên Phủ, Quận 4, Thành phố Hồ Chí Minh', '0912345681'),
-    ('Phạm Minh', 'Đức', 'Male', '1994-04-15', '1213 Đường Pasteur, Quận 5, Thành phố Hồ Chí Minh', '0912345682'),
-    ('Bùi Thị', 'Thu', 'Female', '1992-06-26', '1415 Đường Trần Hưng Đạo, Quận 6, Thành phố Hồ Chí Minh', '0912345683'),
-    ('Tiêu Anh', 'Tuấn', 'Male', '1992-07-17', '1617 Đường Nguyễn Thiện Thuật, Quận 7, Thành phố Hồ Chí Minh', '0912345684'),
-    ('Dương Ngọc', 'Châu', 'Female', '1997-07-08', '1819 Đường Hoàng Diệu, Quận 8, Thành phố Hồ Chí Minh', '0912345685'),
-    ('Đỗ Văn', 'Kiên', 'Male', '1999-12-09', '2021 Đường Nguyễn Văn Cừ, Quận 9, Thành phố Hồ Chí Minh', '0912345686'),
-    ('Vũ Hỷ', 'Phương', 'Female', '1999-10-10', '2223 Đường Nguyễn Hữu Tháp, Quận 10, Thành phố Hồ Chí Minh', '0912345687');
+	('Nguyễn Văn', 'Anh', 'nguyenvananh@example.com', 'Male', '1990-01-21', '123 Đường Mã Lò, Quận Bình Tân, Thành phố Hồ Chí Minh', '0912345678'),
+    ('Trần Thị', 'Mai', 'tranthimai@example.com', 'Female', '1991-02-14', '456 Đường Lê Lợi, Quận 2, Thành phố Hồ Chí Minh', '0912345679'),
+    ('Lê Ngọc', 'Hùng', 'lengochung@example.com', 'Male', '1992-03-23', '789 Đường Trần Quốc Toản, Quận 3, Thành phố Hồ Chí Minh', '0912345680');
     
-INSERT INTO account (username, password, email, roleID, userID)
+INSERT INTO lessor (lastName, firstName, email, address, phoneNumber)
+VALUES   
+    ('Hoàng Ngọc', 'Linh', 'hoangngoclinh@example.com', '1011 Đường Điện Biên Phủ, Quận 4, Thành phố Hồ Chí Minh', '0912345681'),
+    ('Phạm Minh', 'Đức', 'phamminhduc@example.com', '1213 Đường Pasteur, Quận 5, Thành phố Hồ Chí Minh', '0912345682'),
+    ('Bùi Thị', 'Thu', 'buithithu@example.com', '1415 Đường Trần Hưng Đạo, Quận 6, Thành phố Hồ Chí Minh', '0912345683'),
+    ('Tiêu Anh', 'Tuấn', 'tieuanhtuan@example.com', '1617 Đường Nguyễn Thiện Thuật, Quận 7, Thành phố Hồ Chí Minh', '0912345684'),
+    ('Dương Ngọc', 'Châu', 'duongngocchau@example.com', '1819 Đường Hoàng Diệu, Quận 8, Thành phố Hồ Chí Minh', '0912345685'),
+    ('Đỗ Văn', 'Kiên', 'dovankien@example.com', '2021 Đường Nguyễn Văn Cừ, Quận 9, Thành phố Hồ Chí Minh', '0912345686'),
+    ('Vũ Hỷ', 'Phương', 'vuhyphuong@example.com', '2223 Đường Nguyễn Hữu Tháp, Quận 10, Thành phố Hồ Chí Minh', '0912345687');
+    
+INSERT INTO account (username, password, roleID, employeeID, lessorID)
 VALUES
-    ('nguyenvananh', 'password123', 'nguyenvananh@example.com', 1, 1),
-    ('nguyenvananh2', 'password234', 'nguyenvananh@example.com', 3, 1),
-    ('tranthimai', 'password345', 'tranthimai@example.com', 1, 2),
-    ('lengochung', 'password456', 'lengochung@example.com', 3, 3),
-    ('lengochung2', 'password567', 'lengochung@example.com', 1, 3),
-    ('hoangngoclinh', 'password678', 'hoangngoclinh@example.com', 2, 4),
-    ('phamminhduc', 'password789', 'phamminhduc@example.com', 2, 5),
-    ('buithithu', 'password890', 'buithithu@example.com', 2, 6),
-    ('buithithu2', 'password890', 'buithithu@example.com', 3, 6),
-    ('tieuanhtuan', 'password901', 'tieuanhtuan@example.com', 2, 7),
-    ('duongngocchau', 'password012', 'duongngocchau@example.com', 2, 8),
-    ('dovankien', 'password123', 'dovankien@example.com', 3, 9),
-    ('vuhyphuong', 'password234', 'vuhyphuong@example.com', 3, 10);
+    ('nguyenvananh', 'password123', 1, 1, null),
+    ('tranthimai', 'password345', 2, 2, null),
+    ('lengochung', 'password456', 2, 3, null),
+
+    ('hoangngoclinh', 'password678', 3, null, 1),
+    ('phamminhduc', 'password789', 3, null, 2),
+    ('buithithu', 'password890', 3, null, 3),
+    ('tieuanhtuan', 'password901', 3, null, 4),
+    ('duongngocchau', 'password012', 3, null, 5),
+    ('dovankien', 'password123', 3, null, 6),
+    ('vuhyphuong', 'password234', 3, null, 7);
     
 INSERT INTO AccomType (type, description)
 VALUES
@@ -81,19 +83,19 @@ VALUES
 	('Azure Skies Studio', '123 Thảo Điền', 'An Thú', 'Quận 2', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Đông', 40.00, 1, 3, 2),
 	('The Haven Villa', '225 Nguyễn Văn Linh', 'Tân Phú', 'Quận 7', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Nam', 250.00, 5, 3, 3),
 	('The Grandiose House', '79 Nguyễn Thị Minh Khai', '6', 'Quận 3', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Bắc', 120.00, 3, 3, 4),
-	('The Pinnacle Room', '88 Phạm Ngọc Thạch', 'Phú Nhuận', 'Quận 5', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Tây', 30.00, 1, 10, 5),
+	('The Pinnacle Room', '88 Phạm Ngọc Thạch', 'Phú Nhuận', 'Quận 5', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Tây', 30.00, 1, 5, 5),
 	
-    ('The Willow Creek Apartment', 'Phố Hàng Trọng', 'Hàng Trọng', 'Hoàn Kiếm', 'Hà Nội', 'Hà Nội', 'Bắc', 60.00, 2, 6, 1),
+    ('The Willow Creek Apartment', 'Phố Hàng Trọng', 'Hàng Trọng', 'Hoàn Kiếm', 'Hà Nội', 'Hà Nội', 'Bắc', 60.00, 2, 2, 1),
 	('Ocean Breeze Studio', 'Hồ Trúc Bạch', 'Trúc Bạch', 'Tây Hồ', 'Hà Nội', 'Hà Nội', 'Tây', 45.00, 1, 6, 2),
-	('The Forest Retreat Villa', '1162 Nguyễn Du', 'Đống Đa', 'Đống Đa', 'Hà Nội', 'Hà Nội', 'Nam', 180.00, 4, 9, 3),
-	('Mountain View House', '80 Võ Chí Công', 'Cửa Lò', 'Bắc Từ Liêm', 'Hà Nội', 'Hà Nội', 'Đông', 100.00, 3, 9, 4),
-	('The Sunnyside Room', '638 Trường Chinh', 'Thanh Xuân Trung', 'Thanh Xuân', 'Hà Nội', 'Hà Nội', 'Nam', 25.00, 1, 10, 5),
+	('The Forest Retreat Villa', '1162 Nguyễn Du', 'Đống Đa', 'Đống Đa', 'Hà Nội', 'Hà Nội', 'Nam', 180.00, 4, 4, 3),
+	('Mountain View House', '80 Võ Chí Công', 'Cửa Lò', 'Bắc Từ Liêm', 'Hà Nội', 'Hà Nội', 'Đông', 100.00, 3, 4, 4),
+	('The Sunnyside Room', '638 Trường Chinh', 'Thanh Xuân Trung', 'Thanh Xuân', 'Hà Nội', 'Hà Nội', 'Nam', 25.00, 1, 7, 5),
 	
-    ('The Wanderlust Apartment', '980 Võ Nguyên Giáp', 'Khai Hương', 'Ngũ Hành Sơn', 'Đà Nẵng', 'Đà Nẵng', 'Đông', 80.00, 2, 6, 1),
-	('The Nomad Studio', '76 Trường Sa', 'An Hải Bắc', 'Sơn Trà', 'Đà Nẵng', 'Đà Nẵng', 'Nam', 35.00, 1, 1, 2),
-	('The Eccentric Villa', '90 Hoàng Hoa Thắm', 'Thanh Khê Tây', 'Thanh Khê', 'Đà Nẵng', 'Đà Nẵng', 'Bắc', 200.00, 4, 10, 3),
+    ('The Wanderlust Apartment', '980 Võ Nguyên Giáp', 'Khai Hương', 'Ngũ Hành Sơn', 'Đà Nẵng', 'Đà Nẵng', 'Đông', 80.00, 2, 7, 1),
+	('The Nomad Studio', '76 Trường Sa', 'An Hải Bắc', 'Sơn Trà', 'Đà Nẵng', 'Đà Nẵng', 'Nam', 35.00, 1, 5, 2),
+	('The Eccentric Villa', '90 Hoàng Hoa Thắm', 'Thanh Khê Tây', 'Thanh Khê', 'Đà Nẵng', 'Đà Nẵng', 'Bắc', 200.00, 4, 4, 3),
 	('The Bohemian House', '764 Nguyễn Văn Linh', 'Liên Chiều', 'Liên Chiều', 'Đà Nẵng', 'Đà Nẵng', 'Tây', 150.00, 3, 1, 4),
-	('The Enigma Room', '912 Nguyễn Văn Linh', 'Cẩm Lệ', 'Cẩm Lệ', 'Đà Nẵng', 'Đà Nẵng', 'Đông', 20.00, 1, 9, 5);
+	('The Enigma Room', '912 Nguyễn Văn Linh', 'Cẩm Lệ', 'Cẩm Lệ', 'Đà Nẵng', 'Đà Nẵng', 'Đông', 20.00, 1, 3, 5);
 
 INSERT INTO Amenity (amenityName, description)
 VALUES
@@ -122,8 +124,7 @@ INSERT INTO Status (status, description)
 VALUES
 	('Available', 'Sẵn sàng cho thuê'),
     ('Unavailable', 'Không sẵn sàng cho thuê'),
-	('Occupied', 'Đã được thuê'),
-	('Maintenance', 'Đang bảo trì, không thể thuê');
+	('Occupied', 'Đã được thuê');
     
 INSERT INTO DetailAmenity (accommodationID, amenityID)
 VALUES
@@ -189,18 +190,18 @@ INSERT INTO DetailStatus (accommodationID, statusID, startDate, endDate, reason)
 VALUES
 	(1, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
 	(2, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-	(3, 4, NULL, NULL, 'Đang bảo trì'),
+	(3, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
 	(4, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (5, 4, NULL, NULL, 'Đang bảo trì'),
+    (5, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
 	(6, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
     (7, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
 	(8, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
     (9, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
-	(10, 4, NULL, NULL, 'Đang bảo trì'),
-    (11, 4, NULL, NULL, 'Đang bảo trì'),
+	(10, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (11, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
 	(12, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
     (13, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-	(14, 4, NULL, NULL, 'Đang bảo trì'),
+	(14, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
     (15, 1, NULL, NULL, 'Sẵn sàng cho thuê');
 
 use real_estate;

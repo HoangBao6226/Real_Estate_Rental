@@ -1,10 +1,8 @@
 package com.javaweb.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalTime;
 
 @Entity
@@ -17,7 +15,7 @@ public class ReservationEntity {
 
     @ManyToOne
     @JoinColumn(name = "salesID")
-    private UserEntity salesID;
+    private EmployeeEntity salesID;
 
     @ManyToOne
     @JoinColumn(name = "lesseeID")
@@ -44,11 +42,11 @@ public class ReservationEntity {
         this.reservationID = reservationID;
     }
 
-    public UserEntity getSalesID() {
+    public EmployeeEntity getSalesID() {
         return salesID;
     }
 
-    public void setSalesID(UserEntity salesID) {
+    public void setSalesID(EmployeeEntity salesID) {
         this.salesID = salesID;
     }
 
