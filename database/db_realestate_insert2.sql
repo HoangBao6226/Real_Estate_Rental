@@ -80,3 +80,20 @@ VALUES
     (30, 1, 20000000, 5000000), (30, 2, 10000000, 3000000), (30, 3, 5000000, 1500000),
     (30, 4, 1200000, 400000), (30, 5, 1000000, 300000), (30, 6, 800000, 200000);
 
+INSERT INTO DetailStatus (accommodationID, statusID, startDate, endDate, reason) 
+VALUES
+    (16, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
+    (17, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (18, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (19, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (20, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (21, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (22, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
+    (23, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (24, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
+    (25, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (26, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (27, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (28, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (29, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
+    (30, 1, NULL, NULL, 'Sẵn sàng cho thuê');

@@ -11,95 +11,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!---->
-    <style>
-      table {
-        width: 50%;
-        border-collapse: collapse;
-        margin: 20px auto;
-        font-family: Arial, sans-serif;
-      }
-
-      th, td {
-        border: 1px solid #ddd;
-        text-align: center;
-        padding: 8px;
-      }
-
-      th {
-        background-color: #f4f4f4;
-        font-weight: bold;
-      }
-
-      tr:nth-child(even) {
-        background-color: #f9f9f9;
-      }
-
-      tr:hover {
-        background-color: #f1f1f1;
-      }
-    </style>
-    <style>
-      /* Ẩn form ban đầu */
-      #scheduleForm {
-        display: none;
-        position: fixed;
-        top: 70%;
-        left: 50%;
-        transform: translate(-50%, -20%);
-        /*border: 1px solid #ccc;*/
-        padding: 20px;
-        /*background: white;*/
-        /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
-        max-height: 70%; /* Giới hạn chiều cao */
-        /*width: 400px; !* Đặt chiều rộng *!*/
-        overflow-y: auto; /* Thêm thanh cuộn dọc */
-      }
-
-      /* Để thanh cuộn trông đẹp hơn */
-      #scheduleForm::-webkit-scrollbar {
-        width: 0px;
-      }
-      #scheduleForm::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 4px;
-      }
-      #scheduleForm::-webkit-scrollbar-thumb:hover {
-        background: #555;
-      }
-    </style>
-    <style>
-      /* Ẩn form ban đầu */
-      #scheduleForm2 {
-        display: none;
-        position: fixed;
-        top: 70%;
-        left: 50%;
-        transform: translate(-50%, -20%);
-        /*border: 1px solid #ccc;*/
-        padding: 20px;
-        /*background: white;*/
-        /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
-        max-height: 70%; /* Giới hạn chiều cao */
-        /*width: 400px; !* Đặt chiều rộng *!*/
-        overflow-y: auto; /* Thêm thanh cuộn dọc */
-      }
-
-      /* Để thanh cuộn trông đẹp hơn */
-      #scheduleForm2::-webkit-scrollbar {
-        width: 0px;
-      }
-      #scheduleForm2::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 4px;
-      }
-      #scheduleForm2::-webkit-scrollbar-thumb:hover {
-        background: #555;
-      }
-    </style>
     <!---->
     <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/assets/css/property-details.css">
     <link rel="stylesheet" href="/assets/css/fontawesome.css">
     <link rel="stylesheet" href="/assets/css/templatemo-villa-agency.css">
     <link rel="stylesheet" href="/assets/css/owl.css">
@@ -139,7 +53,26 @@
                       <li><a th:href="@{/}">Home</a></li>
                       <li><a th:href="@{/properties}">Properties</a></li>
                       <li><a th:href="@{/properties/{id}(id=${accommodation.getAccommodationID()})}" class="active">Property Details</a></li>
-                      <li><a href="#" id="scheduleButton"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
+                      <!--                      -->
+                      <li>
+                        <!-- Kiểm tra nếu chưa đăng nhập -->
+                        <div th:if="${user == null}">
+                          <a th:href="@{/login}">
+                            <i class="fa fa-calendar"></i> Log in
+                          </a>
+                        </div>
+                        <!-- Kiểm tra nếu đã đăng nhập -->
+                        <div th:if="${user != null}" class="dropdown">
+                          <a class="dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user"></i> <span th:text="${user.getUsername()}">Username</span>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
+                            <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                      <!--                      -->
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -208,152 +141,36 @@
     </div>
   </div>
 
-  <table>
-    <thead>
-    <tr>
-      <th>Rent Type</th>
-      <th>Price</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="renttype, iterStat : ${accommodation.getRentType()}">
-      <th:block th:with="price=${accommodation.getPrice()[iterStat.index]}">
-        <td th:text="${renttype}"></td>
-        <td th:text="${price}"></td>
-        <td>
-          <button
-                  type="button"
-                  th:data-name="${renttype}"
-                  th:data-name2="${price}"
-                  th:onclick="rentAction(this.getAttribute('data-name'), this.getAttribute('data-name2'))">
-            Thuê
-          </button>
-        </td>
-      </th:block>
-    </tr>
-
-    </tbody>
-  </table>
-
-  <div class="section best-deal">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="tabs-content">
-            <div class="row">
-              <div class="tab-content">
-                <div class="tab-pane fade show active">
-                  <div class="row">
-                    <div class="col-lg-3">
-                      <div class="info-table">
-                        <ul>
-                          <li th:each="renttype : ${accommodation.getRentType()}" th:text="${renttype}"></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <img src="/assets/images/deal-01.jpg" alt="">
-                    </div>
-                    <div class="col-lg-3">
-                      <h4>Extra Info About Property</h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, do eiusmod tempor pack incididunt ut labore et dolore magna aliqua quised ipsum suspendisse.
-                        <br><br>When you need free CSS templates, you can simply type TemplateMo in any search engine website. In addition, you can type TemplateMo Portfolio, TemplateMo One Page Layouts, etc.</p>
-                      <div class="icon-button">
-                        <a th:href="@{/properties/{id}(id=${accommodation.getAccommodationID()})}"><i class="fa fa-calendar"></i> Schedule a visit</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="container2">
+    <div class="map"> <!-- Thay thế src bằng URL của bản đồ hoặc nhúng bản đồ Google Maps -->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15677.487059339399!2d106.61734189999999!3d10.782812250000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1733411804569!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-  </div>
-
-  <div >
-    <div class="contact-content" id="scheduleForm">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12" >
-            <form id="contact-form" action="/save-lessee" method="post">
-              <div class="row">
-                <div class="col-lg-12">
-                  <fieldset>
-                    <label for="name">Full Name</label>
-                    <input type="name" name="name" id="name" placeholder="Your Name..." autocomplete="on" required>
-                  </fieldset>
-                </div>
-                <div class="col-lg-12">
-                  <fieldset>
-                    <label for="address">Address</label>
-                    <input type="text" name="address" id="address" placeholder="Address..." autocomplete="on" >
-                  </fieldset>
-                </div>
-                <div class="col-lg-12">
-                  <fieldset>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your E-mail..." required="">
-                  </fieldset>
-                </div>
-                <div class="col-lg-12">
-                  <fieldset>
-                    <label for="phone">Phone number</label>
-                    <input type="text" name="phone" id="phone" placeholder="Phone number..." autocomplete="on" >
-                  </fieldset>
-                </div>
-                <div class="col-lg-12">
-                  <fieldset>
-                    <button type="button" id="closeForm" class="orange-button">Close</button>
-                    <button type="submit" id="form-submit" class="orange-button">Send Message</button>
-                  </fieldset>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div >
-    <div class="contact-content" id="scheduleForm2">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12" >
-            <form id="appointmentForm" action="/save-date" method="post">
-              <div class="row">
-                <div class="col-lg-12">
-                  <fieldset>
-                    <label for="viewDate">View date</label>
-                    <input type="date" name="viewDate" id="viewDate" placeholder="View date..." autocomplete="on" >
-                  </fieldset>
-                </div>
-                <div class="col-lg-12">
-                  <fieldset>
-                    <label for="viewTime">View time</label>
-                    <input type="time" name="viewTime" id="viewTime" placeholder="View time..." autocomplete="on" >
-                  </fieldset>
-                </div>
-                <div class="col-lg-12">
-                  <fieldset>
-                    <label for="note">Message</label>
-                    <textarea name="note" id="note" placeholder="Your Message"></textarea>
-                  </fieldset>
-                </div>
-                <div class="col-lg-12">
-                  <fieldset>
-                    <button type="button" id="closeForm2" class="orange-button">Close</button>
-                    <button type="submit" id="form-submit2" class="orange-button">Send Message</button>
-                  </fieldset>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+    <div class="table-container">
+      <table>
+        <thead>
+        <tr>
+          <th>Rent Type</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="renttype, iterStat : ${accommodation.getRentType()}">
+          <th:block th:with="price=${accommodation.getPrice()[iterStat.index]}">
+            <td th:text="${renttype}"></td>
+            <td th:text="${price}"></td>
+            <td>
+              <button class="button" type="button"
+                      th:data-name="${renttype}"
+                      th:data-name2="${price}"
+                      th:onclick="rentAction(this.getAttribute('data-name'), this.getAttribute('data-name2'))">
+                Thuê
+              </button>
+            </td>
+          </th:block>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -367,93 +184,12 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+<!--   Scripts -->
   <script th:inline="javascript">
     function rentAction(renttype, price) {
       alert("Bạn đã chọn thuê " + renttype + " với giá " + price + " VND.");
       // Thực hiện logic thuê ở đây (gửi request tới server hoặc chuyển trang)
     }
-  </script>
-  <script>
-    document.getElementById("contact-form").addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData);
-
-      try {
-        const response = await fetch("/save-lessee", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-          alert(`Lessee ID created: ${result.lesseeID}`);
-          const lesseeID = result.lesseeID;
-          const currentUrl = new URL(window.location.href);
-          currentUrl.searchParams.set("lesseeID", lesseeID);
-          window.history.pushState({}, "", currentUrl);
-          document.getElementById("scheduleForm").style.display = "none";
-          document.getElementById("scheduleForm2").style.display = "block";
-
-        } else {
-          const error = await response.json();
-          alert(`Error: ${error.message}`);
-        }
-      } catch (err) {
-        alert("An unexpected error occurred!");
-        console.error(err);
-      }
-    });
-  </script>
-  <script>
-    document.getElementById("appointmentForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData);
-      // Lấy URL hiện tại
-      const urlParams = new URLSearchParams(window.location.search);
-      // const id = parts[4]; // Phần tử thứ 4 là "2"
-      const lesseeID = urlParams.get('lesseeID');
-      try {
-        const response = await fetch(`/save-date`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
-
-        if (response.ok) {
-          alert("Đặt lịch thành công!");
-          document.getElementById("scheduleForm2").style.display = "none";
-        } else {
-          const error = await response.json();
-          alert(`Error: ${error.message}`);
-        }
-      } catch (err) {
-        alert("An unexpected error occurred!");
-        console.error(err);
-      }
-    });
-  </script>
-  <script>
-    // JavaScript để điều khiển hiển thị form
-    document.getElementById('scheduleButton').addEventListener('click', function() {
-      document.getElementById('scheduleForm').style.display = 'block';
-    });
-
-    // Đóng form
-    document.getElementById('closeForm').addEventListener('click', function() {
-      document.getElementById('scheduleForm').style.display = 'none';
-    });
-  </script>
-  <script>
-    // Đóng form
-    document.getElementById('closeForm2').addEventListener('click', function() {
-      document.getElementById('scheduleForm2').style.display = 'none';
-    });
   </script>
 
   <!-- Bootstrap core JavaScript -->

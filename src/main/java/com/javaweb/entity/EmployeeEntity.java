@@ -24,7 +24,7 @@ public class EmployeeEntity {
 	@Column(name = "firstName", nullable = false)
     private String firstName;
 
-	@Column(name = "email")
+	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
 	@Enumerated(EnumType.STRING)

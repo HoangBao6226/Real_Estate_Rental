@@ -4,5 +4,5 @@ import com.javaweb.entity.DetailStatusEntity;
 
 public interface DetailStatusService {
 
-    public DetailStatusEntity updateStatusID(int accomID);
+    DetailStatusEntity updateStatusID(int accomID);
 }

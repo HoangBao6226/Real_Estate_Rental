@@ -1,0 +1,221 @@
+<!---->
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 8px;
+}
+
+th {
+    background-color: #ffe69c;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Ẩn form ban đầu */
+#scheduleForm {
+    display: none;
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    /*border: 1px solid #ccc;*/
+    padding: 20px;
+    /*background: white;*/
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+    max-height: 70%; /* Giới hạn chiều cao */
+    /*width: 400px; !* Đặt chiều rộng *!*/
+    overflow-y: auto; /* Thêm thanh cuộn dọc */
+}
+
+/* Để thanh cuộn trông đẹp hơn */
+#scheduleForm::-webkit-scrollbar {
+    width: 0px;
+}
+#scheduleForm::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+#scheduleForm::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Ẩn form ban đầu */
+#scheduleForm2 {
+    display: none;
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    /*border: 1px solid #ccc;*/
+    padding: 20px;
+    /*background: white;*/
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+    max-height: 70%; /* Giới hạn chiều cao */
+    /*width: 400px; !* Đặt chiều rộng *!*/
+    overflow-y: auto; /* Thêm thanh cuộn dọc */
+}
+
+/* Để thanh cuộn trông đẹp hơn */
+#scheduleForm2::-webkit-scrollbar {
+    width: 0px;
+}
+#scheduleForm2::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+#scheduleForm2::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/*Định dạnh table giá thuê------HTMC*/
+.container2 {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+}
+/* Định dạng cho map */
+.map {
+    flex: 1; /* Chiếm một phần không gian */
+    min-width: 300px; /* Chiều rộng tối thiểu */
+    margin-top: 50px;
+    margin-left: 100px;
+}
+/* Định dạng cho bảng */
+.table-container {
+    margin-top: 50px;
+    flex: 1; /* Chiếm một phần không gian */
+    min-width: 300px; /* Chiều rộng tối thiểu */
+}
+/* Định dạng bảng */
+table {
+    width: 500px;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* Màu nền trắng */
+    font-size: 14px; /* Giảm kích thước chữ */
+    margin-left: 100px;
+    height: 450px;
+    margin-top: -1px;
+    margin-bottom: 10px ;
+    border: #1a1e21;
+
+}
+/* Định dạng header của bảng */
+thead {
+    background-color: #F2DDDC; /* Màu nền cam pastel */
+    color: white; /* Màu chữ trắng cho header */
+}
+/* Định dạng các ô header */
+th {
+    padding: 8px; /* Giảm khoảng cách trong */
+    text-align: left;
+    border-bottom: 2px solid #FFA500; /* Đường viền dưới cam */
+} /* Định dạng các ô dữ liệu */
+td {
+    padding: 8px; /* Giảm khoảng cách trong */
+    border-bottom: 1px solid #ddd;
+}
+/* Định dạng các hàng */
+tr:nth-child(even) {
+    background-color: #FFFACD; /* Màu nền xen kẽ nhạt */
+}
+tr:hover {
+    background-color: #FFEFD5; /* Màu nền khi hover nhạt */
+}
+/* Định dạng nút trong bảng */
+.button {
+    background-color: #FFA500; /* Màu nền cam cho nút */
+    color: white; /* Màu chữ trắng */
+    border: none;
+    padding: 6px 12px; /* Giảm kích thước nút */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px; /* Giảm kích thước chữ */
+    margin: 2px 1px; /* Giảm khoảng cách ngoài */
+    cursor: pointer;
+    border-radius: 5px; /* Bo tròn góc */
+}
+.button:hover {
+    background-color: #FF8C00; /* Màu nền cam đậm khi hover cho nút */ }
+/*định dạng cho button thuê
+ */
+/* From Uiverse.io by JasonMep */
+.button {
+    color: #ecf0f1;
+    font-size: 13.6px; /* Giảm kích thước chữ 20% */
+    background-color: #e67e22;
+    border: 1px solid #f39c12;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px; /* Giảm padding 20% */
+    box-shadow: 0px 4.8px 0px #d35400; /* Giảm độ sâu của bóng 20% */
+    transition: all 0.1s;
+}
+
+.button:active {
+    box-shadow: 0px 1.6px 0px #d35400; /* Giảm độ sâu của bóng khi nhấn 20% */
+    position: relative;
+    top: 1.6px; /* Giảm vị trí khi nhấn 20% */
+
+}
+/*?--------------*/
+/* Định dạng tổng thể cho main-content */
+/*.main-content {*/
+/*    font-family: Arial, sans-serif;*/
+/*    color: #333;*/
+/*    background-color: #f9f9f9;*/
+/*    padding: 20px;*/
+/*    border-radius: 10px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*!* Định dạng cho category *!*/
+/*.main-content .category {*/
+/*    display: inline-block;*/
+/*    font-size: 14px;*/
+/*    color: #fff;*/
+/*    background-color: #ffa500;*/
+/*    padding: 5px 10px;*/
+/*    border-radius: 5px;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*!* Định dạng cho h4 *!*/
+/*.main-content h4 {*/
+/*    font-size: 24px;*/
+/*    color: #000000;*/
+/*    margin-bottom: 15px;*/
+/*}*/
+
+/*!* Định dạng cho p và strong *!*/
+/*.main-content p {*/
+/*    font-size: 16px;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*.main-content p strong {*/
+/*    font-weight: bold;*/
+/*    color: #1a1d20;*/
+/*}*/
+
+/*!* Thêm khoảng cách cho các đoạn văn *!*/
+/*.main-content p + p {*/
+/*    margin-top: 10px;*/
+/*}*/
+/*-----HTMC*/

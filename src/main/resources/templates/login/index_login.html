@@ -1,145 +1,205 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/assets/css/style_login.css" />
-    <title>Login Register Form</title>
-  </head>
-  <body>
-    <header>
-      <div class="logo">
-        <img src="/assets/images/logo.png" alt="logo" />
-        <a th:href="@{/}">RER</a>
-      </div>
-
-      <nav>
-        <button id="login-button" onclick="{popup(event)}">
-          <span>Login</span>
-        </button>
-      </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assets/css/style_login.css" />
+  <title>Login Register Form</title>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="/assets/images/logo.png" alt="logo" />
+    <a th:href="@{/}">RER</a>
+  </div>
 
 
-    </header>
+</header>
 
-    <section class="container">
-      <div class="wrapper">
-        <span class="icon-close" onclick="{popup(event)}"
-          ><ion-icon name="close-outline"></ion-icon
-        ></span>
-        <div class="formbox login">
-          <h1>Login</h1>
-          <form action="">
-            <div class="input">
+<section class="container">
+  <div class="wrapper">
+    <div class="formbox login">
+      <h1>Login</h1>
+      <form id="login" th:action="@{/login}" method="post">
+        <div class="input">
               <span class="icon">
                 <ion-icon name="person-outline"></ion-icon>
               </span>
-              <input type="text" name="username" id="username" required />
-              <label for="username">Username</label>
-            </div>
-            <div class="input">
+          <input type="text" name="username" id="username" required />
+          <label for="username">Username</label>
+        </div>
+        <div class="input">
               <span class="icon">
-                <ion-icon
-                  title="show password?"
-                  class="eyes"
-                  name="eye-outline"
-                  id="eye"
-                  onclick="{showPassword(event)}"
-                  aria-hidden="true"
-                ></ion-icon>
+                <ion-icon title="show password?" class="eyes" name="eye-outline" id="eye" onclick="{showPassword(event)}" aria-hidden="true"></ion-icon>
               </span>
-              <input
-                type="password"
-                name="password"
-                id="password-login"
-                required
-              />
-              <label for="password">Password</label>
-            </div>
-
-            <div class="remember-forgot">
-              <label for="remember"
-                ><input type="checkbox" id="remember" />Remember Me</label
-              >
-              <a href="#">Forgot Password?</a>
-            </div>
-            <button type="submit" class="btn" name="login">Login</button>
-            <div class="login-register">
-              <p>
-                Dont Have Account?<a
-                  href="#"
-                  class="register-link"
-                  onclick="{change(event)}"
-                  >Register</a
-                >
-              </p>
-            </div>
-          </form>
+          <input type="password" name="password" id="password" required/>
+          <label for="password">Password</label>
         </div>
 
-        <div class="formbox register">
-          <h2>Registration</h2>
-          <form action="">
-            <div class="input">
-              <span class="icon">
-                <ion-icon name="person-outline"></ion-icon>
-              </span>
-              <input type="text" name="username" required />
-              <label for="">Username</label>
-            </div>
-            <div class="input">
-              <span class="icon">
-                <i name="show password"
-                  ><ion-icon
-                    title="show password?"
-                    class="eyes"
-                    name="eye-outline"
-                    id="eye"
-                    onclick="{showPassword(event)}"
-                    aria-hidden="true"
-                  ></ion-icon
-                ></i>
-              </span>
-              <input
-                type="password"
-                name="password"
-                id="password-regis"
-                required
-              />
-              <label for="">Password</label>
-            </div>
-            <div class="remember-forgot">
-              <label for=""
-                ><input type="checkbox" />I agree to the terms &
-                conditions</label
-              >
-            </div>
-            <button type="submit" class="btn" name="save_user">Register</button>
-            <div class="login-register">
-              <p>
-                Already have an account?<a
-                  href="#"
-                  class="login-link"
-                  onclick="{change(event)}"
-                  >Login</a
-                >
-              </p>
-            </div>
-          </form>
+        <div class="remember-forgot">
+          <label for="remember"
+          ><input type="checkbox" id="remember" />Remember Me</label
+          >
+          <a href="#">Forgot Password?</a>
         </div>
-      </div>
-    </section>
+        <button type="submit" class="btn" name="login">Login</button>
+        <div class="login-register">
+          <p>
+            Dont Have Account? &nbsp<a href="#" class="register-link" onclick="{change(event)}">Register</a>
+          </p>
+        </div>
 
-    <script src="/assets/js/script_login.js"></script>
+      </form>
+    </div>
 
-    <!-- Ion Icon -->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
-  </body>
+    <div class="formbox register">
+      <h2>Registration</h2>
+      <form id="signup" action="/signup" method="post">
+        <!-- Full Name -->
+        <div class="input">
+      <span class="icon">
+        <ion-icon name="person-outline"></ion-icon>
+      </span>
+          <input type="text" name="name" id="name" required />
+          <label for="name">Full Name</label>
+        </div>
+
+        <!-- Address -->
+        <div class="input">
+      <span class="icon">
+        <ion-icon name="home-outline"></ion-icon>
+      </span>
+          <input type="text" name="address" id="address" required />
+          <label for="address">Address</label>
+        </div>
+
+        <!-- Email -->
+        <div class="input">
+      <span class="icon">
+        <ion-icon name="mail-outline"></ion-icon>
+      </span>
+          <input type="email" name="email" id="email" required />
+          <label for="email">Email</label>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="input">
+      <span class="icon">
+        <ion-icon name="call-outline"></ion-icon>
+      </span>
+          <input type="text" name="phone" id="phone" required />
+          <label for="phone">Phone Number</label>
+        </div>
+
+        <!-- Username -->
+        <div class="input">
+      <span class="icon">
+        <ion-icon name="person-outline"></ion-icon>
+      </span>
+          <input type="text" name="username" id="username_signup" required />
+          <label for="username_signup">Username</label>
+        </div>
+
+        <!-- Password -->
+        <div class="input">
+      <span class="icon">
+        <ion-icon
+                title="show password?"
+                class="eyes"
+                name="eye-outline"
+                id="eye"
+                onclick="showPassword(event)"
+                aria-hidden="true"
+        ></ion-icon>
+      </span>
+          <input type="password" name="password" id="password_signup" required />
+          <label for="password_signup">Password</label>
+        </div>
+
+        <!-- Who (Lessee or Lessor) -->
+        <div >
+      <span class="icon">
+        <ion-icon name="person-outline"></ion-icon>
+      </span>
+          <label for="role">Who are you?</label>
+          <select name="role" id="role" required class="custom-select">
+            <option id="lessee" value="lessee">Lessee</option>
+            <option id="lessor" value="lessor">Lessor</option>
+          </select>
+        </div>
+
+        <div style="clear: both;"></div>
+
+        <!-- Terms and Conditions -->
+        <div class="remember-forgot">
+          <label >
+            <input type="checkbox" required /> I agree to the terms & conditions
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn" name="save_user">Register</button>
+
+        <!-- Link to Login -->
+        <div class="login-register">
+          <p>
+            Already have an account?
+            <a href="#" class="login-link" onclick="change(event)">Login</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="/assets/js/script_login.js"></script>
+<!-- Scripts -->
+<script>
+  document.getElementById("signup").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const response = await fetch(`/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      // Kiểm tra trạng thái HTTP và kiểu phản hồi
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Server error:", errorText);
+        alert(`Error: ${response.status} - ${response.statusText}`);
+        return;
+      }
+
+      // Đảm bảo phản hồi là JSON
+      if (response.headers.get("Content-Type").includes("application/json")) {
+        const result = await response.json();
+        alert(`Notification: ${result.notification}`);
+      } else {
+        const text = await response.text();
+        console.error("Unexpected response:", text);
+        alert("Error: Server did not return JSON.");
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      alert("An unexpected error occurred!");
+    }
+  });
+
+</script>
+<!-- Ion Icon -->
+<script
+        type="module"
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+        nomodule
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+></script>
+</body>
 </html>
