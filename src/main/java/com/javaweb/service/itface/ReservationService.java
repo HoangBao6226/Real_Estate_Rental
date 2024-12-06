@@ -5,5 +5,5 @@ import com.javaweb.service.model.ReservationDTO;
 
 public interface ReservationService {
 
-    public ReservationEntity saveReservation(ReservationDTO reDTO, int accomID, int lesseeID);
+    ReservationEntity saveReservation(ReservationDTO reDTO, int accomID, int lesseeID);
 }

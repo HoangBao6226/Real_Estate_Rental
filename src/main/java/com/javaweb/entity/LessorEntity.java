@@ -26,7 +26,7 @@ public class LessorEntity {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @OneToMany(mappedBy = "lessorID")

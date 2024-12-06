@@ -208,7 +208,8 @@ use real_estate;
 
 select * from Accommodation;
 select * from AccomType;
-select * from Account;
+-- --pass:123;-- 
+select * from Account; 
 select * from Advantage;
 select * from Amenity;
 select * from DetailAmenity;
@@ -217,12 +218,13 @@ select * from DetailStatus;
 select * from Status;
 select * from Invoice;
 select * from Lessee;
+select * from Lessor;
 select * from Payment;
 select * from RentType;
 select * from Reservation;
 select * from Role;
 
-select * from user;
+select * from employee;
 
 select *
 from User join Account on User.userID = Account.userID

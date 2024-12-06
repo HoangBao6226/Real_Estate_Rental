@@ -22,7 +22,7 @@ CREATE TABLE Employee (
     employeeID INT PRIMARY KEY AUTO_INCREMENT,
     lastName NVARCHAR(50) NOT NULL,
     firstName NVARCHAR(50) NOT NULL,
-	email VARCHAR(100) NOT NULL,
+	email VARCHAR(100) NOT NULL unique,
     gender ENUM('Male', 'Female'),
     dateOfBirth DATE,
     address TEXT,
@@ -35,7 +35,7 @@ CREATE TABLE Lessor (
     firstName NVARCHAR(50) NOT NULL,
     address TEXT,
     phoneNumber VARCHAR(20),
-    email VARCHAR(100)
+    email VARCHAR(100) NOT NULL unique
 ) ENGINE=InnoDB;
 
 CREATE TABLE Lessee (
@@ -44,7 +44,7 @@ CREATE TABLE Lessee (
     firstName NVARCHAR(50) NOT NULL,
     address TEXT,
     phoneNumber VARCHAR(20),
-    email VARCHAR(100)
+    email VARCHAR(100) NOT NULL unique
 ) ENGINE=InnoDB;
 
 CREATE TABLE AccomType (

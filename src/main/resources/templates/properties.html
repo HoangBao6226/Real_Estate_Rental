@@ -52,8 +52,26 @@
                       <li><a th:href="@{/}">Home</a></li>
                       <li><a th:href="@{/properties}" class="active">Properties</a></li>
 <!--                      <li><a href="property-details.html">Property Details</a></li>-->
-                      <li><a href="contact.html">Contact Us</a></li>
-                      <li><a href="#"><i class="fa fa-calendar"></i>Log in</a></li>
+                      <!--                      -->
+                      <li>
+                        <!-- Kiểm tra nếu chưa đăng nhập -->
+                        <div th:if="${user == null}">
+                          <a th:href="@{/login}">
+                            <i class="fa fa-calendar"></i> Log in
+                          </a>
+                        </div>
+                        <!-- Kiểm tra nếu đã đăng nhập -->
+                        <div th:if="${user != null}" class="dropdown">
+                          <a class="dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user"></i> <span th:text="${user.getUsername()}">Username</span>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
+                            <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                      <!--                      -->
                   </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>

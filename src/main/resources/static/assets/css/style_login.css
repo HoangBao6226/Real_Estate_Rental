@@ -1,390 +1,568 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #fff;
+  background-color: #000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+}
+
+header {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 6rem;
+}
+
+header .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header .logo img {
+  width: 75px;
+  height: 75px;
+}
+
+header .logo a {
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+header nav a {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+header nav a::after {
+  content: "";
+  display: block;
+  border-bottom: 4px solid #fff;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s linear;
+}
+
+header nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.3s linear;
+}
+
+header nav button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 1rem 3rem;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+  overflow: hidden;
+}
+
+header nav button::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 0;
+  width: 100%;
+  background-color: #fff;
+  transition: 0.3s linear;
+  z-index: 0;
+}
+
+header nav button:hover::after {
+  height: 100%;
+  top: initial;
+  bottom: 0;
+  transition: 0.3s linear;
+}
+
+header nav button span {
+  position: relative;
+  transition: color 0.3s linear;
+  z-index: 1;
+}
+
+header nav button:hover span {
+  color: #000;
+}
+
+header .hamburger-menu {
+  display: none;
+}
+
+.container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../images/bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.container .wrapper {
+  position: absolute;
+  width: 400px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  transform: scale(0);
+  transition: transform 0.3s linear;
+}
+
+.container .wrapper .icon-close {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 2rem;
+  border-bottom-left-radius: 20px;
+}
+
+.container .wrapper h1 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.container .wrapper.popup {
+  transform: scale(1);
+}
+
+.container .wrapper .formbox {
+  width: 100%;
+  padding: 40px;
+}
+
+.container .wrapper .formbox.login {
+  transform: translateX(0);
+  transition: transform 0.3s linear;
+}
+
+.container .wrapper.active .formbox.login {
+  transform: translateX(-400px);
+  transition: transform 0.3s linear;
+}
+
+.container .wrapper .formbox.login .remember-forgot {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.container .wrapper .formbox.login .remember-forgot label,
+.container .wrapper .formbox.register .remember-forgot label {
+  display: flex;
+  align-items: center;
+  gap:4px;
+
+}
+
+.container .wrapper .formbox.login button,
+.container .wrapper .formbox.register button {
+  cursor: pointer;
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  background: transparent;
+  margin: 1rem 0;
+  color: #fff;
+  font-size: 18px;
+  transition: .2s linear;
+}
+
+.container .wrapper .formbox.login button:hover,
+.container .wrapper .formbox.register button:hover {
+  background-color: #fff;
+  color: #000;
+  transition: .2s linear;
+}
+
+.container .wrapper .formbox.login .login-register .register-link,
+.container .wrapper .formbox.register .login-register .login-link {
+  color: #fff;
+}
+
+.container .wrapper .formbox.login .remember-forgot a {
+
+  color: #fff;
+}
+
+.container .wrapper .formbox.register {
+  position: absolute;
+  transform: translateX(400px);
+  transition: transform 0.3s linear;
+}
+
+.container .wrapper.active .formbox.register {
+  transform: translateX(0);
+  transition: transform 0.3s linear;
+}
+
+.input {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px solid #fff;
+  margin: 30px 0;
+}
+
+.input label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  transform: translateY(-50%);
+  transition: 0.3s;
+}
+
+.input input:focus ~ label,
+.input input:valid ~ label {
+  top: 0;
+}
+
+.input input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 0 35px 0 5px;
+  color: #fff;
+}
+
+.input .icon {
+  position: absolute;
+  right: 4px;
+  top: 30%;
+  font-size: 1.2rem;
+}
+
+.input .icon .eyes {
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 1024px) {
+  header nav,
+  header .extra-nav {
+    display: none;
   }
-  
-  body {
-    color: #fff;
-    background-color: #000;
+
+  header .hamburger-menu {
+    display: block;
   }
-  
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    background-color: #000;
-    color: #fff;
-  }
-  
-  header {
-      position: fixed;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding: 1rem 6rem;
-    }
-    
-    header .logo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    header .logo img {
-      width: 75px;
-      height: 75px;
-    }
-    
-    header .logo a {
-      font-size: 24px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #fff;
-    }
-    
-    header nav {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-    
-    header nav a {
-      color: #fff;
-      font-size: 20px;
-      font-weight: 500;
-      text-decoration: none;
-    }
-    
-    header nav a::after {
-      content: "";
-      display: block;
-      border-bottom: 4px solid #fff;
-      width: 100%;
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s linear;
-    }
-    
-    header nav a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-      transition: transform 0.3s linear;
-    }
-    
-    header nav button {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-      padding: 1rem 3rem;
-      background: transparent;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      color: #fff;
-      font-weight: 600;
-      font-size: 20px;
-      overflow: hidden;
-    }
-    
-    header nav button::after {
-      content: "";
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 0;
-      width: 100%;
-      background-color: #fff;
-      transition: 0.3s linear;
-      z-index: 0;
-    }
-    
-    header nav button:hover::after {
-      height: 100%;
-      top: initial;
-      bottom: 0;
-      transition: 0.3s linear;
-    }
-    
-    header nav button span {
-      position: relative;
-      transition: color 0.3s linear;
-      z-index: 1;
-    }
-    
-    header nav button:hover span {
-      color: #000;
-    }
-    
-    header .hamburger-menu {
-      display: none;
-    }
-  
-  .container {
-    min-height: 100vh;
-    width: 100%;
+
+  header .mobile-nav {
+    position: absolute;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url("../images/bg.png");
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .container .wrapper {
-    position: absolute;
-    width: 400px;
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #fff;
-    border-radius: 50px;
-    background: transparent;
-    backdrop-filter: blur(20px);
-    overflow: hidden;
-    transform: scale(0);
-    transition: transform 0.3s linear;
-  }
-  
-  .container .wrapper .icon-close {
-    cursor: pointer;
-    position: absolute;
     top: 0;
+    left: 0;
     right: 0;
-    padding: 10px;
-    background-color: #fff;
+    transform: translateY(-100%);
+    height: 100vh;
+    background-color: #000;
+    z-index: 999;
+    transition: all 0.2s linear;
+  }
+
+  header .mobile-nav.show {
+    transform: translateY(0);
+    transition: all 0.2s linear;
+  }
+
+  header .mobile-nav .close {
+    position: absolute;
+    top: 24px;
+    right: 16px;
     display: flex;
+    justify-content: end;
+    width: 100%;
+  }
+
+  header .mobile-nav .close svg {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+  }
+
+  header .mobile-nav ul {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #000;
-    font-size: 2rem;
-    border-bottom-left-radius: 20px;
-  }
-  
-  .container .wrapper h1 {
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  .container .wrapper.popup {
-    transform: scale(1);
-  }
-  
-  .container .wrapper .formbox {
+    gap: 8px;
     width: 100%;
-    padding: 40px;
   }
-  
-  .container .wrapper .formbox.login {
-    transform: translateX(0);
-    transition: transform 0.3s linear;
-  }
-  
-  .container .wrapper.active .formbox.login {
-    transform: translateX(-400px);
-    transition: transform 0.3s linear;
-  }
-  
-  .container .wrapper .formbox.login .remember-forgot {
-      display: flex;
-      justify-content: space-between;
-  }
-  
-  .container .wrapper .formbox.login .remember-forgot label,
-  .container .wrapper .formbox.register .remember-forgot label {
-      display: flex;
-      align-items: center;
-      gap:4px;
-  }
-  
-  .container .wrapper .formbox.login button,
-  .container .wrapper .formbox.register button {
-      cursor: pointer;
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      background: transparent;
-      margin: 1rem 0;
-      color: #fff;
-      font-size: 18px;
-      transition: .2s linear;
-  }
-  
-  .container .wrapper .formbox.login button:hover,
-  .container .wrapper .formbox.register button:hover {
-      background-color: #fff;
-      color: #000;
-      transition: .2s linear;
-  }
-  
-  .container .wrapper .formbox.login .login-register .register-link, 
-  .container .wrapper .formbox.register .login-register .login-link {
-      color: #fff;
-  }
-  
-  .container .wrapper .formbox.login .remember-forgot a {
-      color: #fff;
-  }
-  
-  .container .wrapper .formbox.register {
-    position: absolute;
-    transform: translateX(400px);
-    transition: transform 0.3s linear;
-  }
-  
-  .container .wrapper.active .formbox.register {
-    transform: translateX(0);
-    transition: transform 0.3s linear;
-  }
-  
-  .input {
+
+  header .mobile-nav ul li {
+    cursor: pointer;
     position: relative;
-    width: 100%;
-    height: 50px;
-    border-bottom: 2px solid #fff;
-    margin: 30px 0;
+    list-style: none;
+    width: 25%;
   }
-  
-  .input label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    font-size: 1rem;
-    font-weight: 500;
-    transform: translateY(-50%);
-    transition: 0.3s;
-  }
-  
-  .input input:focus ~ label,
-  .input input:valid ~ label {
-    top: 0;
-  }
-  
-  .input input {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    padding: 0 35px 0 5px;
+
+  header .mobile-nav ul li a {
     color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 36px;
+    transition: 0.3s linear;
   }
-  
-  .input .icon {
-    position: absolute;
-    right: 4px;
-    top: 30%;
-    font-size: 1.2rem;
+
+  header .mobile-nav ul li .nav-link::after {
+    content: "";
+    display: block;
+    border-bottom: 1px solid #fff;
+    width: 0%;
+    transition: 0.3s linear;
   }
-  
-  .input .icon .eyes {
-      cursor: pointer;
+
+  header .mobile-nav ul li:hover .nav-link::after {
+    width: 100%;
+    transition: 0.3s linear;
   }
-  
-  
-  @media screen and (max-width: 1024px) {
-    header nav,
-    header .extra-nav {
-      display: none;
-    }
-  
-    header .hamburger-menu {
-      display: block;
-    }
-  
-    header .mobile-nav {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      top: 0;
-      left: 0;
-      right: 0;
-      transform: translateY(-100%);
-      height: 100vh;
-      background-color: #000;
-      z-index: 999;
-      transition: all 0.2s linear;
-    }
-  
-    header .mobile-nav.show {
-      transform: translateY(0);
-      transition: all 0.2s linear;
-    }
-  
-    header .mobile-nav .close {
-      position: absolute;
-      top: 24px;
-      right: 16px;
-      display: flex;
-      justify-content: end;
-      width: 100%;
-    }
-  
-    header .mobile-nav .close svg {
-      cursor: pointer;
-      width: 35px;
-      height: 35px;
-    }
-  
-    header .mobile-nav ul {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-    }
-  
-    header .mobile-nav ul li {
-      cursor: pointer;
-      position: relative;
-      list-style: none;
-      width: 25%;
-    }
-  
-    header .mobile-nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 36px;
-      transition: 0.3s linear;
-    }
-  
-    header .mobile-nav ul li .nav-link::after {
-      content: "";
-      display: block;
-      border-bottom: 1px solid #fff;
-      width: 0%;
-      transition: 0.3s linear;
-    }
-  
-    header .mobile-nav ul li:hover .nav-link::after {
-      width: 100%;
-      transition: 0.3s linear;
-    }
+}
+
+@media screen and (max-width: 768px) {
+  header .mobile-nav ul li {
+    width: 35%;
   }
-  
-  @media screen and (max-width: 768px) {
-    header .mobile-nav ul li {
-      width: 35%;
-    }
+}
+
+@media screen and (max-width: 450px) {
+  header .mobile-nav ul li {
+    width: 50%;
   }
-  
-  @media screen and (max-width: 450px) {
-    header .mobile-nav ul li {
-      width: 50%;
-    }
+}
+.container .wrapper {
+  position: relative; /* Chuyển từ absolute sang relative */
+  width: 400px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  transform: scale(1); /* Hiển thị form mặc định */
+  transition: none; /* Loại bỏ animation */
+}
+
+.container .wrapper.popup {
+  transform: scale(1); /* Không thay đổi trạng thái form */
+}
+
+.container .wrapper .formbox.login {
+  position: relative; /* Chuyển từ absolute sang relative */
+  transform: translateX(0); /* Hiển thị mặc định */
+  transition: none; /* Loại bỏ animation */
+}
+
+
+
+
+.container .wrapper .formbox {
+  width: 100%;
+  padding: 40px;
+  visibility: visible; /* Đảm bảo form luôn hiển thị */
+  opacity: 1; /* Đảm bảo độ trong suốt */
+}
+/* Đảm bảo rằng form luôn trung tâm và có thanh cuộn khi cần thiết */
+.container .wrapper .formbox.register {
+  width: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.6); /* Thêm nền mờ cho form */
+  border-radius: 20px; /* Bo góc của form */
+  backdrop-filter: blur(10px); /* Hiệu ứng mờ cho nền */
+  overflow-y: auto; /* Thêm thanh cuộn dọc khi nội dung quá dài */
+  max-height: 80vh; /* Đảm bảo form không vượt quá chiều cao của màn hình */
+}
+
+/* Các trường input */
+.input {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px solid #fff;
+  margin: 20px 0;
+}
+
+.input label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  transform: translateY(-50%);
+  transition: 0.3s;
+  color: #fff; /* Màu của label */
+}
+
+.input input:focus ~ label,
+.input input:valid ~ label {
+  top: 0;
+}
+
+.input input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 0 35px 0 5px;
+  color: #fff;
+}
+
+.input .icon {
+  position: absolute;
+  right: 4px;
+  top: 30%;
+  font-size: 1.2rem;
+}
+
+.input .icon .eyes {
+  cursor: pointer;
+}
+
+/* Nút đăng ký */
+.container .wrapper .formbox.register button {
+  cursor: pointer;
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  background: transparent;
+  margin: 1rem 0;
+  color: #fff;
+  font-size: 18px;
+  transition: .2s linear;
+}
+
+.container .wrapper .formbox.register button:hover {
+  background-color: #fff;
+  color: #000;
+  transition: .2s linear;
+}
+
+/* Các liên kết trong form */
+.container .wrapper .formbox.register .login-register .login-link {
+  color: #fff;
+}
+
+.container .wrapper .formbox.register .remember-forgot label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+}
+
+/* Đảm bảo form có thể hoạt động mượt mà trên các màn hình nhỏ */
+@media screen and (max-width: 768px) {
+  .container .wrapper .formbox.register {
+    padding: 20px;
+    max-height: 70vh;
   }
+
+  .input input {
+    font-size: 0.9rem;
+  }
+
+  .container .wrapper .formbox.register button {
+    font-size: 16px;
+    padding: 10px;
+  }
+}
+.formbox.register h2 {
+  text-align: center; /* Căn giữa tiêu đề */
+  font-size: 2rem;    /* Điều chỉnh kích thước chữ */
+  font-weight: bold;  /* Đậm chữ */
+  margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+  color: #fff; /* Màu chữ trắng */
+}
+.formbox.register::-webkit-scrollbar { display: none; }
+.custom-select {
+  width: 50%; /* Đặt chiều rộng cho phần tử */
+  padding: 10px; /* Đặt khoảng cách trong (padding) */
+  margin-bottom: 10px;
+  font-size: 16px; /* Kích thước chữ */
+  border: 1px solid #ccc; /* Đường viền */
+  border-radius: 5px; /* Bo góc đường viền */
+  background-color: rgba(0, 0, 0, 0.5); /* Màu nền */
+  appearance: none; /* Loại bỏ phong cách mặc định của trình duyệt */
+  -webkit-appearance: none; /* Cho Webkit browsers */
+  -moz-appearance: none; /* Cho Mozilla browsers */
+  color : #ffffff;
+  float: right;
+}
+
+.custom-select:focus {
+  border-color: #007bff; /* Màu đường viền khi tập trung */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Hiệu ứng bóng khi tập trung */
+}
+
+.custom-select option {
+  padding: 10px; /* Đặt khoảng cách trong (padding) cho các tùy chọn */
+}
+.clearfix::after { content: ""; display: table; clear: both; }

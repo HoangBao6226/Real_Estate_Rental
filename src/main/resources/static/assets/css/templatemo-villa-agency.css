@@ -315,6 +315,18 @@ Pre-loader Style
 Header Style
 --------------------------------------------- 
 */
+.nav .dropdown-menu {
+  min-width: 150px;
+  text-align: center;
+}
+
+.nav .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: inherit;
+}
 
 .sub-header {
   background-color: #fff;
