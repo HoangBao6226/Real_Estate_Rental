@@ -12,6 +12,15 @@
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <style>
+      /* Hiển thị nội dung khi hover vào dropdown */
+      .dropdown:hover .dropdown-menu {
+        display: block;
+        background-color: #1e1e1e;
+        width: 200px;
+      }
+    </style>
+
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="/assets/css/fontawesome.css">
@@ -65,10 +74,10 @@
                           <a class="dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-user"></i> <span th:text="${user.getUsername()}">Username</span>
                           </a>
-                          <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
-                            <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
-                          </ul>
+                          <div class="dropdown-menu" >
+                            <a  th:href="@{/profile}">Profile</a>
+                            <a  th:href="@{/logout}">Log out</a>
+                          </div>
                         </div>
                       </li>
 <!--                      -->

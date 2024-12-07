@@ -151,23 +151,22 @@
         <tr>
           <th>Rent Type</th>
           <th>Price</th>
+          <th>Deposit</th>
           <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="renttype, iterStat : ${accommodation.getRentType()}">
-          <th:block th:with="price=${accommodation.getPrice()[iterStat.index]}">
-            <td th:text="${renttype}"></td>
-            <td th:text="${price}"></td>
-            <td>
-              <button class="button" type="button"
-                      th:data-name="${renttype}"
-                      th:data-name2="${price}"
-                      th:onclick="rentAction(this.getAttribute('data-name'), this.getAttribute('data-name2'))">
-                Thuê
-              </button>
-            </td>
-          </th:block>
+        <tr th:each="renttype, iterStart: ${accommodation.getRentType()}">
+          <td th:text="${renttype}"></td>
+          <td th:text="${accommodation.getPrice()[iterStart.index]}"></td>
+          <td th:text="${accommodation.getDeposit()[iterStart.index]}"></td>
+          <td>
+            <button class="button" type="button">
+              <a th:href="@{/payment/create_payment(amount=${accommodation.getDeposit()[iterStart.index]})}">
+                <i class="fa fa-calendar"></i> Đặt cọc
+              </a>
+            </button>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -183,14 +182,6 @@
       </div>
     </div>
   </footer>
-
-<!--   Scripts -->
-  <script th:inline="javascript">
-    function rentAction(renttype, price) {
-      alert("Bạn đã chọn thuê " + renttype + " với giá " + price + " VND.");
-      // Thực hiện logic thuê ở đây (gửi request tới server hoặc chuyển trang)
-    }
-  </script>
 
   <!-- Bootstrap core JavaScript -->
   <script src="/vendor/jquery/jquery.min.js"></script>

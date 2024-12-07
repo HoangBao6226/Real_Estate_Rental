@@ -18,8 +18,6 @@ import com.javaweb.service.converter.AccomConverter;
 import com.javaweb.service.itface.AccomService;
 import com.javaweb.service.model.AccomDTO;
 
-
-
 @Service
 public class AccomSerImplement implements AccomService {
 
@@ -32,35 +30,12 @@ public class AccomSerImplement implements AccomService {
 	@Autowired
 	private AccomConverter accomConverter;
 
-	@Autowired
-	private ModelMapper modelMapper;
-
-	@Autowired
-	private DetailAmenityRepository deAmenityRepo;
-
-	@Autowired
-	private DetailRTRepository deRTRepo;
-
 	@Override
 	public AccomDTO findAccomById(int id) {
 
 		AccomEntity item = accomRepo.findById(id).get();
-		AccomDTO ac = modelMapper.map(item, AccomDTO.class);
 
-		ac.setAccommodationName(item.getAccommodationName());
-		ac.setAddress(item.getStreet() + ", " + item.getWard() + ", " + item.getDistrict() + ", " + item.getCity());
-
-		List<DetailAmenityEntity> am = deAmenityRepo.findAllByaccommodationID(item);
-		String amenityName = am.stream().map(it -> "" + it.getAmenityID().getAmenityName()).collect(Collectors.joining(", "));
-		ac.setAmenity(amenityName);
-
-		List<DetailRentTypeEntity> deRT = deRTRepo.findAllByaccommodationID(item);
-		String rentType = deRT.stream().map(it -> it.getRentTypeID().getRentTypeName()).collect(Collectors.joining(", "));
-		String[] rt = rentType.split(",");
-		ac.setRentType(rt);
-		String detailRentType = deRT.stream().map(it -> "" + it.getPrice()).collect(Collectors.joining(", "));
-		String[] price = detailRentType.split(",");
-		ac.setPrice(price);
+		AccomDTO ac = accomConverter.toAccomDTO(item);
 
 		return ac;
 	}

@@ -46,7 +46,8 @@ public class EmployeeEntity {
 	@OneToMany(mappedBy = "salesID")
 	private List<ReservationEntity> listReverse = new ArrayList<ReservationEntity>();
 
-
+	public EmployeeEntity() {
+	}
 
 	//////////////////////////////////////////////////////////////////////////////////
 
