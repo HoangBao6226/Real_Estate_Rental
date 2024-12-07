@@ -12,6 +12,7 @@ public class AccomDTO {
 	private String amenity;
 	private String[] rentType;
 	private String[] price;
+	private String[] deposit;
 	private String accomType;
 
 	public int getAccommodationID() {
@@ -92,6 +93,14 @@ public class AccomDTO {
 
 	public void setPrice(String[] price) {
 		this.price = price;
+	}
+
+	public String[] getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(String[] deposit) {
+		this.deposit = deposit;
 	}
 
 	public String getAccomType() {

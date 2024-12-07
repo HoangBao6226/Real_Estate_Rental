@@ -16,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +44,9 @@ public class SignUpController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @PostMapping(value = "/signup")
     public ResponseEntity<Map<String, Object>> signUp(@RequestBody RegistrationDTO registrationDTO) {
 
@@ -52,7 +56,7 @@ public class SignUpController {
             if (accountRepository.findByUsername(registrationDTO.getUsername()) != null) {
                 Map<String, Object> response = new HashMap<>();
                 response.put("notification", "Username already exists!");
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+                return ResponseEntity.status(HttpStatus.CREATED).body(response);
             }
 
             if(employeeRepository.findByEmail(registrationDTO.getEmail()) != null ||
@@ -60,28 +64,27 @@ public class SignUpController {
                     lessorRepository.findByEmail(registrationDTO.getEmail()) != null) {
                 Map<String, Object> response = new HashMap<>();
                 response.put("notification", "Email already exists!");
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+                return ResponseEntity.status(HttpStatus.CREATED).body(response);
             }
 
             registrationService.saveUser(registrationDTO);
 
-//            // 4. Tự động đăng nhập
-//            UsernamePasswordAuthenticationToken authToken =
-//                    new UsernamePasswordAuthenticationToken(registrationDTO.getUsername(), registrationDTO.getPassword());
-//
-//            Authentication authentication = authenticationManager.authenticate(authToken);
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//            String previousPage = request.getHeader("Referer");
-//            if (previousPage != null) {
-//                responseHTTP.sendRedirect(previousPage);
-//            } else {
-//                responseHTTP.sendRedirect("/"); // fallback nếu không có referer
-//            }
-
             // 2. Chuẩn bị phản hồi
             Map<String, Object> response = new HashMap<>();
             response.put("notification", "Sign up successfully!");
+
+            // Tự động đăng nhập
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                    registrationDTO.getUsername(),
+                    registrationDTO.getPassword()
+            );
+
+            Authentication authResult = authenticationManager.authenticate(authentication);
+            SecurityContextHolder.getContext().setAuthentication(authResult);
+//            UsernamePasswordAuthenticationToken authToken =
+//                    new UsernamePasswordAuthenticationToken(registrationDTO.getUsername(), registrationDTO.getPassword());
+//            Authentication authentication = authenticationManager.authenticate(authToken);
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
 
             // 3. Trả về phản hồi với HTTP status 201
             return ResponseEntity.status(HttpStatus.CREATED).body(response);

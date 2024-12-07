@@ -34,6 +34,11 @@ public class RegistrationSerImplement implements RegistrationService {
     @Override
     public void saveUser(RegistrationDTO form) {
 
+        // Lưu Account
+        AccountEntity account = new AccountEntity();
+        account.setUsername(form.getUsername());
+        account.setPassword(passwordEncoder.encode(form.getPassword()));
+
         // Lưu Lessee
         String fullName = form.getName().trim();
         String firstName = "";
@@ -60,9 +65,6 @@ public class RegistrationSerImplement implements RegistrationService {
             lessee.setEmail(form.getEmail());
             lesseeRepository.save(lessee);
             // Lưu Account
-            AccountEntity account = new AccountEntity();
-            account.setUsername(form.getUsername());
-            account.setPassword(passwordEncoder.encode(form.getPassword()));
             account.setRoleID(roleRepository.findById(4).get());
             account.setLesseeID(lesseeRepository.findById(lessee.getLesseeID()).get());
             accountRepository.save(account);
@@ -75,9 +77,6 @@ public class RegistrationSerImplement implements RegistrationService {
             lessor.setEmail(form.getEmail());
             lessorRepository.save(lessor);
             // Lưu Account
-            AccountEntity account = new AccountEntity();
-            account.setUsername(form.getUsername());
-            account.setPassword(passwordEncoder.encode(form.getPassword()));
             account.setRoleID(roleRepository.findById(3).get());
             account.setLessorID(lessorRepository.findById(lessor.getLessorID()).get());
             accountRepository.save(account);
