@@ -39,9 +39,10 @@ public class AccountSerImplement implements AccountService {
     }
 
     @Override
-    public String sendPaymentEmail(String username) {
+    public String findEmail(String username) {
 
         AccountEntity accountEntity = accountRepository.findByUsername(username);
+
         if(accountEntity.getEmployeeID() != null) {
             EmployeeEntity em = employeeRepository.findById(accountEntity.getEmployeeID().getEmployeeID()).get();
             return em.getEmail();

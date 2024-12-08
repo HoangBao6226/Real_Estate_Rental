@@ -7,13 +7,12 @@
   <title>Login Register Form</title>
 </head>
 <body>
+
 <header>
   <div class="logo">
     <img src="/assets/images/logo.png" alt="logo" />
     <a th:href="@{/}">RER</a>
   </div>
-
-
 </header>
 
 <section class="container">
@@ -114,6 +113,22 @@
       </span>
           <input type="password" name="password" id="password_signup" required />
           <label for="password_signup">Password</label>
+        </div>
+
+        <!-- Password2 -->
+        <div class="input">
+      <span class="icon">
+        <ion-icon
+                title="show password?"
+                class="eyes"
+                name="eye-outline"
+                id="eye2"
+                onclick="showPassword2(event)"
+                aria-hidden="true"
+        ></ion-icon>
+      </span>
+          <input type="password" name="password2" id="password_signup2" required />
+          <label for="password_signup2">Confirm Password</label>
         </div>
 
         <!-- Who (Lessee or Lessor) -->

@@ -10,6 +10,8 @@ import com.javaweb.service.itface.DetailStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class DetailStatusSerImplement implements DetailStatusService {
 
@@ -21,12 +23,38 @@ public class DetailStatusSerImplement implements DetailStatusService {
     private StatusRepository statusRepository;
 
     @Override
-    public DetailStatusEntity updateStatusID(int accomID) {
+    public void updateStatusAvailable(int accomID) {
+
+        AccomEntity ac = accomRepository.findById(accomID).get();
+        StatusEntity st = statusRepository.findById(1).get();
+        DetailStatusEntity detailStatusEntity = detailStatusRepository.findByaccommodationID(ac);
+        detailStatusEntity.setStatusID(st);
+        detailStatusEntity.setStartDate(null);
+        detailStatusEntity.setEndDate(null);
+        detailStatusRepository.save(detailStatusEntity);
+    }
+
+    @Override
+    public void updateStatusUnavailable(int accomID) {
 
         AccomEntity ac = accomRepository.findById(accomID).get();
         StatusEntity st = statusRepository.findById(2).get();
         DetailStatusEntity detailStatusEntity = detailStatusRepository.findByaccommodationID(ac);
         detailStatusEntity.setStatusID(st);
-        return detailStatusRepository.save(detailStatusEntity);
+        detailStatusEntity.setStartDate(null);
+        detailStatusEntity.setEndDate(null);
+        detailStatusRepository.save(detailStatusEntity);
+    }
+
+    @Override
+    public void updateStatusOccupied(int accomID, LocalDateTime startDate, LocalDateTime endDate) {
+
+        AccomEntity ac = accomRepository.findById(accomID).get();
+        StatusEntity st = statusRepository.findById(3).get();
+        DetailStatusEntity detailStatusEntity = detailStatusRepository.findByaccommodationID(ac);
+        detailStatusEntity.setStatusID(st);
+        detailStatusEntity.setStartDate(startDate);
+        detailStatusEntity.setEndDate(endDate);
+        detailStatusRepository.save(detailStatusEntity);
     }
 }

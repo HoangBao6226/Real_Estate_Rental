@@ -6,4 +6,6 @@ import com.javaweb.entity.RentTypeEntity;
 
 public interface RentTypeRepository extends JpaRepository<RentTypeEntity, Integer> {
 
+    RentTypeEntity findByRentTypeName(String rentTypeName);
+
 }

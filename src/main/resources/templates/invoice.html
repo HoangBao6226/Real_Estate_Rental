@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
   <head>
 
@@ -7,25 +7,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Villa Agency TemplateMo - Contact Page</title>
+    <title>RER - Invoice</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <style>
+
+      .contact-content h2 {
+        text-align: center;
+        color: #333333;
+        margin-bottom: 20px;
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+
+      .col-lg-6 {
+        width: 50%;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+
+      fieldset {
+        border: none;
+        margin: 0;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555555;
+      }
+
+      .data-display {
+        display: block;
+        padding: 10px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        font-size: 14px;
+        color: #333333;
+      }
+
+      .orange-button {
+        background-color: #ff7f50;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 5px 0 0;
+        padding: 10px 20px;
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
+
+      .orange-button:hover {
+        background-color: #ff6347;
+      }
+    </style>
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-villa-agency.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-<!--
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-villa-agency.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
-TemplateMo 591 villa agency
-
-https://templatemo.com/tm-591-villa-agency
-
--->
   </head>
 
 <body>
@@ -46,130 +100,269 @@ https://templatemo.com/tm-591-villa-agency
   <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
-                        <h1>Villa</h1>
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="properties.html">Properties</a></li>
-                      <li><a href="property-details.html">Property Details</a></li>
-                      <li><a href="invoice.html" class="active">Contact Us</a></li>
-                      <li><a href="#"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
-                  </ul>   
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
-            </div>
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a th:href="@{/}" class="logo">
+              <h1>RER</h1>
+            </a>
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li><a th:href="@{/}">Home</a></li>
+              <li><a th:href="@{/properties}">Properties</a></li>
+              <li><a th:href="@{/properties/{id}(id=${accommodation.getAccommodationID()})}">Property Details</a></li>
+              <li><a th:href="@{/invoice(accommodationID=${accommodation.getAccommodationID()},
+              renttype=${rentType.getRentTypeName()})}" class="active">Invoice</a></li>
+              <!--                      -->
+              <li>
+                <!-- Kiểm tra nếu chưa đăng nhập -->
+                <div th:if="${user == null}">
+                  <a th:href="@{/login}">
+                    <i class="fa fa-calendar"></i> Log in
+                  </a>
+                </div>
+                <!-- Kiểm tra nếu đã đăng nhập -->
+                <div th:if="${user != null}" class="dropdown">
+                  <a class="dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-user"></i> <span th:text="${user.getUsername()}">Username</span>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
+                    <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
+                  </ul>
+                </div>
+              </li>
+              <!--                      -->
+            </ul>
+            <a class='menu-trigger'>
+              <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
         </div>
+      </div>
     </div>
   </header>
   <!-- ***** Header Area End ***** -->
 
-  <div class="page-heading header-text">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <span class="breadcrumb"><a href="#">Home</a>  /  Contact Us</span>
-          <h3>Contact Us</h3>
-        </div>
-      </div>
-    </div>
-  </div>
+<!---->
+  <div class="container">
 
-  <div class="contact-page section">
-    <div class="container">
+    <form id="invoiceForm" method="post"
+          th:action="@{/payment/create_payment(
+                                                accommodationID=${accommodation.getAccommodationID()},
+                                                rentTypeID=${rentType.getRentTypeID()},
+                                                price=${detailRT.getPrice()},
+                                                deposit=${detailRT.getDeposit()})}">
+
       <div class="row">
-        <div class="col-lg-6">
-          <div class="section-heading">
-            <h6>| Contact Us</h6>
-            <h2>Get In Touch With Our Agents</h2>
-          </div>
-          <p>When you really need to download free CSS templates, please remember our website TemplateMo. Also, tell your friends about our website. Thank you for visiting. There is a variety of Bootstrap HTML CSS templates on our website. If you need more information, please contact us.</p>
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="item phone">
-                <img src="assets/images/phone-icon.png" alt="" style="max-width: 52px;">
-                <h6>010-020-0340<br><span>Phone Number</span></h6>
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="item email">
-                <img src="assets/images/email-icon.png" alt="" style="max-width: 52px;">
-                <h6>info@villa.co<br><span>Business Email</span></h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <form id="contact-form" action="" method="post">
-            <div class="row">
-              <div class="col-lg-12">
-                <fieldset>
-                  <label for="name">Full Name</label>
-                  <input type="name" name="name" id="name" placeholder="Your Name..." autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <label for="email">Email Address</label>
-                  <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your E-mail..." required="">
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <label for="subject">Subject</label>
-                  <input type="subject" name="subject" id="subject" placeholder="Subject..." autocomplete="on" >
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <label for="message">Message</label>
-                  <textarea name="message" id="message" placeholder="Your Message"></textarea>
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <button type="submit" id="form-submit" class="orange-button">Send Message</button>
-                </fieldset>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="col-lg-12">
-          <div id="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12469.776493332698!2d-80.14036379941481!3d25.907788681148624!2m3!1f357.26927939317244!2f20.870722720054623!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x88d9add4b4ac788f%3A0xe77469d09480fcdb!2sSunny%20Isles%20Beach!5e1!3m2!1sen!2sth!4v1642869952544!5m2!1sen!2sth" width="100%" height="500px" frameborder="0" style="border:0; border-radius: 10px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);" allowfullscreen=""></iframe>
-          </div>
+        <div class="col-lg-12" style="text-align: center">
+          <h1>Invoice Information</h1>
         </div>
       </div>
-    </div>
+
+      <div class="row">
+        <!-- Accommodation Name and RentType -->
+        <div class="col-lg-6">
+          <fieldset>
+            <label>Accommodation Name</label>
+            <span class="data-display" th:text="${accommodation.getAccommodationName()}"></span>
+          </fieldset>
+        </div>
+        <div class="col-lg-6">
+          <fieldset>
+            <label>Rent Type</label>
+            <span class="data-display" id="rentType" name="rentType" th:text="${rentType.getRentTypeName()}"></span>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <fieldset>
+            <label>Price</label>
+            <span class="data-display" th:text="${detailRT.getPrice()}"></span>
+          </fieldset>
+        </div>
+        <!-- Deposit and Price -->
+        <div class="col-lg-6">
+          <fieldset>
+            <label>Deposit</label>
+            <span class="data-display" th:text="${detailRT.getDeposit()}"></span>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Direction and Room -->
+        <div class="col-lg-6">
+          <fieldset>
+            <label>Direction</label>
+            <span class="data-display" th:text="${accommodation.getDirection()}"></span>
+          </fieldset>
+        </div>
+        <div class="col-lg-6">
+          <fieldset>
+            <label>Room</label>
+            <span class="data-display" th:text="${accommodation.getNumberOfRooms()}"></span>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Amenity and Address -->
+        <div class="col-lg-6">
+          <fieldset>
+            <label>Amenity</label>
+            <span class="data-display" th:text="${accommodation.getAmenity()}"></span>
+          </fieldset>
+        </div>
+        <div class="col-lg-6">
+          <fieldset>
+            <label>Address</label>
+            <span class="data-display" th:text="${accommodation.getAddress()}"></span>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Start Date -->
+        <div class="col-lg-6">
+          <fieldset>
+            <label for="startDate">Start Date</label>
+            <input
+                    type="datetime-local"
+                    id="startDate"
+                    name="startDate"
+                    class="form-control"
+                    min=""
+                    required>
+          </fieldset>
+        </div>
+        <!-- End Date -->
+        <div class="col-lg-6">
+          <fieldset>
+            <label for="endDate">End Date</label>
+            <input
+                    type="datetime-local"
+                    id="endDate"
+                    name="endDate"
+                    class="form-control"
+                    readonly
+                    required>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Buttons -->
+        <div class="col-lg-6">
+          <button type="button" id="closeForm2" class="orange-button">
+            <a th:href="@{/properties/{id}(id=${accommodation.getAccommodationID()})}">
+              Close
+            </a>
+          </button>
+          <button type="submit" id="payment" class="orange-button">
+              Payment
+          </button>
+        </div>
+      </div>
+
+    </form>
   </div>
+<!---->
 
   <footer>
     <div class="container">
       <div class="col-lg-12">
-        <p>Copyright © 2048 Villa Agency Co., Ltd. All rights reserved. 
-        
-        Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+        <p>Copyright © 2048 RER Agency Co., Ltd. All rights reserved.
+
+          Design: <a rel="nofollow" href="#" target="_blank">Nguyen Hoang Bao - Ha Thi My Chau </a></p>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
+  <script>
+    const startDateInput = document.getElementById("startDate");
+    const endDateInput = document.getElementById("endDate");
+    const rentTypeInput = document.getElementById("rentType");
+
+    // Function to format a date object into 'YYYY-MM-DDTHH:mm' for datetime-local
+    function formatLocalDateTime(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+
+    // Function to set the minimum start date (current local time)
+    function setMinStartDate() {
+      const now = new Date(); // Get current local time
+      const formattedNow = formatLocalDateTime(now); // Format as 'YYYY-MM-DDTHH:mm'
+      startDateInput.min = formattedNow;
+
+      // Set default value for Start Date if it's empty or invalid
+      if (!startDateInput.value || new Date(startDateInput.value) < now) {
+        startDateInput.value = formattedNow;
+      }
+    }
+
+    // Function to calculate end date based on start date and rent type
+    function calculateEndDate() {
+      const startDate = new Date(startDateInput.value); // Get the selected Start Date
+      const rentType = rentTypeInput.textContent.trim();
+
+      let endDate = new Date(startDate); // Initialize end date
+
+      // Adjust end date based on rent type
+      switch (rentType) {
+        case "Yearly":
+          endDate.setFullYear(endDate.getFullYear() + 1); // Add 1 year
+          break;
+        case "Seasonal":
+          endDate.setMonth(endDate.getMonth() + 3); // Add 3 months
+          break;
+        case "Monthly":
+          endDate.setMonth(endDate.getMonth() + 1); // Add 1 month
+          break;
+        case "Weekly":
+          endDate.setDate(endDate.getDate() + 7); // Add 7 days
+          break;
+        case "Daily":
+          endDate.setDate(endDate.getDate() + 1); // Add 1 day
+          break;
+        case "Hourly":
+          endDate.setHours(endDate.getHours() + 1); // Add 1 hour
+          break;
+        default:
+          break;
+      }
+
+      // Format the End Date to 'YYYY-MM-DDTHH:mm' and set the value
+      const formattedEndDate = formatLocalDateTime(endDate);
+      endDateInput.value = formattedEndDate;
+    }
+
+    // Add event listeners to recalculate End Date and update min Start Date
+    startDateInput.addEventListener("change", calculateEndDate);
+
+    // Initialize the Start Date and End Date on page load
+    setMinStartDate();
+    calculateEndDate();
+  </script>
+
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/counter.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/assets/js/isotope.min.js"></script>
+  <script src="/assets/js/owl-carousel.js"></script>
+  <script src="/assets/js/counter.js"></script>
+  <script src="/assets/js/custom.js"></script>
 
   </body>
 </html>

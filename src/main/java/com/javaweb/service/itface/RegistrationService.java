@@ -4,5 +4,5 @@ import com.javaweb.service.model.RegistrationDTO;
 
 public interface RegistrationService {
 
-    void saveUser(RegistrationDTO form);
+    String saveUser(RegistrationDTO form);
 }

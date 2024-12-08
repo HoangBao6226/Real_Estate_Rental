@@ -6,5 +6,5 @@ public interface AccountService {
 
     AccountDTO findByUsername(String username);
 
-    String sendPaymentEmail(String username);
+    String findEmail(String username);
 }

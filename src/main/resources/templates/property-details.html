@@ -52,7 +52,7 @@
                     <ul class="nav">
                       <li><a th:href="@{/}">Home</a></li>
                       <li><a th:href="@{/properties}">Properties</a></li>
-                      <li><a th:href="@{/properties/{id}(id=${accommodation.getAccommodationID()})}" class="active">Property Details</a></li>
+                      <li><a href="#" class="active">Property Details</a></li>
                       <!--                      -->
                       <li>
                         <!-- Kiểm tra nếu chưa đăng nhập -->
@@ -162,7 +162,7 @@
           <td th:text="${accommodation.getDeposit()[iterStart.index]}"></td>
           <td>
             <button class="button" type="button">
-              <a th:href="@{/payment/create_payment(amount=${accommodation.getDeposit()[iterStart.index]})}">
+              <a th:href="@{/invoice(accommodationID=${accommodation.getAccommodationID()}, renttype=${renttype})}">
                 <i class="fa fa-calendar"></i> Đặt cọc
               </a>
             </button>
@@ -175,10 +175,10 @@
 
   <footer>
     <div class="container">
-      <div class="col-lg-8">
+      <div class="col-lg-12">
         <p>Copyright © 2048 RER Agency Co., Ltd. All rights reserved.
 
-          Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+          Design: <a rel="nofollow" href="#" target="_blank">Nguyen Hoang Bao - Ha Thi My Chau </a></p>
       </div>
     </div>
   </footer>
