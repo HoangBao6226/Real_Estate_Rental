@@ -10,8 +10,8 @@ import com.javaweb.entity.AccomEntity;
 @Repository
 public interface AccomRepository extends JpaRepository<AccomEntity, Integer> {
 	
-	List<AccomEntity> findByaccommodationNameContaining(String s);
+//	List<AccomEntity> findByaccommodationNameContaining(String s);
 
-	List<AccomEntity> findByaccommodationIDIn(List<Integer> ids);
+//	List<AccomEntity> findByaccommodationIDIn(List<Integer> ids);
 
 }

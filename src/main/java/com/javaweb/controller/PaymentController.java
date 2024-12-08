@@ -1,64 +1,98 @@
 package com.javaweb.controller;
 
+import com.javaweb.entity.InvoiceEntity;
 import com.javaweb.service.implement.EmailService;
 import com.javaweb.service.implement.PaymentService;
-import com.javaweb.service.itface.AccountService;
+import com.javaweb.service.itface.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/payment")
 public class PaymentController {
 
+    private static LocalDateTime startDate;
+    private static LocalDateTime endDate;
+    private static int accomID;
+    private static int inID;
+    private static int amount;
+
     @Autowired
-    private PaymentService invoiceService;
+    private InvoiceService invoiceService;
 
     @Autowired
     private AccountService accountService;
 
     @Autowired
+    private PaymentService paymentService;
+
+    @Autowired
+    private DetailStatusService detailStatusService;
+
+    @Autowired
     private EmailService emailService;
+
+    @PostMapping(path = "/create_payment", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public void createPayment(HttpServletRequest req,
+                              HttpServletResponse res,
+                              @RequestParam Map<String, Object> params) throws IOException {
+
+        String remoteUser = req.getRemoteUser();
+
+        String acID = (String) params.get("accommodationID");
+        accomID = Integer.parseInt(acID);
+        detailStatusService.updateStatusUnavailable(accomID);
+
+        String start = (String) params.get("startDate");
+        startDate = LocalDateTime.parse(start);
+
+        String end = (String) params.get("endDate");
+        endDate = LocalDateTime.parse(end);
+
+        InvoiceEntity inE =  invoiceService.saveInvoice(params, remoteUser);
+        inID = inE.getInvoiceID();
+
+        String deposit = (String) params.get("deposit");
+        amount = Integer.parseInt(deposit);
+        String in = paymentService.createPayment(req, amount);
+
+        res.sendRedirect(in);
+
+    }
+
 
     @GetMapping("/vn-pay-callback")
     public void payCallbackHandler(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String status = request.getParameter("vnp_ResponseCode");
-        String username = request.getRemoteUser(); // Lấy username của người dùng đã đăng nhập
+        // Lấy thông tin từ callback URL
+        String responseCode = request.getParameter("vnp_ResponseCode");
 
-        // Truy vấn thông tin người dùng từ cơ sở dữ liệu
-//        AccountDTO user = accountService.findByUsername(username); // Giả sử bạn có UserService với phương thức findByUsername
+        // Lấy thông tin người dùng hiện tại
+        String remoteUser = request.getRemoteUser();
 
-        if ("00".equals(status)) {
-            // Xử lý thanh toán thành công
-            String email = accountService.sendPaymentEmail(username); // Lấy email của người dùng
-            String subject = "Payment Notification";
-            emailService.sendPaymentEmail(email, subject);
+        if ("00".equals(responseCode)) {
+            // Giao dịch thành công
+            detailStatusService.updateStatusOccupied(accomID, startDate, endDate);
+            // Lấy email của người dùng
+            String email = accountService.findEmail(remoteUser);
+            emailService.sendPaymentEmail(email, inID, amount);
 
             // Chuyển hướng về trang chủ
             response.sendRedirect("/");
         } else {
-            // Xử lý thanh toán thất bại
-            String email = accountService.sendPaymentEmail(username); // Lấy email của người dùng
-            String subject = "Your payment failed. Please try again.\"";
-            emailService.sendPaymentEmail(email, subject);
-
-            // Chuyển hướng về trang chủ hoặc trang lỗi
+            // Giao dịch thất bại
+            detailStatusService.updateStatusAvailable(accomID);
+            // Cập nhật status Invoive In_progress -> Canceled
+            invoiceService.updateStatusCanceled(inID);
+            // Chuyển hướng về trang chủ
             response.sendRedirect("/");
         }
-    }
-
-    @GetMapping("/create_payment")
-    public void createPayment(@RequestParam("amount") long amount, HttpServletRequest req, HttpServletResponse res) throws IOException {
-
-        String in = invoiceService.createPayment(req, amount);
-        res.sendRedirect(in);
-
     }
 }

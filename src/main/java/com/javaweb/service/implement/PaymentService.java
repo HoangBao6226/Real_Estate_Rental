@@ -12,7 +12,7 @@ import java.util.*;
 @Service
 public class PaymentService {
 
-    public String createPayment(HttpServletRequest req, long amount) {
+    public String createPayment(HttpServletRequest req, int amount) {
 
 //        long amount = Integer.parseInt(req.getParameter("amount"))*100*10000;
 //        long amount = 100000*100;

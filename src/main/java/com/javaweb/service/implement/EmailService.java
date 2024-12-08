@@ -1,14 +1,20 @@
 package com.javaweb.service.implement;
 
+import com.javaweb.entity.InvoiceEntity;
 import com.javaweb.entity.ReservationEntity;
+import com.javaweb.repository.itface.InvoiceRepository;
 import com.javaweb.repository.itface.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class EmailService {
+
+    @Autowired
+    private InvoiceRepository invoiceRepository;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -16,26 +22,30 @@ public class EmailService {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    public void sendPaymentEmail(String to, String subject) {
+    public void sendPaymentEmail(String to, int id, int amount) {
 
+        InvoiceEntity re = invoiceRepository.findById(id).get();
 
-//        String subject = "Payment Notification";
-        String body = "Cảm ơn quý khách đã đặt cọc thuê nhà!";
+        String subject = "Cảm ơn quý khách đã đặt cọc thuê nhà!";
 
         // Nội dung email
-//        String body = "Kính gửi " + re.getLesseeID().getLastName() + " " + re.getLesseeID().getFirstName() + ",\n\n"
-//                + "Cảm ơn quý khách đã tin tưởng và sử dụng dịch vụ cho thuê bất động sản của chúng tôi!\n\n"
-//                + "Lịch hẹn xem nhà của quý khách đã được xác nhận như sau:\n"
-//                + "- Tên nhà: " + re.getAccommodationID().getAccommodationName() + "\n"
-//                + "- Địa chỉ: " + re.getAccommodationID().getStreet() + ", " + re.getAccommodationID().getWard() + ", " + re.getAccommodationID().getDistrict() + ", " + re.getAccommodationID().getCity()+ "\n"
-//                + "- Thời gian: " + re.getViewDate() + " " + re.getViewTime() + "\n"
-//                + "- Người phụ trách: " + "contactPerson" + " - " + "contactPhone" + "\n\n"
-//                + "Nếu quý khách cần thêm thông tin về bất động sản hoặc có bất kỳ thay đổi nào về lịch hẹn, xin vui lòng liên hệ với chúng tôi qua email này hoặc số điện thoại hỗ trợ.\n\n"
-//                + "Chúng tôi cam kết mang đến sự hài lòng và trải nghiệm tốt nhất cho quý khách. Một lần nữa, xin cảm ơn quý khách đã lựa chọn dịch vụ của chúng tôi!\n\n"
-//                + "Trân trọng,\n"
-//                + "[RER]\n"
-//                + "[Email liên hệ] | [Số điện thoại liên hệ]\n"
-//                + "[Website công ty]";
+        String body = "Kính gửi " + re.getLesseeID().getLastName() + " " + re.getLesseeID().getFirstName() + ",\n\n"
+                + "Cảm ơn quý khách đã tin tưởng và sử dụng dịch vụ cho thuê bất động sản của chúng tôi!\n\n"
+                + "Thông tin thuê nhà của quý khách đã được xác nhận như sau:\n"
+                + "- Tên nhà: " + re.getAccommodationID().getAccommodationName() + "\n"
+                + "- Địa chỉ: " + re.getAccommodationID().getStreet() + ", " + re.getAccommodationID().getWard() + ", " + re.getAccommodationID().getDistrict() + ", " + re.getAccommodationID().getCity()+ "\n"
+                + "- Thời gian đặt cọc: " + re.getInvoiceDate() + "\n"
+                + "- Thời gian thuê: " + re.getStartDate() + " - " + re.getEndDate() + "\n"
+                + "- Loại hình thuê: " + re.getRentTypeID().getRentTypeName() + "\n"
+                + "- Tiền thuê: " + (re.getTotalPrice() - amount) + "\n"
+                + "- Tiền cọc (đã chuyển khoản): " + amount + "\n"
+                + "- Người phụ trách: " + "contactPerson" + " - " + "contactPhone" + "\n\n"
+                + "Nếu quý khách cần thêm thông tin về bất động sản hoặc có bất kỳ thay đổi nào về lịch hẹn, xin vui lòng liên hệ với chúng tôi qua email này hoặc số điện thoại hỗ trợ.\n\n"
+                + "Chúng tôi cam kết mang đến sự hài lòng và trải nghiệm tốt nhất cho quý khách. Một lần nữa, xin cảm ơn quý khách đã lựa chọn dịch vụ của chúng tôi!\n\n"
+                + "Trân trọng,\n"
+                + "[RER]\n"
+                + "[Email liên hệ] | [Số điện thoại liên hệ]\n"
+                + "[Website công ty]";
 
         // Tạo email
         SimpleMailMessage message = new SimpleMailMessage();
@@ -47,6 +57,7 @@ public class EmailService {
         // Gửi email
         mailSender.send(message);
     }
+
     public void sendThankYouEmail(String to, int id) {
 
         ReservationEntity re = reservationRepository.findById(id).get();

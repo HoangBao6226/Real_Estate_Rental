@@ -244,7 +244,7 @@
               <div class="col-lg-4">
                 <div class="counter">
                   <h2 class="timer count-title count-number" data-to="24" data-speed="1000"></h2>
-                  <p class="count-text ">Awwards<br>Won 2023</p>
+                  <p class="count-text ">Awards<br>Won 2023</p>
                 </div>
               </div>
             </div>
@@ -367,59 +367,24 @@
   <div class="contact-content">
     <div class="container">
       <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-12">
           <div id="map">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7839.904952739309!2d106.67464379575955!3d10.73814625599458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f62a90e5dbd%3A0x674d5126513db295!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgU8OgaSBHw7Ju!5e0!3m2!1svi!2s!4v1732886957259!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="item phone">
-                <img src="assets/images/phone-icon.png" alt="" style="max-width: 52px;">
-                <h6>010-020-0340<br><span>Phone Number</span></h6>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="item email">
-                <img src="assets/images/email-icon.png" alt="" style="max-width: 52px;">
-                <h6>info@RER.co<br><span>Business Email</span></h6>
-              </div>
-            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="item phone">
+            <img src="assets/images/phone-icon.png" alt="" style="max-width: 52px;">
+            <h6>010-020-0340<br><span>Phone Number</span></h6>
           </div>
         </div>
-        <div class="col-lg-5">
-          <form id="contact-form" action="/save-lessee" method="post">
-            <div class="row">
-              <div class="col-lg-12">
-                <fieldset>
-                  <label for="name">Full Name</label>
-                  <input type="name" name="name" id="name" placeholder="Your Name..." autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <label for="address">Address</label>
-                  <input type="text" name="address" id="address" placeholder="Address..." autocomplete="on" >
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <label for="email">Email</label>
-                  <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your E-mail..." required="">
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <label for="phone">Phone number</label>
-                  <input type="text" name="phone" id="phone" placeholder="Phone number..." autocomplete="on" >
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <button type="submit" id="form-submit" class="orange-button">Send Message</button>
-                </fieldset>
-              </div>
-            </div>
-          </form>
+        <div class="col-lg-6">
+          <div class="item email">
+            <img src="assets/images/email-icon.png" alt="" style="max-width: 52px;">
+            <h6>info@RER.co<br><span>Business Email</span></h6>
+          </div>
         </div>
       </div>
     </div>
@@ -427,37 +392,16 @@
 
   <footer>
     <div class="container">
-      <div class="col-lg-8">
+      <div class="col-lg-12">
         <p>Copyright © 2048 RER Agency Co., Ltd. All rights reserved.
         
-        Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+        Design: <a rel="nofollow" href="#" target="_blank">Nguyen Hoang Bao - Ha Thi My Chau </a></p>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script>
-    document.getElementById("contact-form").addEventListener("submit", async function(e) {
-      e.preventDefault();
 
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData);
-
-      await fetch("/save-lessee", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }).then(response => {
-        if (response.ok) {
-          alert("User created successfully!");
-        } else {
-          alert("Error creating user!");
-        }
-      });
-    });
-  </script>
   <!-- Bootstrap core JavaScript -->
   <script src="/vendor/jquery/jquery.min.js"></script>
   <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>

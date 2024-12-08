@@ -85,9 +85,8 @@ CREATE TABLE DetailStatus (
 	detailStatusID INT AUTO_INCREMENT PRIMARY KEY,
     accommodationID INT UNIQUE,
     statusID INT,
-    startDate DATE,
-    endDate DATE,
-    reason TEXT
+    startDate DATETIME,
+    endDate DATETIME
 ) ENGINE=InnoDB;
 
 CREATE TABLE Amenity (
@@ -129,10 +128,10 @@ CREATE TABLE Reservation (
 CREATE TABLE Invoice (
     invoiceID INT PRIMARY KEY AUTO_INCREMENT,
     totalPrice INT,
-    invoiceDate DATE,
-    startDate DATE,
-    endDate DATE,
-    status ENUM('Đang thực hiện', 'Đã hoàn thành', 'Đã hủy'),
+    invoiceDate DATETIME,
+    startDate DATETIME,
+    endDate DATETIME,
+    status ENUM('In_progress', 'Completed', 'Canceled'),
     accommodationID INT, 
     lesseeID INT,
     rentTypeID INT

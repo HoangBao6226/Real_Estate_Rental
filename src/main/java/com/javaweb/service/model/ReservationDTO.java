@@ -1,9 +1,7 @@
 package com.javaweb.service.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalTime;
 
 public class ReservationDTO {

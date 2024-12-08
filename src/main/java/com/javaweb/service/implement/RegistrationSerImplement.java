@@ -3,15 +3,13 @@ package com.javaweb.service.implement;
 import com.javaweb.entity.AccountEntity;
 import com.javaweb.entity.LesseeEntity;
 import com.javaweb.entity.LessorEntity;
-import com.javaweb.repository.itface.AccountRepository;
-import com.javaweb.repository.itface.LesseeRepository;
-import com.javaweb.repository.itface.LessorRepository;
-import com.javaweb.repository.itface.RoleRepository;
+import com.javaweb.repository.itface.*;
 import com.javaweb.service.itface.RegistrationService;
 import com.javaweb.service.model.RegistrationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class RegistrationSerImplement implements RegistrationService {
@@ -23,6 +21,9 @@ public class RegistrationSerImplement implements RegistrationService {
     private AccountRepository accountRepository;
 
     @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
     private LesseeRepository lesseeRepository;
 
     @Autowired
@@ -32,7 +33,21 @@ public class RegistrationSerImplement implements RegistrationService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public void saveUser(RegistrationDTO form) {
+    public String saveUser(RegistrationDTO form) {
+
+        if (accountRepository.findByUsername(form.getUsername()) != null) {
+            return "Username already exists!";
+        }
+
+        if(employeeRepository.findByEmail(form.getEmail()) != null ||
+                lesseeRepository.findByEmail(form.getEmail()) != null ||
+                lessorRepository.findByEmail(form.getEmail()) != null) {
+            return "Email already exists!";
+        }
+
+        if (!form.getPassword().equals(form.getPassword2())) {
+            return "Passwords do not match!";
+        }
 
         // Lưu Account
         AccountEntity account = new AccountEntity();
@@ -82,5 +97,6 @@ public class RegistrationSerImplement implements RegistrationService {
             accountRepository.save(account);
         }
 
+        return "Registration successful!";
     }
 }

@@ -1,8 +1,13 @@
 package com.javaweb.service.itface;
 
-import com.javaweb.entity.DetailStatusEntity;
+import java.time.LocalDateTime;
 
 public interface DetailStatusService {
 
-    DetailStatusEntity updateStatusID(int accomID);
+    void updateStatusAvailable(int accomID);
+
+    void updateStatusUnavailable(int accomID);
+
+    void updateStatusOccupied(int accomID, LocalDateTime startDate, LocalDateTime endDate);
+
 }

@@ -1,32 +1,36 @@
 package com.javaweb.service.model;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class InvoiceDTO {
 
-    private String status;
-    private String message;
-    private String URL;
+    private int invoiceID;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
-    public String getStatus() {
-        return status;
+    public int getInvoiceID() {
+        return invoiceID;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setInvoiceID(int invoiceID) {
+        this.invoiceID = invoiceID;
     }
 
-    public String getMessage() {
-        return message;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
     }
 
-    public String getURL() {
-        return URL;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public void setURL(String URL) {
-        this.URL = URL;
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
+
 }

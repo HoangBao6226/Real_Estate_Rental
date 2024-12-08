@@ -223,7 +223,6 @@ select * from Payment;
 select * from RentType;
 select * from Reservation;
 select * from Role;
-
 select * from employee;
 
 select *
