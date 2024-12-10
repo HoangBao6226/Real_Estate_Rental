@@ -105,13 +105,19 @@
           </div>
           <div class="main-content">
             <span class="category" th:text="${accommodation.getAccomType()}"></span>
-            <h4 th:text="${accommodation.getAccommodationName()}"></h4>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <!-- Tiêu đề -->
+              <h4 class="mb-0" th:text="${accommodation.getAccommodationName()}"></h4>
+
+              <!-- Nút "Đặt lịch" -->
+              <a id="scheduleButton" class="btn btn-warning text-white">
+                <i class="fa fa-calendar"></i> Đặt lịch
+              </a>
+            </div>
             <p>Address: <strong th:text="${accommodation.getAddress()}"></strong></p>
             <p>Direction: <strong th:text="${accommodation.getDirection()}"></strong></p>
             <p>Rooms: <strong th:text="${accommodation.getNumberOfRooms()}"></strong></p>
             <p>Amenity: <strong th:text="${accommodation.getAmenity()}"></strong></p>
-<!--            <p>Rent type: <strong th:text="${accommodation.getRentType()}"></strong></p>-->
-<!--            <p>Price: <strong th:text="${accommodation.getPrice()}"></strong></p>-->
           </div>
         </div>
         <div class="col-lg-4">
@@ -183,6 +189,112 @@
     </div>
   </footer>
 
+  <div id="overlay" class="overlay"></div>
+  <div >
+    <div class="contact-content" id="schedule-Form">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" >
+            <form id="appointmentForm" th:action="@{/save-date/{accommodationID}(accommodationID=${accommodation.getAccommodationID()})}" method="post">
+              <div class="row">
+                <div class="col-lg-12">
+                  <fieldset>
+                    <label for="viewDate">View date</label>
+                    <input type="datetime-local" name="viewDate" id="viewDate" placeholder="View date..." autocomplete="on" required>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <label for="note">Note</label>
+                    <textarea name="note" id="note" placeholder="Your message..."></textarea>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="button" id="closeForm" class="orange-button">Close</button>
+                    <button type="submit" id="form-submit" class="orange-button">Reserve</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--  Script-->
+  <script>
+    // JavaScript để điều khiển hiển thị form
+    document.getElementById('scheduleButton').addEventListener('click', function() {
+      document.getElementById('schedule-Form').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    });
+
+    // Đóng form
+    document.getElementById('closeForm').addEventListener('click', function() {
+      document.getElementById('schedule-Form').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    });
+  </script>
+  <script>
+    const viewDateInput = document.getElementById("viewDate");
+
+    // Function to format a date object into 'YYYY-MM-DDTHH:mm' for datetime-local
+    function formatLocalDateTime(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+
+    // Function to set the minimum view date (current local time)
+    function setMinViewDate() {
+      const now = new Date(); // Get current local time
+      const formattedNow = formatLocalDateTime(now); // Format as 'YYYY-MM-DDTHH:mm'
+      viewDateInput.min = formattedNow;
+
+      // Set default value for Start Date if it's empty or invalid
+      if (!viewDateInput.value || new Date(viewDateInput.value) < now) {
+        viewDateInput.value = formattedNow;
+      }
+    }
+    // Initialize the View Date on page load
+    setMinViewDate();
+  </script>
+  <script>
+    document.getElementById("appointmentForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      // Lấy giá trị accommodationID từ Thymeleaf
+      const accommodationID = "[[${accommodation.getAccommodationID()}]]";
+
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+      try {
+        const response = await fetch(`/save-date/${accommodationID}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          alert("Đặt lịch thành công!");
+          document.getElementById("schedule-Form").style.display = "none";
+          document.getElementById('overlay').style.display = 'none';
+        } else {
+          const error = await response.json();
+          alert(`Error: ${error.message}`);
+        }
+      } catch (err) {
+        alert("An unexpected error occurred!");
+        console.error(err);
+      }
+    });
+  </script>
   <!-- Bootstrap core JavaScript -->
   <script src="/vendor/jquery/jquery.min.js"></script>
   <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>

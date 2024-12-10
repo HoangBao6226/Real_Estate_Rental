@@ -57,4 +57,13 @@ public class AccountSerImplement implements AccountService {
         }
         return "";
     }
+
+    @Override
+    public int findLesseeID(String username) {
+
+        AccountEntity accountEntity = accountRepository.findByUsername(username);
+
+        return accountEntity.getLesseeID().getLesseeID();
+
+    }
 }

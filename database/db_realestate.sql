@@ -120,8 +120,7 @@ CREATE TABLE Reservation (
     salesID INT,
     lesseeID INT,
     accommodationID INT,
-    viewDate DATE,
-    viewTime TIME,
+    viewDate DATETIME,
     note TEXT
 ) ENGINE=InnoDB;
 

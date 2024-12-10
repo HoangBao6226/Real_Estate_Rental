@@ -25,62 +25,6 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Ẩn form ban đầu */
-#scheduleForm {
-    display: none;
-    position: fixed;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -20%);
-    /*border: 1px solid #ccc;*/
-    padding: 20px;
-    /*background: white;*/
-    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
-    max-height: 70%; /* Giới hạn chiều cao */
-    /*width: 400px; !* Đặt chiều rộng *!*/
-    overflow-y: auto; /* Thêm thanh cuộn dọc */
-}
-
-/* Để thanh cuộn trông đẹp hơn */
-#scheduleForm::-webkit-scrollbar {
-    width: 0px;
-}
-#scheduleForm::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-}
-#scheduleForm::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* Ẩn form ban đầu */
-#scheduleForm2 {
-    display: none;
-    position: fixed;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -20%);
-    /*border: 1px solid #ccc;*/
-    padding: 20px;
-    /*background: white;*/
-    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
-    max-height: 70%; /* Giới hạn chiều cao */
-    /*width: 400px; !* Đặt chiều rộng *!*/
-    overflow-y: auto; /* Thêm thanh cuộn dọc */
-}
-
-/* Để thanh cuộn trông đẹp hơn */
-#scheduleForm2::-webkit-scrollbar {
-    width: 0px;
-}
-#scheduleForm2::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-}
-#scheduleForm2::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
 /*Định dạnh table giá thuê------HTMC*/
 .container2 {
     display: flex;
@@ -173,49 +117,106 @@ tr:hover {
     top: 1.6px; /* Giảm vị trí khi nhấn 20% */
 
 }
-/*?--------------*/
-/* Định dạng tổng thể cho main-content */
-/*.main-content {*/
-/*    font-family: Arial, sans-serif;*/
-/*    color: #333;*/
-/*    background-color: #f9f9f9;*/
-/*    padding: 20px;*/
-/*    border-radius: 10px;*/
-/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
-/*    margin-bottom: 20px;*/
-/*}*/
 
-/*!* Định dạng cho category *!*/
-/*.main-content .category {*/
-/*    display: inline-block;*/
-/*    font-size: 14px;*/
-/*    color: #fff;*/
-/*    background-color: #ffa500;*/
-/*    padding: 5px 10px;*/
-/*    border-radius: 5px;*/
-/*    margin-bottom: 10px;*/
-/*}*/
+.btn-warning {
+    background-color: #FF9800; /* Màu cam */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
 
-/*!* Định dạng cho h4 *!*/
-/*.main-content h4 {*/
-/*    font-size: 24px;*/
-/*    color: #000000;*/
-/*    margin-bottom: 15px;*/
-/*}*/
+.btn-warning:hover {
+    background-color: #F57C00; /* Màu cam đậm hơn khi hover */
+    color: #fff;
+}
+.single-property .main-content h4 {
+    width: 80%;
+}
+/*css cho form dat lich
+ */
 
-/*!* Định dạng cho p và strong *!*/
-/*.main-content p {*/
-/*    font-size: 16px;*/
-/*    margin-bottom: 10px;*/
-/*}*/
+#schedule-Form {
+    display: none;
+    position: fixed;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*padding: 20px;*/
+    border-radius: 8px;
+    /*z-index: 1000;*/
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+    z-index: 10;
+}
 
-/*.main-content p strong {*/
-/*    font-weight: bold;*/
-/*    color: #1a1d20;*/
-/*}*/
+#schedule-Form .btn {
+    margin: 5px;
+}
 
-/*!* Thêm khoảng cách cho các đoạn văn *!*/
-/*.main-content p + p {*/
-/*    margin-top: 10px;*/
-/*}*/
-/*-----HTMC*/
+.contact-content h2 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.col-lg-6 {
+    width: 50%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+fieldset {
+    border: none;
+    margin: 0;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555555;
+}
+
+.data-display {
+    display: block;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    color: #333333;
+}
+
+.orange-button {
+    background-color: #ff7f50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 5px 0 0;
+    padding: 10px 20px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.orange-button:hover {
+    background-color: #ff6347;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Nền đen mờ */
+    z-index: 9; /* Phải nằm phía sau form */
+}
