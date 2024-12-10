@@ -28,6 +28,11 @@ public class AccomRepoImplement implements AccomRepoCustom {
 
 	public static void joinTableAccom(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName, StringBuilder sql) {
 
+		String accomType = (String) params.get("accomType");
+		if (StringUtil.checkString(accomType)) {
+			sql.append(" join accomtype on accommodation.accomTypeID = accomtype.accomTypeID");
+		}
+
 		boolean flag = false;
 		String minPrice = (String) params.get("minPrice");
 		String maxPrice = (String) params.get("maxPrice");
@@ -53,7 +58,7 @@ public class AccomRepoImplement implements AccomRepoCustom {
 	public static void queryNormal(Map<String, Object> params, StringBuilder where) {
 
 		for (Map.Entry<String, Object> item : params.entrySet()) {
-			if (!item.getKey().equals("amenityName") && !item.getKey().equals("rentTypeName")
+			if (!item.getKey().equals("amenityName") && !item.getKey().equals("rentTypeName") && !item.getKey().equals("accomType")
 					&& !item.getKey().endsWith("Size") && !item.getKey().endsWith("Price")) {
 				String value = item.getValue().toString();
 				if (StringUtil.checkString(value)) {
@@ -67,6 +72,10 @@ public class AccomRepoImplement implements AccomRepoCustom {
 	}
 
 	public static void querySpecial(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName, StringBuilder where) {
+
+		String accomType = (String) params.get("accomType");
+		if (StringUtil.checkString(accomType))
+			where.append(" AND `type` like" + "'%" + accomType + "%'");
 
 		String minPrice = (String) params.get("minPrice");
 		if (StringUtil.checkString(minPrice))
@@ -119,7 +128,7 @@ public class AccomRepoImplement implements AccomRepoCustom {
 	@Override
 	public List<AccomEntity> findAllAccomAvailable() {
 
-		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accomTypeID from accommodation ");
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accommodation.accomTypeID from accommodation ");
 		joinTableStatus(sql);
 		StringBuilder where = new StringBuilder(" where detailstatus.statusID = 1 ");
 		sql.append(where);
@@ -137,7 +146,7 @@ public class AccomRepoImplement implements AccomRepoCustom {
 		}
 		List<Integer> randomIds = new ArrayList<>(randomIdsSet);
 
-		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accomTypeID from accommodation ");
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accommodation.accomTypeID from accommodation ");
 		joinTableStatus(sql);
 		StringBuilder where = new StringBuilder(" where detailstatus.statusID = 1 ORDER BY RAND() LIMIT 3");
 		sql.append(where);
@@ -150,13 +159,32 @@ public class AccomRepoImplement implements AccomRepoCustom {
 	@Override
 	public List<AccomEntity> searchAccom(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName) {
 
-		StringBuilder sql = new StringBuilder("select * from accommodation ");
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accommodation.accomTypeID from accommodation ");
 		joinTableAccom(params, amenityName, rentTypeName, sql);
 		StringBuilder where = new StringBuilder(" where 1 = 1 ");
 		queryNormal(params, where);
 		querySpecial(params, amenityName, rentTypeName, where);
 		sql.append(where);
 		sql.append(" group by accommodation.accommodationID");
+		System.out.println(sql);
+
+		Query query = entityManager.createNativeQuery(sql.toString(), AccomEntity.class);
+
+		return query.getResultList();
+	}
+
+	@Override
+	public List<AccomEntity> searchAccomAvailable(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName) {
+
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accommodation.accomTypeID from accommodation ");
+		joinTableAccom(params, amenityName, rentTypeName, sql);
+		joinTableStatus(sql);
+		StringBuilder where = new StringBuilder(" where detailstatus.statusID = 1 ");
+		queryNormal(params, where);
+		querySpecial(params, amenityName, rentTypeName, where);
+		sql.append(where);
+		sql.append(" group by accommodation.accommodationID");
+		System.out.println(sql);
 
 		Query query = entityManager.createNativeQuery(sql.toString(), AccomEntity.class);
 

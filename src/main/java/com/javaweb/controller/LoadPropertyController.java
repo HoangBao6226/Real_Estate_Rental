@@ -19,9 +19,6 @@ import java.util.List;
 public class LoadPropertyController {
 
 	@Autowired
-	private AccomTypeService accomTypeSer;
-
-	@Autowired
 	private AccomService accomSer;
 
 	@Autowired
@@ -41,10 +38,6 @@ public class LoadPropertyController {
 			// Đưa thông tin người dùng vào model để sử dụng trong view
 			model.addAttribute("user", user);
 		}
-
-		List<AccomTypeDTO> acDTO = accomTypeSer.findAllAccomType();
-//		"____" giống như key để gửi qua bên FE
-		model.addAttribute("accomType", acDTO);
 
 		List<AccomDTO> ac = accomSer.findAllAccomAvailable();
 //		"accommodation" giống như key để gửi qua bên FE
