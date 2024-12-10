@@ -36,11 +36,9 @@ public class ReservationSerImplement implements ReservationService {
         reEntity.setAccommodationID(ac);
         reEntity.setLesseeID(le);
         reEntity.setViewDate(reDTO.getViewDate());
-        reEntity.setViewTime(reDTO.getViewTime());
         reEntity.setNote(reDTO.getNote());
         reRepository.save(reEntity);
-        // Gửi email chào mừng
-        emailService.sendThankYouEmail(le.getEmail(), reEntity.getReservationID());
+
         return reEntity;
     }
 }

@@ -7,4 +7,6 @@ public interface AccountService {
     AccountDTO findByUsername(String username);
 
     String findEmail(String username);
+
+    int findLesseeID(String username);
 }

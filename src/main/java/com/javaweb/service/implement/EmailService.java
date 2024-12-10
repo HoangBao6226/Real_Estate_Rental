@@ -70,7 +70,7 @@ public class EmailService {
                 + "Lịch hẹn xem nhà của quý khách đã được xác nhận như sau:\n"
                 + "- Tên nhà: " + re.getAccommodationID().getAccommodationName() + "\n"
                 + "- Địa chỉ: " + re.getAccommodationID().getStreet() + ", " + re.getAccommodationID().getWard() + ", " + re.getAccommodationID().getDistrict() + ", " + re.getAccommodationID().getCity()+ "\n"
-                + "- Thời gian: " + re.getViewDate() + " " + re.getViewTime() + "\n"
+                + "- Thời gian: " + re.getViewDate() + "\n"
                 + "- Người phụ trách: " + "contactPerson" + " - " + "contactPhone" + "\n\n"
                 + "Nếu quý khách cần thêm thông tin về bất động sản hoặc có bất kỳ thay đổi nào về lịch hẹn, xin vui lòng liên hệ với chúng tôi qua email này hoặc số điện thoại hỗ trợ.\n\n"
                 + "Chúng tôi cam kết mang đến sự hài lòng và trải nghiệm tốt nhất cho quý khách. Một lần nữa, xin cảm ơn quý khách đã lựa chọn dịch vụ của chúng tôi!\n\n"
