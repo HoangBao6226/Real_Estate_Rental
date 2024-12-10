@@ -12,4 +12,6 @@ public interface AccomRepoCustom {
 	List<AccomEntity> findRandomAccomAvailable();
 
 	List<AccomEntity> searchAccom(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName);
+
+	List<AccomEntity> searchAccomAvailable(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName);
 }

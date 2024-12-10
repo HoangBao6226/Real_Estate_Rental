@@ -7,7 +7,6 @@ import com.javaweb.service.itface.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class PaymentController {
     @Autowired
     private EmailService emailService;
 
-    @PostMapping(path = "/create_payment", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(path = "/create_payment")
     public void createPayment(HttpServletRequest req,
                               HttpServletResponse res,
                               @RequestParam Map<String, Object> params) throws IOException {

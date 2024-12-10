@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>RER - PROPERTIES</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--Style-->
+    <style>
+
+      .search-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+      }
+
+      .col-lg-6 {
+        width: 50%;
+        padding: 5px;
+      }
+
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      .orange-button {
+        background-color: #ff7f50;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        padding: 10px 20px;
+        text-align: center;
+      }
+
+      .orange-button:hover {
+        background-color: #ff6347;
+      }
+
+      .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px; /* Tăng khoảng cách giữa các checkbox */
+      }
+
+      .checkbox-group div {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 10px;
+        /*margin-bottom: 10px; !* Thêm khoảng cách dưới mỗi checkbox *!*/
+      }
+
+      .search-form {
+        max-height: 500px; /* Điều chỉnh chiều cao tối đa */
+        overflow-y: auto; /* Thêm thanh cuộn dọc nếu nội dung vượt quá chiều cao */
+        overflow-x: hidden; /* Vô hiệu hóa cuộn ngang */
+        padding: 10px;
+        border: 1px solid #ccc; /* Tùy chọn: Thêm viền cho dễ nhìn */
+        border-radius: 5px; /* Tùy chọn: Bo góc */
+      }
+
+      /* Ẩn thanh cuộn trên trình duyệt Webkit (Chrome, Safari) */
+      .search-form::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+
+      /* Ẩn thanh cuộn trên Firefox */
+      .search-form {
+        scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
+      }
+      
+    </style>
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-villa-agency.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a th:href="@{/}" class="logo">
+                        <h1>RER</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a th:href="@{/}">Home</a></li>
+                      <li><a th:href="@{/properties}" class="active">Properties</a></li>
+                      <!--                      -->
+                      <li>
+                        <!-- Kiểm tra nếu chưa đăng nhập -->
+                        <div th:if="${user == null}">
+                          <a th:href="@{/login}">
+                            <i class="fa fa-calendar"></i> Log in
+                          </a>
+                        </div>
+                        <!-- Kiểm tra nếu đã đăng nhập -->
+                        <div th:if="${user != null}" class="dropdown">
+                          <a class="dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user"></i> <span th:text="${user.getUsername()}">Username</span>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
+                            <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                      <!--                      -->
+                  </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!--  Search Form-->
+  <div class="properties section">
+    <div class="container">
+      <div class="search-form" id="search-Form">
+      <div class="container">
+        <h2>Search Accommodation</h2>
+        <form id="searchForm" method="get"
+              >
+          <!-- Name -->
+          <div class="row">
+            <div class="col-lg-6">
+              <fieldset>
+                <label>Name</label>
+                <input type="text" name="accommodationName" id="name" placeholder="Enter name">
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset>
+                <label>Room Number</label>
+                <input type="number" name="numberOfRooms" id="room" placeholder="Enter room number">
+              </fieldset>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="row">
+            <div class="col-lg-4">
+              <fieldset>
+                <label>Street</label>
+                <input type="text" name="street" id="street" placeholder="Enter street">
+              </fieldset>
+            </div>
+            <div class="col-lg-4">
+              <fieldset>
+                <label>Ward</label>
+                <input type="text" name="ward" id="ward" placeholder="Enter ward">
+              </fieldset>
+            </div>
+            <div class="col-lg-4">
+              <fieldset>
+                <label>District</label>
+                <input type="text" name="district" id="district" placeholder="Enter district">
+              </fieldset>
+            </div>
+          </div>
+
+          <!-- Address2 -->
+          <div class="row">
+            <div class="col-lg-4">
+              <fieldset>
+                <label>City</label>
+                <input type="text" name="city" id="city" placeholder="Enter city">
+              </fieldset>
+            </div>
+            <div class="col-lg-4">
+              <fieldset>
+                <label>Province</label>
+                <input type="text" name="province" id="province" placeholder="Enter province">
+              </fieldset>
+            </div>
+            <div class="col-lg-4">
+              <fieldset>
+                <label>Direction</label>
+                <input type="text" name="direction" id="direction" placeholder="Enter direction">
+              </fieldset>
+            </div>
+          </div>
+
+          <!-- Rent Type -->
+          <div class="row">
+            <div class="col-lg-6">
+              <fieldset>
+                <label>Rent Type</label>
+                <div class="checkbox-group">
+                  <div><input type="checkbox" name="rentTypeName" value="Yearly" id="yearly">Yearly</div>
+                  <div><input type="checkbox" name="rentTypeName" value="Seasonal" id="seasonal">Seasonal</div>
+                  <div><input type="checkbox" name="rentTypeName" value="Monthly" id="monthly">Monthly</div>
+                  <div><input type="checkbox" name="rentTypeName" value="Daily" id="daily">Daily</div>
+                  <div><input type="checkbox" name="rentTypeName" value="Weekly" id="weekly">Weekly</div>
+                  <div><input type="checkbox" name="rentTypeName" value="Hourly" id="hourly">Hourly</div>
+                </div>
+              </fieldset>
+            </div>
+            <!-- Accommodation Type -->
+            <div class="col-lg-6">
+              <fieldset>
+                <label>Accommodation Type</label>
+                <select name="accomType" id="accomType" class="form-control">
+                  <option value="">Select accommodation type</option>
+                  <option value="Apartment">Apartment</option>
+                  <option value="Studio">Studio</option>
+                  <option value="Villa">Villa</option>
+                  <option value="House">House</option>
+                  <option value="Room">Room</option>
+                </select>
+              </fieldset>
+            </div>
+          </div>
+          <!-- Area  -->
+          <div class="row">
+            <div class="col-lg-6">
+              <fieldset>
+                <label>Area From (m²)</label>
+                <input type="number" name="minSize" id="areaFrom" placeholder="Min area">
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset>
+                <label>Area To (m²)</label>
+                <input type="number" name="maxSize" id="areaTo" placeholder="Max area">
+              </fieldset>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <fieldset>
+                <label>Price From</label>
+                <input type="number" name="minPrice" id="priceFrom" placeholder="Min price">
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset>
+                <label>Price To</label>
+                <input type="number" name="maxPrice" id="priceTo" placeholder="Max price">
+              </fieldset>
+            </div>
+          </div>
+
+          <!-- Amenity -->
+          <div class="form-group">
+            <label>Amenity</label>
+            <div class="checkbox-group">
+              <div class="col-lg-6">
+                <div><input type="checkbox" name="amenityName" value="Interior" id="interior"> Interior</div>
+                <div><input type="checkbox" name="amenityName" value="Swimming Pool" id="pool"> Swimming Pool</div>
+                <div><input type="checkbox" name="amenityName" value="Gym" id="gym"> Gym</div>
+                <div><input type="checkbox" name="amenityName" value="Spa" id="spa"> Spa</div>
+                <div><input type="checkbox" name="amenityName" value="Restaurant" id="restaurant"> Restaurant</div>
+                <div><input type="checkbox" name="amenityName" value="Bar" id="bar"> Bar</div>
+              </div>
+              <div class="col-lg-6">
+                <div><input type="checkbox" name="amenityName" value="Wifi" id="wifi"> Wifi</div>
+                <div><input type="checkbox" name="amenityName" value="Parking" id="parking"> Parking</div>
+                <div><input type="checkbox" name="amenityName" value="Laundry Service" id="laundry"> Laundry Service</div>
+                <div><input type="checkbox" name="amenityName" value="Concierge Service" id="concierge"> Concierge Service</div>
+                <div><input type="checkbox" name="amenityName" value="Room Service" id="room-service"> Room Service</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search Button -->
+          <div class="row">
+            <div class="col-lg-12" style="text-align: center;">
+              <fieldset>
+                <button type="reset" id="closeForm" class="orange-button">Reset</button>
+                <button type="submit" class="orange-button">Search</button>
+              </fieldset>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!--  Hiển thị-->
+  <div class="section properties">
+    <div class="container">
+      <div class="row properties-box">
+        <div
+                th:each="ac : ${ac}"
+                th:class="'col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 ' ">
+          <div class="item">
+            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><img src="/assets/images/property-01.jpg" alt=""></a>
+            <span class="category"><p th:text="${ac.getAccomType()}"></p></span>
+            <h6></h6>
+            <h4><a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><h3 th:text="${ac.getAccommodationName()}"></h3></a></h4>
+            <ul>
+              <li>Rooms: <span th:text="${ac.getNumberOfRooms()}"></span></li>
+              <li>Area: <span th:text="${ac.getSize()}"></span></li>
+              <li>Address: <span th:text="${ac.getAddress()}"></span></li>
+            </ul>
+            <div class="main-button">
+              <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}">View a detail</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="pagination">
+            <li><a href="#!">1</a></li>
+            <li><a class="is_active" href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">>></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="col-lg-12">
+        <p>Copyright © 2048 RER Agency Co., Ltd. All rights reserved.
+
+          Design: <a rel="nofollow" href="#" target="_blank">Nguyen Hoang Bao - Ha Thi My Chau </a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/assets/js/isotope.min.js"></script>
+  <script src="/assets/js/owl-carousel.js"></script>
+  <script src="/assets/js/counter.js"></script>
+  <script src="/assets/js/custom.js"></script>
+
+  </body>
+</html>

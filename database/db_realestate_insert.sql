@@ -313,3 +313,13 @@ ORDER BY RAND()
 LIMIT 3;
 
 select * from status where statusID = 2;
+
+select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accommodation.accomTypeID 
+from accommodation  join accomtype on accommodation.accomTypeID = accomtype.accomTypeID 
+where 1 = 1  AND accomType LIKE '%Studio%' AND type like'%Studio%'
+group by accommodation.accommodationID;
+
+select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accommodation.accomTypeID 
+from accommodation  join accomtype on accommodation.accomTypeID = accomtype.accomTypeID join detailrenttype on accommodation.accommodationID = detailrenttype.accommodationID join renttype on detailrenttype.renttypeID = renttype.renttypeID join detailstatus on accommodation.accommodationID = detailstatus.accommodationID 
+where detailstatus.statusID = 1  AND numberOfRooms = 2 AND `type` like'%Apartment%' AND (rentTypeName like'%Yearly%' )  
+group by accommodation.accommodationID

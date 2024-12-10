@@ -16,7 +16,7 @@ public interface AccomService {
 
 	List<AccomDTO> findRandomAccomAvailable();
 
-	List<AccomDTO> findAll(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName);
+	List<AccomDTO> searchAll(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName);
 
-
+	List<AccomDTO> searchAllAvailable(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName);
 }

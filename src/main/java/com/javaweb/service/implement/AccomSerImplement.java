@@ -80,9 +80,22 @@ public class AccomSerImplement implements AccomService {
 	}
 
 	@Override
-	public List<AccomDTO> findAll(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName) {
+	public List<AccomDTO> searchAll(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName) {
 
 		List<AccomEntity> listAccomEntity = accomRepoCustom.searchAccom(params, amenityName, rentTypeName);
+		List<AccomDTO> listAccomDTO = new ArrayList<AccomDTO>();
+
+		for(AccomEntity item : listAccomEntity) {
+			AccomDTO ac = accomConverter.toAccomDTO(item);
+			listAccomDTO.add(ac);
+		}
+		return listAccomDTO;
+	}
+
+	@Override
+	public List<AccomDTO> searchAllAvailable(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName) {
+
+		List<AccomEntity> listAccomEntity = accomRepoCustom.searchAccomAvailable(params, amenityName, rentTypeName);
 		List<AccomDTO> listAccomDTO = new ArrayList<AccomDTO>();
 
 		for(AccomEntity item : listAccomEntity) {
