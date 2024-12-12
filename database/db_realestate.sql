@@ -67,11 +67,11 @@ CREATE TABLE Accommodation (
     ward NVARCHAR(50),
     district NVARCHAR(50),
     city NVARCHAR(50),
-    province NVARCHAR(50),
     direction NVARCHAR(50),
     size DECIMAL(10,2),
     numberOfRooms INT,
 	lessorID INT,
+    salesID INT,
     accomTypeID INT
 ) ENGINE=InnoDB;
 
@@ -117,7 +117,6 @@ CREATE TABLE DetailRentType (
 
 CREATE TABLE Reservation (
 	reservationID INT AUTO_INCREMENT PRIMARY KEY,
-    salesID INT,
     lesseeID INT,
     accommodationID INT,
     viewDate DATETIME,
@@ -159,6 +158,8 @@ ALTER TABLE Account ADD CONSTRAINT fk_Account_Lessee FOREIGN KEY (lesseeID) REFE
 
 ALTER TABLE Accommodation ADD CONSTRAINT fk_Accom_Lessor FOREIGN KEY (lessorID) REFERENCES Lessor(lessorID);
 
+ALTER TABLE Accommodation ADD CONSTRAINT fk_Accom_Em FOREIGN KEY (salesID) REFERENCES Employee(employeeID);
+
 ALTER TABLE Accommodation ADD CONSTRAINT fk_Accom_Type FOREIGN KEY (accomTypeID) REFERENCES AccomType(accomTypeID);
 
 ALTER TABLE Advantage ADD CONSTRAINT fk_Advan_Type FOREIGN KEY (accomTypeID) REFERENCES AccomType(accomTypeID);
@@ -186,5 +187,3 @@ ALTER TABLE Invoice ADD CONSTRAINT fk_Invoice_Lessee FOREIGN KEY (lesseeID) REFE
 ALTER TABLE Reservation ADD CONSTRAINT fk_Reservation_Accom FOREIGN KEY (accommodationID) REFERENCES Accommodation(accommodationID);
 
 ALTER TABLE Reservation ADD CONSTRAINT fk_Reservation_Lessee FOREIGN KEY (lesseeID) REFERENCES Lessee(lesseeID);
-
-ALTER TABLE Reservation ADD CONSTRAINT fk_Reservation_Em FOREIGN KEY (salesID) REFERENCES Employee(employeeID);

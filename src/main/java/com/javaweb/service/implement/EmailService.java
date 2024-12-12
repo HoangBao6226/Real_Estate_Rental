@@ -71,12 +71,14 @@ public class EmailService {
                 + "- Tên nhà: " + re.getAccommodationID().getAccommodationName() + "\n"
                 + "- Địa chỉ: " + re.getAccommodationID().getStreet() + ", " + re.getAccommodationID().getWard() + ", " + re.getAccommodationID().getDistrict() + ", " + re.getAccommodationID().getCity()+ "\n"
                 + "- Thời gian: " + re.getViewDate() + "\n"
-                + "- Người phụ trách: " + "contactPerson" + " - " + "contactPhone" + "\n\n"
+                + "- Người phụ trách: " + re.getAccommodationID().getSalesID().getLastName() + " " + re.getAccommodationID().getSalesID().getFirstName() + "\n"
+                + "- Số điện thoại liên hệ: " + re.getAccommodationID().getSalesID().getPhoneNumber() + "\n\n"
                 + "Nếu quý khách cần thêm thông tin về bất động sản hoặc có bất kỳ thay đổi nào về lịch hẹn, xin vui lòng liên hệ với chúng tôi qua email này hoặc số điện thoại hỗ trợ.\n\n"
                 + "Chúng tôi cam kết mang đến sự hài lòng và trải nghiệm tốt nhất cho quý khách. Một lần nữa, xin cảm ơn quý khách đã lựa chọn dịch vụ của chúng tôi!\n\n"
                 + "Trân trọng,\n"
                 + "[RER]\n"
-                + "[Email liên hệ] | [Số điện thoại liên hệ]\n"
+                + "[Email liên hệ: yoonhoang6226@gmail.com]\n"
+                + "[Số điện thoại liên hệ: 0937877312]\n"
                 + "[Website công ty]";
 
         // Tạo email

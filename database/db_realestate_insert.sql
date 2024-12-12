@@ -25,17 +25,17 @@ VALUES
     
 INSERT INTO account (username, password, roleID, employeeID, lessorID)
 VALUES
-    ('nguyenvananh', 'password123', 1, 1, null),
-    ('tranthimai', 'password345', 2, 2, null),
-    ('lengochung', 'password456', 2, 3, null),
+    ('nguyenvananh', '123', 1, 1, null),
+    ('tranthimai', '123', 2, 2, null),
+    ('lengochung', '123', 2, 3, null),
 
-    ('hoangngoclinh', 'password678', 3, null, 1),
-    ('phamminhduc', 'password789', 3, null, 2),
-    ('buithithu', 'password890', 3, null, 3),
-    ('tieuanhtuan', 'password901', 3, null, 4),
-    ('duongngocchau', 'password012', 3, null, 5),
-    ('dovankien', 'password123', 3, null, 6),
-    ('vuhyphuong', 'password234', 3, null, 7);
+    ('hoangngoclinh', '123', 3, null, 1),
+    ('phamminhduc', '123', 3, null, 2),
+    ('buithithu', '123', 3, null, 3),
+    ('tieuanhtuan', '123', 3, null, 4),
+    ('duongngocchau', '123', 3, null, 5),
+    ('dovankien', '123', 3, null, 6),
+    ('vuhyphuong', '123', 3, null, 7);
     
 INSERT INTO AccomType (type, description)
 VALUES
@@ -77,25 +77,25 @@ VALUES
     ('Dễ dàng tìm kiếm', 'Có rất nhiều phòng trọ trên thị trường.', 5),	
 	('Môi trường sống đa dạng', 'Có cơ hội làm quen và giao lưu với nhiều người từ khắp nơi, tạo ra một môi trường sống đa dạng và sôi động.', 5);
 
-INSERT INTO Accommodation (accommodationName, street, ward, district, city, province, direction, size, numberOfRooms, lessorID, accomTypeID)
+INSERT INTO Accommodation (accommodationName, street, ward, district, city, direction, size, numberOfRooms, lessorID, salesID, accomTypeID)
 VALUES
-	('The Elysian Apartment', '46 Nguyễn Huệ', 'Bến Nghé', 'Quận 1', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Nam', 75.00, 2, 1, 1),
-	('Azure Skies Studio', '123 Thảo Điền', 'An Thú', 'Quận 2', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Đông', 40.00, 1, 3, 2),
-	('The Haven Villa', '225 Nguyễn Văn Linh', 'Tân Phú', 'Quận 7', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Nam', 250.00, 5, 3, 3),
-	('The Grandiose House', '79 Nguyễn Thị Minh Khai', '6', 'Quận 3', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Bắc', 120.00, 3, 3, 4),
-	('The Pinnacle Room', '88 Phạm Ngọc Thạch', 'Phú Nhuận', 'Quận 5', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Tây', 30.00, 1, 5, 5),
+	('The Elysian Apartment', '46 Nguyễn Huệ', 'Bến Nghé', 'Quận 1', 'Hồ Chí Minh', 'Nam', 75.00, 2, 1, 2, 1),
+	('Azure Skies Studio', '123 Thảo Điền', 'An Thú', 'Quận 2', 'Hồ Chí Minh', 'Đông', 40.00, 1, 3, 2, 2),
+	('The Haven Villa', '225 Nguyễn Văn Linh', 'Tân Phú', 'Quận 7', 'Hồ Chí Minh', 'Nam', 250.00, 5, 3, 2, 3),
+	('The Grandiose House', '79 Nguyễn Thị Minh Khai', '6', 'Quận 3', 'Hồ Chí Minh', 'Bắc', 120.00, 3, 3, 2, 4),
+	('The Pinnacle Room', '88 Phạm Ngọc Thạch', 'Phú Nhuận', 'Quận 5', 'Hồ Chí Minh', 'Tây', 30.00, 1, 5, 2, 5),
 	
-    ('The Willow Creek Apartment', 'Phố Hàng Trọng', 'Hàng Trọng', 'Hoàn Kiếm', 'Hà Nội', 'Hà Nội', 'Bắc', 60.00, 2, 2, 1),
-	('Ocean Breeze Studio', 'Hồ Trúc Bạch', 'Trúc Bạch', 'Tây Hồ', 'Hà Nội', 'Hà Nội', 'Tây', 45.00, 1, 6, 2),
-	('The Forest Retreat Villa', '1162 Nguyễn Du', 'Đống Đa', 'Đống Đa', 'Hà Nội', 'Hà Nội', 'Nam', 180.00, 4, 4, 3),
-	('Mountain View House', '80 Võ Chí Công', 'Cửa Lò', 'Bắc Từ Liêm', 'Hà Nội', 'Hà Nội', 'Đông', 100.00, 3, 4, 4),
-	('The Sunnyside Room', '638 Trường Chinh', 'Thanh Xuân Trung', 'Thanh Xuân', 'Hà Nội', 'Hà Nội', 'Nam', 25.00, 1, 7, 5),
+    ('The Willow Creek Apartment', 'Phố Hàng Trọng', 'Hàng Trọng', 'Hoàn Kiếm', 'Hà Nội', 'Bắc', 60.00, 2, 2, 3, 1),
+	('Ocean Breeze Studio', 'Hồ Trúc Bạch', 'Trúc Bạch', 'Tây Hồ', 'Hà Nội', 'Tây', 45.00, 1, 6, 3, 2),
+	('The Forest Retreat Villa', '1162 Nguyễn Du', 'Đống Đa', 'Đống Đa', 'Hà Nội', 'Nam', 180.00, 4, 4, 3, 3),
+	('Mountain View House', '80 Võ Chí Công', 'Cửa Lò', 'Bắc Từ Liêm', 'Hà Nội', 'Đông', 100.00, 3, 4, 3, 4),
+	('The Sunnyside Room', '638 Trường Chinh', 'Thanh Xuân Trung', 'Thanh Xuân', 'Hà Nội', 'Nam', 25.00, 1, 7, 3, 5),
 	
-    ('The Wanderlust Apartment', '980 Võ Nguyên Giáp', 'Khai Hương', 'Ngũ Hành Sơn', 'Đà Nẵng', 'Đà Nẵng', 'Đông', 80.00, 2, 7, 1),
-	('The Nomad Studio', '76 Trường Sa', 'An Hải Bắc', 'Sơn Trà', 'Đà Nẵng', 'Đà Nẵng', 'Nam', 35.00, 1, 5, 2),
-	('The Eccentric Villa', '90 Hoàng Hoa Thắm', 'Thanh Khê Tây', 'Thanh Khê', 'Đà Nẵng', 'Đà Nẵng', 'Bắc', 200.00, 4, 4, 3),
-	('The Bohemian House', '764 Nguyễn Văn Linh', 'Liên Chiều', 'Liên Chiều', 'Đà Nẵng', 'Đà Nẵng', 'Tây', 150.00, 3, 1, 4),
-	('The Enigma Room', '912 Nguyễn Văn Linh', 'Cẩm Lệ', 'Cẩm Lệ', 'Đà Nẵng', 'Đà Nẵng', 'Đông', 20.00, 1, 3, 5);
+    ('The Wanderlust Apartment', '980 Võ Nguyên Giáp', 'Khai Hương', 'Ngũ Hành Sơn', 'Đà Nẵng', 'Đông', 80.00, 2, 7, 3, 1),
+	('The Nomad Studio', '76 Trường Sa', 'An Hải Bắc', 'Sơn Trà', 'Đà Nẵng', 'Nam', 35.00, 1, 5, 3, 2),
+	('The Eccentric Villa', '90 Hoàng Hoa Thắm', 'Thanh Khê Tây', 'Thanh Khê', 'Đà Nẵng', 'Bắc', 200.00, 4, 4, 3, 3),
+	('The Bohemian House', '764 Nguyễn Văn Linh', 'Liên Chiều', 'Liên Chiều', 'Đà Nẵng', 'Tây', 150.00, 3, 1, 3, 4),
+	('The Enigma Room', '912 Nguyễn Văn Linh', 'Cẩm Lệ', 'Cẩm Lệ', 'Đà Nẵng', 'Đông', 20.00, 1, 3, 3, 5);
 
 INSERT INTO Amenity (amenityName, description)
 VALUES
@@ -122,7 +122,7 @@ VALUES
 
 INSERT INTO Status (status, description) 
 VALUES
-	('Available', 'Sẵn sàng cho thuê'),
+	('Available'),
     ('Unavailable', 'Không sẵn sàng cho thuê'),
 	('Occupied', 'Đã được thuê');
     
@@ -186,23 +186,23 @@ VALUES
     (15, 4, 1000000, 300000), (15, 5, 900000, 250000), (15, 6, 600000, 150000);
 --------------------------------------------------------------------------------------------
 
-INSERT INTO DetailStatus (accommodationID, statusID, startDate, endDate, reason) 
+INSERT INTO DetailStatus (accommodationID, statusID, startDate, endDate) 
 VALUES
-	(1, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
-	(2, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-	(3, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-	(4, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (5, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-	(6, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (7, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
-	(8, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (9, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
-	(10, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (11, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-	(12, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (13, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-	(14, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (15, 1, NULL, NULL, 'Sẵn sàng cho thuê');
+	(1, 1, NULL, NULL),
+	(2, 1, NULL, NULL),
+	(3, 1, NULL, NULL),
+	(4, 1, NULL, NULL),
+    (5, 1, NULL, NULL),
+	(6, 1, NULL, NULL),
+    (7, 1, NULL, NULL),
+	(8, 1, NULL, NULL),
+    (9, 1, NULL, NULL),
+	(10, 1, NULL, NULL),
+    (11, 1, NULL, NULL),
+	(12, 1, NULL, NULL),
+    (13, 1, NULL, NULL),
+	(14, 1, NULL, NULL),
+    (15, 1, NULL, NULL);
 
 use real_estate;
 

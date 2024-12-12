@@ -18,8 +18,29 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(account.getRoleID().getRoleID() + ""));
+        String rolePrefix = "ROLE_";
+        String roleName = String.valueOf(account.getRoleID().getRoleID());
+
+        switch (roleName) {
+            case "1":
+                roleName = "MANAGER";
+                break;
+            case "2":
+                roleName = "EMPLOYEE";
+                break;
+            case "3":
+                roleName = "LESSOR";
+                break;
+            case "4":
+                roleName = "LESSEE";
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid role ID: " + roleName);
+        }
+
+        return Collections.singletonList(new SimpleGrantedAuthority(rolePrefix + roleName));
     }
+
 
     @Override
     public String getPassword() {

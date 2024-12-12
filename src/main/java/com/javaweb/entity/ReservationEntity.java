@@ -14,10 +14,6 @@ public class ReservationEntity {
     private int reservationID;
 
     @ManyToOne
-    @JoinColumn(name = "salesID")
-    private EmployeeEntity salesID;
-
-    @ManyToOne
     @JoinColumn(name = "lesseeID")
     private LesseeEntity lesseeID;
 
@@ -37,14 +33,6 @@ public class ReservationEntity {
 
     public void setReservationID(int reservationID) {
         this.reservationID = reservationID;
-    }
-
-    public EmployeeEntity getSalesID() {
-        return salesID;
-    }
-
-    public void setSalesID(EmployeeEntity salesID) {
-        this.salesID = salesID;
     }
 
     public LesseeEntity getLesseeID() {

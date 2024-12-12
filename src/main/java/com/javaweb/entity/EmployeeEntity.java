@@ -44,7 +44,7 @@ public class EmployeeEntity {
 	private List<AccountEntity> listAccount = new ArrayList<AccountEntity>();
 
 	@OneToMany(mappedBy = "salesID")
-	private List<ReservationEntity> listReverse = new ArrayList<ReservationEntity>();
+	private List<AccomEntity> listAccom = new ArrayList<AccomEntity>();
 
 	public EmployeeEntity() {
 	}
@@ -123,11 +123,11 @@ public class EmployeeEntity {
 		this.listAccount = listAccount;
 	}
 
-	public List<ReservationEntity> getListReverse() {
-		return listReverse;
+	public List<AccomEntity> getListAccom() {
+		return listAccom;
 	}
 
-	public void setListReverse(List<ReservationEntity> listReverse) {
-		this.listReverse = listReverse;
+	public void setListAccom(List<AccomEntity> listAccom) {
+		this.listAccom = listAccom;
 	}
 }

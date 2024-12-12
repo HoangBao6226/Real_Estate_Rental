@@ -1,10 +1,8 @@
 package com.javaweb.controller;
 
-import com.javaweb.entity.DetailStatusEntity;
 import com.javaweb.entity.ReservationEntity;
 import com.javaweb.service.implement.EmailService;
 import com.javaweb.service.itface.AccountService;
-import com.javaweb.service.itface.DetailStatusService;
 import com.javaweb.service.itface.ReservationService;
 import com.javaweb.service.model.ReservationDTO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,7 +42,7 @@ public class SaveViewDateController {
 
             // Gửi email chào mừng
             emailService.sendThankYouEmail(email, savedRe.getReservationID());
-            
+
             // 2. Chuẩn bị phản hồi
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Reservation saved successfully!");

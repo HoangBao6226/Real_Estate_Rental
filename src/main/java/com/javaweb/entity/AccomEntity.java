@@ -28,9 +28,6 @@ public class AccomEntity {
 	@Column(name = "city")
     private String city;
 	
-	@Column(name = "province")
-    private String province;
-	
 	@Column(name = "direction")
     private String direction;
 	
@@ -43,6 +40,10 @@ public class AccomEntity {
 	@ManyToOne
     @JoinColumn(name = "lessorID")
     private LessorEntity lessorID;
+
+	@ManyToOne
+	@JoinColumn(name = "salesID")
+	private EmployeeEntity salesID;
 
 	@ManyToOne
 	@JoinColumn(name = "accomTypeID")
@@ -113,14 +114,6 @@ public class AccomEntity {
 		this.city = city;
 	}
 
-	public String getProvince() {
-		return province;
-	}
-
-	public void setProvince(String province) {
-		this.province = province;
-	}
-
 	public String getDirection() {
 		return direction;
 	}
@@ -151,6 +144,14 @@ public class AccomEntity {
 
 	public void setLessorID(LessorEntity lessorID) {
 		this.lessorID = lessorID;
+	}
+
+	public EmployeeEntity getSalesID() {
+		return salesID;
+	}
+
+	public void setSalesID(EmployeeEntity salesID) {
+		this.salesID = salesID;
 	}
 
 	public AccomTypeEntity getAccomTypeID() {

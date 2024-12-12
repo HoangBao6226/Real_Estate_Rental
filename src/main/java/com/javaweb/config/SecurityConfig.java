@@ -24,9 +24,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/assets/**", "/vendor/**").permitAll()
+                        .requestMatchers("/lessee/assets/**", "/lessee/vendor/**").permitAll()
                         .requestMatchers( "/", "/index", "/properties", "/propertiesSearch").permitAll()
                         .requestMatchers("/login**", "/signup").permitAll()
+                        .requestMatchers("/properties/**").hasRole("LESSEE")
+                        .requestMatchers("/manager**").hasRole("MANAGER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

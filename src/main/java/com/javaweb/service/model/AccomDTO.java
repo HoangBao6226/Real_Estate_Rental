@@ -9,6 +9,7 @@ public class AccomDTO {
 	private float size;
 	private int numberOfRooms;
 	private int lessorID;
+	private int salesID;
 	private String amenity;
 	private String[] rentType;
 	private String[] price;
@@ -69,6 +70,14 @@ public class AccomDTO {
 
 	public void setLessorID(int lessorID) {
 		this.lessorID = lessorID;
+	}
+
+	public int getSalesID() {
+		return salesID;
+	}
+
+	public void setSalesID(int salesID) {
+		this.salesID = salesID;
 	}
 
 	public String[] getRentType() {

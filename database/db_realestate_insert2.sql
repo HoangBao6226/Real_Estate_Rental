@@ -1,25 +1,25 @@
 use real_estate;
 
-INSERT INTO Accommodation (accommodationName, street, ward, district, city, province, direction, size, numberOfRooms, lessorID, accomTypeID)
+INSERT INTO Accommodation (accommodationName, street, ward, district, city, direction, size, numberOfRooms, lessorID, salesID, accomTypeID)
 VALUES
    
-    ('Sunrise Apartment', '12 Mai Chí Thọ', 'An Phú', 'Quận 2', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Đông Nam', 150.00, 4, 1, 1),
-    ('The Urban Studio', '28 Lê Văn Sỹ', 'Phường 14', 'Quận Phú Nhuận', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Tây Bắc', 60.00, 2, 3, 2),
-    ('The Luxe Villa', '15 Nguyễn Văn Cừ', 'Cầu Kho', 'Quận 1', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Nam', 300.00, 6, 3, 3),
-    ('The Skyline House', '102 Nguyễn Tri Phương', 'Phường 9', 'Quận 10', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Đông', 50.00, 1, 6, 4),
-    ('The Sapphire Room', '7 Điện Biên Phủ', 'Phường 17', 'Quận Bình Thạnh', 'Hồ Chí Minh', 'Hồ Chí Minh', 'Bắc', 35.00, 1, 2, 5),
+    ('Sunrise Apartment', '12 Mai Chí Thọ', 'An Phú', 'Quận 2', 'Hồ Chí Minh', 'Đông Nam', 150.00, 4, 1, 3, 1),
+    ('The Urban Studio', '28 Lê Văn Sỹ', 'Phường 14', 'Quận Phú Nhuận', 'Hồ Chí Minh', 'Tây Bắc', 60.00, 2, 3, 3, 2),
+    ('The Luxe Villa', '15 Nguyễn Văn Cừ', 'Cầu Kho', 'Quận 1', 'Hồ Chí Minh', 'Nam', 300.00, 6, 3, 3, 3),
+    ('The Skyline House', '102 Nguyễn Tri Phương', 'Phường 9', 'Quận 10', 'Hồ Chí Minh', 'Đông', 50.00, 1, 6, 3, 4),
+    ('The Sapphire Room', '7 Điện Biên Phủ', 'Phường 17', 'Quận Bình Thạnh', 'Hồ Chí Minh', 'Bắc', 35.00, 1, 2, 3, 5),
 
-    ('The Crescent Apartment', '18 Lý Thường Kiệt', 'Tràng Tiền', 'Hoàn Kiếm', 'Hà Nội', 'Hà Nội', 'Tây Nam', 80.00, 3, 5, 1),
-    ('The Emerald Studio', '123 Xuân Diệu', 'Quảng An', 'Tây Hồ', 'Hà Nội', 'Hà Nội', 'Đông Bắc', 45.00, 1, 5, 2),
-    ('The Lotus House', '56 Cát Linh', 'Cát Linh', 'Đống Đa', 'Hà Nội', 'Hà Nội', 'Nam', 120.00, 3, 7, 4),
-    ('The Serene Villa', '202 Láng Hạ', 'Láng Thượng', 'Đống Đa', 'Hà Nội', 'Hà Nội', 'Bắc', 250.00, 5, 1, 3),
-    ('The Radiant Room', '5 Nguyễn Văn Huyên', 'Nghĩa Đô', 'Cầu Giấy', 'Hà Nội', 'Hà Nội', 'Tây', 30.00, 1, 4, 5),
+    ('The Crescent Apartment', '18 Lý Thường Kiệt', 'Tràng Tiền', 'Hoàn Kiếm', 'Hà Nội', 'Tây Nam', 80.00, 3, 5, 2, 1),
+    ('The Emerald Studio', '123 Xuân Diệu', 'Quảng An', 'Tây Hồ', 'Hà Nội', 'Đông Bắc', 45.00, 1, 5, 2, 2),
+    ('The Lotus House', '56 Cát Linh', 'Cát Linh', 'Đống Đa', 'Hà Nội', 'Nam', 120.00, 3, 7, 2, 4),
+    ('The Serene Villa', '202 Láng Hạ', 'Láng Thượng', 'Đống Đa', 'Hà Nội','Bắc', 250.00, 5, 1, 2, 3),
+    ('The Radiant Room', '5 Nguyễn Văn Huyên', 'Nghĩa Đô', 'Cầu Giấy', 'Hà Nội', 'Tây', 30.00, 1, 4, 2, 5),
 
-    ('The Wave Apartment', '36 Bạch Đằng', 'Hải Châu 1', 'Hải Châu', 'Đà Nẵng', 'Đà Nẵng', 'Đông', 90.00, 2, 4, 1),
-    ('The Ocean Pearl Studio', '45 Trần Hưng Đạo', 'Nại Hiên Đông', 'Sơn Trà', 'Đà Nẵng', 'Đà Nẵng', 'Nam', 55.00, 1, 2, 2),
-    ('The Golden Sands Villa', '89 Nguyễn Tất Thành', 'Xuân Hà', 'Thanh Khê', 'Đà Nẵng', 'Đà Nẵng', 'Bắc', 230.00, 5, 2, 3),
-    ('The Horizon House', '102 Ngũ Hành Sơn', 'Mỹ An', 'Ngũ Hành Sơn', 'Đà Nẵng', 'Đà Nẵng', 'Tây', 140.00, 3, 3, 4),
-    ('The Velvet Room', '60 Trần Phú', 'Thạch Thang', 'Hải Châu', 'Đà Nẵng', 'Đà Nẵng', 'Đông Nam', 25.00, 1, 7, 5);
+    ('The Wave Apartment', '36 Bạch Đằng', 'Hải Châu 1', 'Hải Châu', 'Đà Nẵng', 'Đông', 90.00, 2, 4, 2, 1),
+    ('The Ocean Pearl Studio', '45 Trần Hưng Đạo', 'Nại Hiên Đông', 'Sơn Trà', 'Đà Nẵng', 'Nam', 55.00, 1, 2, 2, 2),
+    ('The Golden Sands Villa', '89 Nguyễn Tất Thành', 'Xuân Hà', 'Thanh Khê', 'Đà Nẵng', 'Bắc', 230.00, 5, 2, 2, 3),
+    ('The Horizon House', '102 Ngũ Hành Sơn', 'Mỹ An', 'Ngũ Hành Sơn', 'Đà Nẵng', 'Tây', 140.00, 3, 3, 2, 4),
+    ('The Velvet Room', '60 Trần Phú', 'Thạch Thang', 'Hải Châu', 'Đà Nẵng','Đông Nam', 25.00, 1, 7, 2, 5);
     
 INSERT INTO DetailAmenity (accommodationID, amenityID)
 VALUES
@@ -80,20 +80,20 @@ VALUES
     (30, 1, 20000000, 5000000), (30, 2, 10000000, 3000000), (30, 3, 5000000, 1500000),
     (30, 4, 1200000, 400000), (30, 5, 1000000, 300000), (30, 6, 800000, 200000);
 
-INSERT INTO DetailStatus (accommodationID, statusID, startDate, endDate, reason) 
+INSERT INTO DetailStatus (accommodationID, statusID, startDate, endDate) 
 VALUES
-    (16, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
-    (17, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (18, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (19, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (20, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (21, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (22, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
-    (23, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (24, 2, NULL, NULL, 'Không sẵn sàng cho thuê'),
-    (25, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (26, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (27, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (28, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (29, 1, NULL, NULL, 'Sẵn sàng cho thuê'),
-    (30, 1, NULL, NULL, 'Sẵn sàng cho thuê');
+    (16, 1, NULL, NULL),
+    (17, 1, NULL, NULL),
+    (18, 1, NULL, NULL),
+    (19, 1, NULL, NULL),
+    (20, 1, NULL, NULL),
+    (21, 1, NULL, NULL),
+    (22, 1, NULL, NULL),
+    (23, 1, NULL, NULL),
+    (24, 1, NULL, NULL),
+    (25, 1, NULL, NULL),
+    (26, 1, NULL, NULL),
+    (27, 1, NULL, NULL),
+    (28, 1, NULL, NULL),
+    (29, 1, NULL, NULL),
+    (30, 1, NULL, NULL);
