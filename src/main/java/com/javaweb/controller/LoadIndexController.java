@@ -36,8 +36,8 @@ public class LoadIndexController {
 		if(remoteUser != null) {
 			// Bạn có thể truy vấn thông tin từ database dựa trên username
 			// Giả sử bạn có một service để lấy thông tin người dùng
-			AccountDTO user = accountService.findByUsername(remoteUser);
-
+//			AccountDTO user = accountService.findByUsername(remoteUser);
+			String user = remoteUser;
 			// Đưa thông tin người dùng vào model để sử dụng trong view
 			model.addAttribute("user", user);
 		}

@@ -17,8 +17,10 @@ public class DetailStatusSerImplement implements DetailStatusService {
 
     @Autowired
     private AccomRepository accomRepository;
+
     @Autowired
     private DetailStatusRepository detailStatusRepository;
+
     @Autowired
     private StatusRepository statusRepository;
 

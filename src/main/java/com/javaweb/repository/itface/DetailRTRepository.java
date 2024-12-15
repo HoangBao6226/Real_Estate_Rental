@@ -14,4 +14,6 @@ public interface DetailRTRepository extends JpaRepository<DetailRentTypeEntity, 
 
 	DetailRentTypeEntity findByAccommodationIDAndRentTypeID(AccomEntity accommodationID, RentTypeEntity rentTypeID);
 
+	void deleteByAccommodationID(AccomEntity accommodationID);
+
 }

@@ -1,5 +1,6 @@
 package com.javaweb.config;
 
+import com.javaweb.service.implement.CustomOAuth2UserService;
 import com.javaweb.service.implement.CustomUserDetailsSerImplement;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,11 +30,19 @@ public class SecurityConfig {
                         .requestMatchers("/login**", "/signup").permitAll()
                         .requestMatchers("/properties/**").hasRole("LESSEE")
                         .requestMatchers("/manager**").hasRole("MANAGER")
+                        .requestMatchers("/sales/**").hasRole("SALES")
+                        .requestMatchers("/lessor/**").hasRole("LESSOR")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login")  // Trang đăng nhập
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .userService(customOAuth2UserService()) // Tùy chỉnh ánh xạ người dùng
+                        )
                 )
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login")
@@ -53,6 +62,11 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder);
 
         return new ProviderManager(provider);
+    }
+
+    @Bean
+    public CustomOAuth2UserService customOAuth2UserService() {
+        return new CustomOAuth2UserService();
     }
 
 }

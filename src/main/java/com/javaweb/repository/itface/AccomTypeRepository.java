@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccomTypeRepository extends JpaRepository<AccomTypeEntity, Integer> {
 
+    AccomTypeEntity findByType(String type);
 }

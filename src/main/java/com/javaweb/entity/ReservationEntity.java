@@ -9,6 +9,10 @@ import java.util.Date;
 @Table(name = "reservation")
 public class ReservationEntity {
 
+    public enum Status {
+        In_progress, Completed, Canceled;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationID;
@@ -26,6 +30,18 @@ public class ReservationEntity {
 
     @Column(name = "note")
     private String note;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status = Status.In_progress;
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public int getReservationID() {
         return reservationID;

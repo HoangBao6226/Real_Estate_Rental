@@ -23,9 +23,6 @@ public class ReservationSerImplement implements ReservationService {
     @Autowired
     private LesseeRepository lesseeRepository;
 
-    @Autowired
-    private EmailService emailService;
-
     @Override
     public ReservationEntity saveReservation(ReservationDTO reDTO, int accomID, int lesseeID) {
 

@@ -1,9 +1,5 @@
 package com.javaweb.service.model;
 
-import com.javaweb.entity.AdvantageEntity;
-
-import java.util.List;
-
 public class AccomTypeDTO {
 
     private String type;

@@ -4,7 +4,6 @@ public class AccountDTO {
 
     private String username;
     private String password;
-    private int lesseeID;
 
     public String getUsername() {
         return username;
@@ -20,13 +19,5 @@ public class AccountDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getLesseeID() {
-        return lesseeID;
-    }
-
-    public void setLesseeID(int lesseeID) {
-        this.lesseeID = lesseeID;
     }
 }

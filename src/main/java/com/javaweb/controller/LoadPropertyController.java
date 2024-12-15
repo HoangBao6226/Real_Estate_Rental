@@ -1,10 +1,8 @@
 package com.javaweb.controller;
 
 import com.javaweb.service.itface.AccomService;
-import com.javaweb.service.itface.AccomTypeService;
 import com.javaweb.service.itface.AccountService;
 import com.javaweb.service.model.AccomDTO;
-import com.javaweb.service.model.AccomTypeDTO;
 import com.javaweb.service.model.AccountDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-
 
 @Controller
 public class LoadPropertyController {

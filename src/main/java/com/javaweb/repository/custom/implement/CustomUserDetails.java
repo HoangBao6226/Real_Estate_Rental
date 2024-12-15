@@ -26,7 +26,7 @@ public class CustomUserDetails implements UserDetails {
                 roleName = "MANAGER";
                 break;
             case "2":
-                roleName = "EMPLOYEE";
+                roleName = "SALES";
                 break;
             case "3":
                 roleName = "LESSOR";

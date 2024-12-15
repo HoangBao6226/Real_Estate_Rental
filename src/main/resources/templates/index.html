@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/lessee/assets/css/templatemo-villa-agency.css">
     <link rel="stylesheet" href="/lessee/assets/css/owl.css">
     <link rel="stylesheet" href="/lessee/assets/css/animate.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
 
   </head>
 
@@ -72,7 +72,7 @@
                         <!-- Kiểm tra nếu đã đăng nhập -->
                         <div th:if="${user != null}" class="dropdown">
                           <a class="dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-user"></i> <span th:text="${user.getUsername()}">Username</span>
+                            <i class="fa fa-user"></i> <span th:text="${user}">Username</span>
                           </a>
                           <div class="dropdown-menu" >
                             <a  th:href="@{/profile}">Profile</a>

@@ -122,7 +122,7 @@ VALUES
 
 INSERT INTO Status (status, description) 
 VALUES
-	('Available'),
+	('Available', 'Sẵn sàng cho thuê'),
     ('Unavailable', 'Không sẵn sàng cho thuê'),
 	('Occupied', 'Đã được thuê');
     
@@ -206,14 +206,14 @@ VALUES
 
 use real_estate;
 
-select * from Accommodation;
+select * from Accommodation order by accommodationID DESC;
 select * from AccomType;
 -- --pass:123;-- 
 select * from Account; 
 select * from Advantage;
 select * from Amenity;
 select * from DetailAmenity;
-select * from DetailRentType order by accommodationID ASC;
+select * from DetailRentType order by accommodationID DESC;
 select * from DetailStatus;
 select * from Status;
 select * from Invoice;
@@ -224,6 +224,8 @@ select * from RentType;
 select * from Reservation;
 select * from Role;
 select * from employee;
+
+select * from reservation join accommodation on accommodation.accommodationID =  reservation.accommodationID where salesID = 3;
 
 select *
 from User join Account on User.userID = Account.userID

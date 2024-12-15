@@ -120,7 +120,8 @@ CREATE TABLE Reservation (
     lesseeID INT,
     accommodationID INT,
     viewDate DATETIME,
-    note TEXT
+    note TEXT,
+    status ENUM('In_progress', 'Completed', 'Canceled')
 ) ENGINE=InnoDB;
 
 CREATE TABLE Invoice (

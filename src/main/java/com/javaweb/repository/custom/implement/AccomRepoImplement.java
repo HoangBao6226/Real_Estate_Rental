@@ -3,7 +3,6 @@ package com.javaweb.repository.custom.implement;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;

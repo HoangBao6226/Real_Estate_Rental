@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import com.javaweb.service.itface.AccomService;
 import com.javaweb.service.model.AccomDTO;
 
-
 @Controller
 public class SearchController {
 
