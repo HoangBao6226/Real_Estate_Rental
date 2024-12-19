@@ -149,6 +149,7 @@ public class AccomSerImplement implements AccomService {
 	}
 
 	// Cập nhật accommodation
+	@Transactional
 	@Override
 	public void updateAccom(int id, NewAccomDTO accommodation, LessorEntity lessorID) {
 
@@ -167,19 +168,21 @@ public class AccomSerImplement implements AccomService {
 		ac.setAccomTypeID(type);
 		accomRepo.save(ac);
 
-//		List<DetailRentTypeEntity> deRTs = new ArrayList<>();
-//		for(int i = 0; i < accommodation.getDeRTs().size(); i++) {
-//
-//			String j = accommodation.getRentTypeName().get(i);
-//			RentTypeEntity rt = rentTypeRepository.findByRentTypeName(j);
-//			DetailRentTypeEntity deRT = new DetailRentTypeEntity();
-//			deRT.setAccommodationID(ac);
-//			deRT.setRentTypeID(rt);
-//			deRT.setPrice(accommodation.getDeRTs().get(i).getPrice());
-//			deRT.setDeposit(accommodation.getDeRTs().get(i).getDeposit());
-//			deRTs.add(deRT);
-//		}
-//		detailRTRepository.saveAll(deRTs);
+		detailRTRepository.deleteByAccommodationID(ac);
+
+		List<DetailRentTypeEntity> deRTs = new ArrayList<>();
+		for(int i = 0; i < accommodation.getDeRTs().size(); i++) {
+
+			String j = accommodation.getRentTypeName().get(i);
+			RentTypeEntity rt = rentTypeRepository.findByRentTypeName(j);
+			DetailRentTypeEntity deRT = new DetailRentTypeEntity();
+			deRT.setAccommodationID(ac);
+			deRT.setRentTypeID(rt);
+			deRT.setPrice(accommodation.getDeRTs().get(i).getPrice());
+			deRT.setDeposit(accommodation.getDeRTs().get(i).getDeposit());
+			deRTs.add(deRT);
+		}
+		detailRTRepository.saveAll(deRTs);
 
 	}
 
@@ -187,8 +190,10 @@ public class AccomSerImplement implements AccomService {
 	@Transactional
 	@Override
 	public void deleteAccom(int id) {
-		AccomEntity accommodation = accomRepo.findById(id).get();
-		detailRTRepository.deleteByAccommodationID(accommodation);
+
+		AccomEntity ac = accomRepo.findById(id).get();
+		detailRTRepository.deleteByAccommodationID(ac);
 		accomRepo.deleteById(id);
 	}
+
 }

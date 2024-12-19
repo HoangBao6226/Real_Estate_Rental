@@ -99,7 +99,7 @@ public class LoadListAccomController {
         accommodationService.updateAccom(id, accommodation, lessorEntity);
     }
 
-    // Xóa accommodation
+    // Xóa accommodation theo rentType
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAccomEntity(@PathVariable int id) {
         accommodationService.deleteAccom(id);
