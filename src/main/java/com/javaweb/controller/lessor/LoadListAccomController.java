@@ -52,7 +52,7 @@ public class LoadListAccomController {
         }
 
         List<AccomEntity> ac = accomRepository.findAllByLessorID(lessorEntity);
-//		"accommodation" giống như key để gửi qua bên FE
+        // "accommodation" giống như key để gửi qua bên FE
         model.addAttribute("accommodation", ac);
 
         return "lessor/list-accom";

@@ -111,7 +111,7 @@
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
               <li><a th:href="@{/}">Home</a></li>
-              <li><a th:href="@{/properties}">Properties</a></li>
+              <li><a th:href="@{/propertiesSearch}">Properties</a></li>
               <li><a th:href="@{/properties/{id}(id=${accommodation.getAccommodationID()})}">Property Details</a></li>
               <li><a th:href="@{/invoice(accommodationID=${accommodation.getAccommodationID()},
               renttype=${rentType.getRentTypeName()})}" class="active">Invoice</a></li>

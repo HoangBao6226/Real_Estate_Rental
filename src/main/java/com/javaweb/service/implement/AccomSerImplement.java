@@ -128,6 +128,7 @@ public class AccomSerImplement implements AccomService {
 		ac.setDirection(accommodation.getDirection());
 		ac.setSize(accommodation.getSize());
 		ac.setNumberOfRooms(accommodation.getNumberOfRooms());
+		ac.setStatus(AccomEntity.Status.Pending_Approval);
 		ac.setLessorID(lessorID);
 		ac.setAccomTypeID(type);
 		accomRepo.save(ac);
@@ -164,6 +165,7 @@ public class AccomSerImplement implements AccomService {
 		ac.setDirection(accommodation.getDirection());
 		ac.setSize(accommodation.getSize());
 		ac.setNumberOfRooms(accommodation.getNumberOfRooms());
+		ac.setStatus(AccomEntity.Status.Pending_Approval);
 		ac.setLessorID(lessorID);
 		ac.setAccomTypeID(type);
 		accomRepo.save(ac);

@@ -5,6 +5,8 @@ import java.util.List;
 import com.javaweb.entity.EmployeeEntity;
 import com.javaweb.entity.LessorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.javaweb.entity.AccomEntity;
@@ -20,4 +22,6 @@ public interface AccomRepository extends JpaRepository<AccomEntity, Integer> {
 
     List<AccomEntity> findAllByLessorID(LessorEntity lessorID);
 
+    @Query("SELECT a FROM AccomEntity a WHERE a.accommodationID = :accommodationID AND a.status = 'Available'")
+    AccomEntity findAvailableByaccommodationID(int accommodationID);
 }

@@ -6,7 +6,6 @@ import java.util.Map;
 
 public interface InvoiceService {
 
-    InvoiceEntity saveInvoice(Map<String, Object> params, String username);
+    InvoiceEntity saveInvoice(Map<String, Object> params, String username, boolean isPaymentSuccessful);
 
-    void updateStatusCanceled(int inID);
 }

@@ -6,6 +6,7 @@ import com.javaweb.repository.itface.AccountRepository;
 import com.javaweb.repository.itface.InvoiceRepository;
 import com.javaweb.repository.itface.RentTypeRepository;
 import com.javaweb.service.itface.InvoiceService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,11 @@ public class InvoiceSerImplement implements InvoiceService {
     private InvoiceRepository invoiceRepository;
 
     @Override
-    public InvoiceEntity saveInvoice(Map<String, Object> params, String username) {
+    public InvoiceEntity saveInvoice(Map<String, Object> params, String username, boolean isPaymentSuccessful) {
+
+        if (!isPaymentSuccessful) {
+            throw new RuntimeException("Payment failed. Deposit process aborted.");
+        }
 
         Date date = new Date();
         String accomIDs = (String) params.get("accommodationID");
@@ -46,28 +51,29 @@ public class InvoiceSerImplement implements InvoiceService {
         LocalDateTime startDate = LocalDateTime.parse(start);
         LocalDateTime endDate = LocalDateTime.parse(end);
 
-        AccomEntity accomEntity = accomRepository.findById(accomID).get();
-        RentTypeEntity rentTypeEntity = rentTypeRepository.findById(rtID).get();
-        AccountEntity accountEntity = accountRepository.findByUsername(username);
-        LesseeEntity lesseeID = accountEntity.getLesseeID();
+        try {
+            AccomEntity accomEntity = accomRepository.findAvailableByaccommodationID(accomID);
 
-        InvoiceEntity invoiceEntity = new InvoiceEntity();
-        invoiceEntity.setAccommodationID(accomEntity);
-        invoiceEntity.setRentTypeID(rentTypeEntity);
-        invoiceEntity.setLesseeID(lesseeID);
-        invoiceEntity.setTotalPrice(price + deposit);
-        invoiceEntity.setInvoiceDate(date);
-        invoiceEntity.setStartDate(startDate);
-        invoiceEntity.setEndDate(endDate);
+            RentTypeEntity rentTypeEntity = rentTypeRepository.findById(rtID).get();
+            AccountEntity accountEntity = accountRepository.findByUsername(username);
+            LesseeEntity lesseeID = accountEntity.getLesseeID();
 
-        return invoiceRepository.save(invoiceEntity);
-    }
+            InvoiceEntity invoiceEntity = new InvoiceEntity();
+            invoiceEntity.setAccommodationID(accomEntity);
+            invoiceEntity.setRentTypeID(rentTypeEntity);
+            invoiceEntity.setLesseeID(lesseeID);
+            invoiceEntity.setTotalPrice(price);
+            invoiceEntity.setInvoiceDate(date);
+            invoiceEntity.setStartDate(startDate);
+            invoiceEntity.setEndDate(endDate);
 
-    @Override
-    public void updateStatusCanceled(int inID) {
+            accomEntity.setStatus(AccomEntity.Status.Occupied);
+            accomRepository.save(accomEntity);
 
-        InvoiceEntity invoiceEntity = invoiceRepository.findById(inID).get();
-        invoiceEntity.setStatus(InvoiceEntity.Status.Canceled);
-        invoiceRepository.save(invoiceEntity);
+            return invoiceRepository.save(invoiceEntity);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Accommodation is not available for deposit");
+        }
     }
 }

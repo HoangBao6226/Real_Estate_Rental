@@ -70,23 +70,10 @@ CREATE TABLE Accommodation (
     direction NVARCHAR(50),
     size DECIMAL(10,2),
     numberOfRooms INT,
+    status ENUM('Available', 'Unavailable', 'Occupied', 'Pending_Approval') default 'Available',
 	lessorID INT,
     salesID INT,
     accomTypeID INT
-) ENGINE=InnoDB;
-
-CREATE TABLE Status (
-    statusID INT AUTO_INCREMENT PRIMARY KEY,
-    status VARCHAR(50),
-    description TEXT
-) ENGINE=InnoDB;
-
-CREATE TABLE DetailStatus (
-	detailStatusID INT AUTO_INCREMENT PRIMARY KEY,
-    accommodationID INT UNIQUE,
-    statusID INT,
-    startDate DATETIME,
-    endDate DATETIME
 ) ENGINE=InnoDB;
 
 CREATE TABLE Amenity (
@@ -164,10 +151,6 @@ ALTER TABLE Accommodation ADD CONSTRAINT fk_Accom_Em FOREIGN KEY (salesID) REFER
 ALTER TABLE Accommodation ADD CONSTRAINT fk_Accom_Type FOREIGN KEY (accomTypeID) REFERENCES AccomType(accomTypeID);
 
 ALTER TABLE Advantage ADD CONSTRAINT fk_Advan_Type FOREIGN KEY (accomTypeID) REFERENCES AccomType(accomTypeID);
-
-ALTER TABLE DetailStatus ADD CONSTRAINT fk_Status_DetailStatus FOREIGN KEY (statusID) REFERENCES Status(statusID);
-
-ALTER TABLE DetailStatus ADD CONSTRAINT fk_Accom_DetailStatus FOREIGN KEY (accommodationID) REFERENCES Accommodation(accommodationID);
 
 ALTER TABLE DetailAmenity ADD CONSTRAINT fk_Accom_DetailType FOREIGN KEY (accommodationID) REFERENCES Accommodation(accommodationID);
 

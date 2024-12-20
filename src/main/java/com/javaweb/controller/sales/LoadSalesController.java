@@ -23,7 +23,6 @@ public class LoadSalesController {
 	@Autowired
 	private Sales_ReservationService salesService;
 
-
 	@GetMapping(value = "/list-reservation")
 	public String loadListReservation(Model model, HttpServletRequest request) {
 

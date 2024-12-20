@@ -9,6 +9,10 @@ import java.util.List;
 @Table(name = "accommodation")
 public class AccomEntity {
 
+	public enum Status {
+		Available, Unavailable, Occupied, Pending_Approval;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int accommodationID;
@@ -36,6 +40,10 @@ public class AccomEntity {
 	
 	@Column(name = "numberOfRooms")
     private int numberOfRooms;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 	
 	@ManyToOne
     @JoinColumn(name = "lessorID")
@@ -54,9 +62,6 @@ public class AccomEntity {
     
     @OneToMany(mappedBy = "accommodationID")
     private List<DetailAmenityEntity> listDetailAmenity = new ArrayList<DetailAmenityEntity>();
-
-	@OneToMany(mappedBy = "accommodationID")
-	private List<DetailStatusEntity> listDetailStatus = new ArrayList<DetailStatusEntity>();
 
 	@OneToMany(mappedBy = "accommodationID")
 	private List<InvoiceEntity> listInvoice= new ArrayList<InvoiceEntity>();
@@ -138,6 +143,14 @@ public class AccomEntity {
 		this.numberOfRooms = numberOfRooms;
 	}
 
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	public LessorEntity getLessorID() {
 		return lessorID;
 	}
@@ -176,14 +189,6 @@ public class AccomEntity {
 
 	public void setListDetailAmenity(List<DetailAmenityEntity> listDetailAmenity) {
 		this.listDetailAmenity = listDetailAmenity;
-	}
-
-	public List<DetailStatusEntity> getListDetailStatus() {
-		return listDetailStatus;
-	}
-
-	public void setListDetailStatus(List<DetailStatusEntity> listDetailStatus) {
-		this.listDetailStatus = listDetailStatus;
 	}
 
 	public List<InvoiceEntity> getListInvoice() {

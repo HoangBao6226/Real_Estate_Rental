@@ -20,11 +20,6 @@ public class AccomRepoImplement implements AccomRepoCustom {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public static void joinTableStatus(StringBuilder sql) {
-
-		sql.append(" join detailstatus on accommodation.accommodationID = detailstatus.accommodationID");
-	}
-
 	public static void joinTableAccom(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName, StringBuilder sql) {
 
 		String accomType = (String) params.get("accomType");
@@ -127,9 +122,8 @@ public class AccomRepoImplement implements AccomRepoCustom {
 	@Override
 	public List<AccomEntity> findAllAccomAvailable() {
 
-		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, lessorID, salesID, direction, accommodation.accomTypeID from accommodation ");
-		joinTableStatus(sql);
-		StringBuilder where = new StringBuilder(" where detailstatus.statusID = 1 ");
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, accommodation.accomTypeID from accommodation ");
+		StringBuilder where = new StringBuilder(" where status = 'Available' ");
 		sql.append(where);
 		Query query = entityManager.createNativeQuery(sql.toString(), AccomEntity.class);
 
@@ -145,9 +139,8 @@ public class AccomRepoImplement implements AccomRepoCustom {
 		}
 		List<Integer> randomIds = new ArrayList<>(randomIdsSet);
 
-		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, lessorID, salesID, direction, accommodation.accomTypeID from accommodation ");
-		joinTableStatus(sql);
-		StringBuilder where = new StringBuilder(" where detailstatus.statusID = 1 ORDER BY RAND() LIMIT 3");
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, accommodation.accomTypeID from accommodation ");
+		StringBuilder where = new StringBuilder(" where status = 'Available' ORDER BY RAND() LIMIT 3");
 		sql.append(where);
 		System.out.println(sql.toString());
 		Query query = entityManager.createNativeQuery(sql.toString(), AccomEntity.class);
@@ -158,7 +151,7 @@ public class AccomRepoImplement implements AccomRepoCustom {
 	@Override
 	public List<AccomEntity> searchAccom(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName) {
 
-		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, lessorID, salesID, direction, accommodation.accomTypeID from accommodation ");
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, accommodation.accomTypeID from accommodation ");
 		joinTableAccom(params, amenityName, rentTypeName, sql);
 		StringBuilder where = new StringBuilder(" where 1 = 1 ");
 		queryNormal(params, where);
@@ -175,10 +168,9 @@ public class AccomRepoImplement implements AccomRepoCustom {
 	@Override
 	public List<AccomEntity> searchAccomAvailable(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName) {
 
-		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, lessorID, salesID, direction, accommodation.accomTypeID from accommodation ");
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, accommodation.accomTypeID from accommodation ");
 		joinTableAccom(params, amenityName, rentTypeName, sql);
-		joinTableStatus(sql);
-		StringBuilder where = new StringBuilder(" where detailstatus.statusID = 1 ");
+		StringBuilder where = new StringBuilder(" where status = 'Available' ");
 		queryNormal(params, where);
 		querySpecial(params, amenityName, rentTypeName, where);
 		sql.append(where);

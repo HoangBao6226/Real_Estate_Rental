@@ -79,21 +79,3 @@ VALUES
     
     (30, 1, 20000000, 5000000), (30, 2, 10000000, 3000000), (30, 3, 5000000, 1500000),
     (30, 4, 1200000, 400000), (30, 5, 1000000, 300000), (30, 6, 800000, 200000);
-
-INSERT INTO DetailStatus (accommodationID, statusID, startDate, endDate) 
-VALUES
-    (16, 1, NULL, NULL),
-    (17, 1, NULL, NULL),
-    (18, 1, NULL, NULL),
-    (19, 1, NULL, NULL),
-    (20, 1, NULL, NULL),
-    (21, 1, NULL, NULL),
-    (22, 1, NULL, NULL),
-    (23, 1, NULL, NULL),
-    (24, 1, NULL, NULL),
-    (25, 1, NULL, NULL),
-    (26, 1, NULL, NULL),
-    (27, 1, NULL, NULL),
-    (28, 1, NULL, NULL),
-    (29, 1, NULL, NULL),
-    (30, 1, NULL, NULL);

@@ -119,12 +119,6 @@ VALUES
     ('Daily', 'Thuê theo ngày'),
     ('Weekly', 'Thuê theo tuần'),
     ('Hourly', 'Thuê theo giờ');
-
-INSERT INTO Status (status, description) 
-VALUES
-	('Available', 'Sẵn sàng cho thuê'),
-    ('Unavailable', 'Không sẵn sàng cho thuê'),
-	('Occupied', 'Đã được thuê');
     
 INSERT INTO DetailAmenity (accommodationID, amenityID)
 VALUES
@@ -186,36 +180,17 @@ VALUES
     (15, 4, 1000000, 300000), (15, 5, 900000, 250000), (15, 6, 600000, 150000);
 --------------------------------------------------------------------------------------------
 
-INSERT INTO DetailStatus (accommodationID, statusID, startDate, endDate) 
-VALUES
-	(1, 1, NULL, NULL),
-	(2, 1, NULL, NULL),
-	(3, 1, NULL, NULL),
-	(4, 1, NULL, NULL),
-    (5, 1, NULL, NULL),
-	(6, 1, NULL, NULL),
-    (7, 1, NULL, NULL),
-	(8, 1, NULL, NULL),
-    (9, 1, NULL, NULL),
-	(10, 1, NULL, NULL),
-    (11, 1, NULL, NULL),
-	(12, 1, NULL, NULL),
-    (13, 1, NULL, NULL),
-	(14, 1, NULL, NULL),
-    (15, 1, NULL, NULL);
 
 use real_estate;
 
 select * from Accommodation order by accommodationID DESC;
+select * from DetailRentType order by accommodationID DESC;
 select * from AccomType;
 -- --pass:123;-- 
 select * from Account; 
 select * from Advantage;
 select * from Amenity;
 select * from DetailAmenity;
-select * from DetailRentType order by accommodationID DESC;
-select * from DetailStatus;
-select * from Status;
 select * from Invoice;
 select * from Lessee;
 select * from Lessor;
