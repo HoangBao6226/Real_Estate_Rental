@@ -1513,38 +1513,40 @@ Properties Style
   color: #f35525;
 }
 
-.properties ul.pagination {
+.pagination {
   margin-top: 50px;
   text-align: center;
   width: 100%;
-  display: inline-block;
+  display: flex;
+  justify-content: center; /* Dùng flex để căn giữa */
+  gap: 10px; /* Khoảng cách giữa các phần tử */
 }
 
-.properties ul.pagination li {
-  display: inline-block;
-  margin: 0px 5px;
-}
-
-.properties ul.pagination li a {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
+.pagination button {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #fff;
   background-color: #1e1e1e;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 50%;
-  transition: all .3s;
+  border: none;
+  border-radius: 5px; /* Bo góc mềm mại hơn */
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.properties ul.pagination li a:hover,
-.properties ul.pagination li a.is_active {
+.pagination button:hover {
   background-color: #f35525;
-  color: #fff;
 }
 
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination #pagination-numbers {
+  margin-top: 8px;
+  display: flex;
+  gap: 5px;
+}
 
 /* 
 ---------------------------------------------

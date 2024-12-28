@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.javaweb.service.itface.AccountService;
 import com.javaweb.service.model.AccountDTO;
+import com.javaweb.util.Pagination;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,8 @@ public class SearchController {
 	public String searchAccom(Model model, HttpServletRequest request,
                                 @RequestParam Map<String, Object> params,
                                 @RequestParam (name = "amenityName", required = false) List<String> amenityName,
-                                @RequestParam (name = "rentTypeName", required = false) List<String> rentTypeName) {
+                                @RequestParam (name = "rentTypeName", required = false) List<String> rentTypeName,
+                                @RequestParam (name = "page", defaultValue = "1") int page) {
         // Kiểm tra #request.remoteUser
         String remoteUser = request.getRemoteUser();
 
@@ -42,7 +44,12 @@ public class SearchController {
 
 //		"accommodation" giống như key để gửi qua bên FE
         List<AccomDTO> acSearch = accomSer.searchAllAvailable(params, amenityName, rentTypeName);
-        model.addAttribute("ac", acSearch);
+        Pagination pagination = new Pagination();
+        List<AccomDTO> pagedAccommodation = pagination.getPagedList(acSearch, page);
+        int totalPages = pagination.getTotalPages(acSearch);
+        model.addAttribute("pagedAccommodation", pagedAccommodation);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
 
         return "propertiesSearch";
 	}

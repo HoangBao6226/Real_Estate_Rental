@@ -116,47 +116,6 @@
 
     </style>
 
-    <style>
-
-      .pagination {
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-      }
-
-      button {
-        padding: 10px 15px;
-        border: none;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-        border-radius: 5px;
-      }
-
-      button:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-      }
-
-      #pagination-numbers {
-        display: flex;
-        gap: 5px;
-      }
-
-      #pagination-numbers button {
-        background-color: #f1f1f1;
-        color: #000;
-      }
-
-      #pagination-numbers button.active {
-        background-color: #007bff;
-        color: #fff;
-      }
-
-    </style>
-
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="/lessee/assets/css/fontawesome.css">
     <link rel="stylesheet" href="/lessee/assets/css/templatemo-villa-agency.css">
@@ -169,16 +128,16 @@
 <body>
 
   <!-- ***** Preloader Start ***** -->
-  <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-      <span class="dot"></span>
-      <div class="dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </div>
+<!--  <div id="js-preloader" class="js-preloader">-->
+<!--    <div class="preloader-inner">-->
+<!--      <span class="dot"></span>-->
+<!--      <div class="dots">-->
+<!--        <span></span>-->
+<!--        <span></span>-->
+<!--        <span></span>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
   <!-- ***** Preloader End ***** -->
 
   <!-- ***** Header Area Start ***** -->
@@ -423,14 +382,20 @@
   <div class="section properties">
     <div class="container">
       <div class="row properties-box">
-        <div
-                th:each="ac : ${ac}"
-                th:class="'col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 ' ">
+        <div th:each="ac : ${pagedAccommodation}" class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6">
           <div class="item">
-            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><img th:src="'/lessee/assets/images/' + ${ac.getImage()}" alt=""></a>
-            <span class="category"><p th:text="${ac.getAccomType()}"></p></span>
+            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}">
+              <img th:src="'/lessee/assets/images/' + ${ac.getImage()}" alt="">
+            </a>
+            <span class="category">
+              <p th:text="${ac.getAccomType()}"></p>
+            </span>
             <h6></h6>
-            <h4><a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><h3 th:text="${ac.getAccommodationName()}"></h3></a></h4>
+            <h4>
+              <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}">
+                <h3 th:text="${ac.getAccommodationName()}"></h3>
+              </a>
+            </h4>
             <ul>
               <li>Rooms: <span th:text="${ac.getNumberOfRooms()}"></span></li>
               <li>Area: <span th:text="${ac.getSize()}"></span></li>
@@ -445,14 +410,15 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="pagination">
-            <button id="prev-btn">Previous</button>
+            <button id="prev-btn"><<</button>
             <div id="pagination-numbers"></div>
-            <button id="next-btn">Next</button>
+            <button id="next-btn">>></button>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 
   <footer>
     <div class="container">
@@ -465,6 +431,58 @@
   </footer>
 
   <!-- Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const paginationNumbers = document.getElementById('pagination-numbers');
+      let currentPage = "[[${currentPage}]]";
+      const totalPages = "[[${totalPages}]]";
+
+      function updatePage(page) {
+        currentPage = page;
+        loadPageData(currentPage);
+        updatePaginationButtons();
+        // scrollToTop();
+      }
+
+      // function scrollToTop() {
+      //   window.scrollTo({ top: -0, behavior: 'smooth' }); // Cuộn về đầu trang với hiệu ứng mượt
+      // }
+
+      function loadPageData(page) {
+        const params = new URLSearchParams(window.location.search);
+        // Thêm hoặc cập nhật tham số trang vào URL
+        params.set('page', page);
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+      }
+
+      function updatePaginationButtons() {
+        paginationNumbers.innerHTML = `Trang ${currentPage} / ${totalPages}`;
+        prevBtn.disabled = currentPage == 1;
+        nextBtn.disabled = currentPage == totalPages;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+          updatePage(currentPage - 1);
+          location.reload();
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          updatePage((parseInt(currentPage)) + 1);
+          location.reload();
+        }
+      });
+
+      // Khởi tạo phân trang
+      updatePage(currentPage);
+    });
+
+  </script>
 
   <!-- Bootstrap core JavaScript -->
   <script src="/lessee/vendor/jquery/jquery.min.js"></script>
@@ -481,7 +499,6 @@
       form.classList.toggle("active");
       icon.classList.toggle("rotate");
     });
-
   </script>
   </body>
 </html>

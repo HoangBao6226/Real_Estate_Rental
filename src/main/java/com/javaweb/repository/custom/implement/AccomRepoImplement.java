@@ -53,7 +53,7 @@ public class AccomRepoImplement implements AccomRepoCustom {
 
 		for (Map.Entry<String, Object> item : params.entrySet()) {
 			if (!item.getKey().equals("amenityName") && !item.getKey().equals("rentTypeName") && !item.getKey().equals("accomType")
-					&& !item.getKey().endsWith("Size") && !item.getKey().endsWith("Price")) {
+					&& !item.getKey().endsWith("Size") && !item.getKey().endsWith("Price") && !item.getKey().endsWith("page")) {
 				String value = item.getValue().toString();
 				if (StringUtil.checkString(value)) {
 					if (NumberUtil.isNumber(value))
