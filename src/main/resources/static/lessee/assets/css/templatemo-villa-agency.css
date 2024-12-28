@@ -1839,9 +1839,9 @@ body {
   .properties ul.properties-filter li {
     margin: 5px;
   }
-  .header-area .main-nav .nav li:last-child {
-    display: none;
-  }
+  /*.header-area .main-nav .nav li:last-child {*/
+  /*  display: none;*/
+  /*}*/
 }
 
 @media (max-width: 992px) {

@@ -1,25 +1,25 @@
 use real_estate;
 
-INSERT INTO Accommodation (accommodationName, street, ward, district, city, direction, size, numberOfRooms, lessorID, salesID, accomTypeID)
+INSERT INTO Accommodation (accommodationName, street, ward, district, city, direction, size, numberOfRooms, lessorID, salesID, accomTypeID,image)
 VALUES
    
-    ('Sunrise Apartment', '12 Mai Chí Thọ', 'An Phú', 'Quận 2', 'Hồ Chí Minh', 'Đông Nam', 150.00, 4, 1, 3, 1),
-    ('The Urban Studio', '28 Lê Văn Sỹ', 'Phường 14', 'Quận Phú Nhuận', 'Hồ Chí Minh', 'Tây Bắc', 60.00, 2, 3, 3, 2),
-    ('The Luxe Villa', '15 Nguyễn Văn Cừ', 'Cầu Kho', 'Quận 1', 'Hồ Chí Minh', 'Nam', 300.00, 6, 3, 3, 3),
-    ('The Skyline House', '102 Nguyễn Tri Phương', 'Phường 9', 'Quận 10', 'Hồ Chí Minh', 'Đông', 50.00, 1, 6, 3, 4),
-    ('The Sapphire Room', '7 Điện Biên Phủ', 'Phường 17', 'Quận Bình Thạnh', 'Hồ Chí Minh', 'Bắc', 35.00, 1, 2, 3, 5),
+    ('Sunrise', '12 Mai Chí Thọ', 'An Phú', 'Quận 2', 'Hồ Chí Minh', 'Đông Nam', 150.00, 4, 1, 3, 1,"Apartment_4.jpg"),
+    ('The Urban', '28 Lê Văn Sỹ', 'Phường 14', 'Quận Phú Nhuận', 'Hồ Chí Minh', 'Tây Bắc', 60.00, 2, 3, 3, 2,"Studio_4.jpg"),
+    ('The Luxe', '15 Nguyễn Văn Cừ', 'Cầu Kho', 'Quận 1', 'Hồ Chí Minh', 'Nam', 300.00, 6, 3, 3, 3,"Villa_4.jpg"),
+    ('The Skyline', '102 Nguyễn Tri Phương', 'Phường 9', 'Quận 10', 'Hồ Chí Minh', 'Đông', 50.00, 1, 6, 3, 4,"House_4.jpg"),
+    ('The Sapphire', '7 Điện Biên Phủ', 'Phường 17', 'Quận Bình Thạnh', 'Hồ Chí Minh', 'Bắc', 35.00, 1, 2, 3, 5,"Room_4.jpg"),
 
-    ('The Crescent Apartment', '18 Lý Thường Kiệt', 'Tràng Tiền', 'Hoàn Kiếm', 'Hà Nội', 'Tây Nam', 80.00, 3, 5, 2, 1),
-    ('The Emerald Studio', '123 Xuân Diệu', 'Quảng An', 'Tây Hồ', 'Hà Nội', 'Đông Bắc', 45.00, 1, 5, 2, 2),
-    ('The Lotus House', '56 Cát Linh', 'Cát Linh', 'Đống Đa', 'Hà Nội', 'Nam', 120.00, 3, 7, 2, 4),
-    ('The Serene Villa', '202 Láng Hạ', 'Láng Thượng', 'Đống Đa', 'Hà Nội','Bắc', 250.00, 5, 1, 2, 3),
-    ('The Radiant Room', '5 Nguyễn Văn Huyên', 'Nghĩa Đô', 'Cầu Giấy', 'Hà Nội', 'Tây', 30.00, 1, 4, 2, 5),
+    ('The Crescent', '18 Lý Thường Kiệt', 'Tràng Tiền', 'Hoàn Kiếm', 'Hà Nội', 'Tây Nam', 80.00, 3, 5, 2, 1,"Apartment_5.jpg"),
+    ('The Emerald', '123 Xuân Diệu', 'Quảng An', 'Tây Hồ', 'Hà Nội', 'Đông Bắc', 45.00, 1, 5, 2, 2,"Studio_5.jpg"),
+    ('The Lotus', '56 Cát Linh', 'Cát Linh', 'Đống Đa', 'Hà Nội', 'Nam', 120.00, 3, 7, 2, 4,"House_5.jpg"),
+    ('The Serene', '202 Láng Hạ', 'Láng Thượng', 'Đống Đa', 'Hà Nội','Bắc', 250.00, 5, 1, 2, 3,"Villa_5.jpg"),
+    ('The Radiant', '5 Nguyễn Văn Huyên', 'Nghĩa Đô', 'Cầu Giấy', 'Hà Nội', 'Tây', 30.00, 1, 4, 2, 5,"Room_5.jpg"),
 
-    ('The Wave Apartment', '36 Bạch Đằng', 'Hải Châu 1', 'Hải Châu', 'Đà Nẵng', 'Đông', 90.00, 2, 4, 2, 1),
-    ('The Ocean Pearl Studio', '45 Trần Hưng Đạo', 'Nại Hiên Đông', 'Sơn Trà', 'Đà Nẵng', 'Nam', 55.00, 1, 2, 2, 2),
-    ('The Golden Sands Villa', '89 Nguyễn Tất Thành', 'Xuân Hà', 'Thanh Khê', 'Đà Nẵng', 'Bắc', 230.00, 5, 2, 2, 3),
-    ('The Horizon House', '102 Ngũ Hành Sơn', 'Mỹ An', 'Ngũ Hành Sơn', 'Đà Nẵng', 'Tây', 140.00, 3, 3, 2, 4),
-    ('The Velvet Room', '60 Trần Phú', 'Thạch Thang', 'Hải Châu', 'Đà Nẵng','Đông Nam', 25.00, 1, 7, 2, 5);
+    ('The Wave', '36 Bạch Đằng', 'Hải Châu 1', 'Hải Châu', 'Đà Nẵng', 'Đông', 90.00, 2, 4, 2, 1,"Apartment_6.jpg"),
+    ('The Ocean Pearl', '45 Trần Hưng Đạo', 'Nại Hiên Đông', 'Sơn Trà', 'Đà Nẵng', 'Nam', 55.00, 1, 2, 2, 2,"Studio_6.jpg"),
+    ('The Golden Sands', '89 Nguyễn Tất Thành', 'Xuân Hà', 'Thanh Khê', 'Đà Nẵng', 'Bắc', 230.00, 5, 2, 2, 3,"Villa_6.jpg"),
+    ('The Horizon', '102 Ngũ Hành Sơn', 'Mỹ An', 'Ngũ Hành Sơn', 'Đà Nẵng', 'Tây', 140.00, 3, 3, 2, 4,"House_6.jpg"),
+    ('The Velvet', '60 Trần Phú', 'Thạch Thang', 'Hải Châu', 'Đà Nẵng','Đông Nam', 25.00, 1, 7, 2, 5,"Room_6.jpg");
     
 INSERT INTO DetailAmenity (accommodationID, amenityID)
 VALUES

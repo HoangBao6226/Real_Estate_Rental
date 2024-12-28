@@ -62,7 +62,8 @@
         cursor: pointer;
         display: inline-block;
         font-size: 16px;
-        margin: 10px 5px 0 0;
+        margin: 10px -9px 0 0;
+        margin-left: 15px;
         padding: 10px 20px;
         text-align: center;
         transition: background-color 0.3s ease;
@@ -70,6 +71,14 @@
 
       .orange-button:hover {
         background-color: #ff6347;
+      }
+      .col-xs-6{
+        float: right;
+      }
+      .dropdown:hover .dropdown-menu {
+        display: block;
+        background-color: #1e1e1e;
+        width: 200px;
       }
     </style>
 
@@ -120,7 +129,7 @@
                 <!-- Kiểm tra nếu chưa đăng nhập -->
                 <div th:if="${user == null}">
                   <a th:href="@{/login}">
-                    <i class="fa fa-calendar"></i> Log in
+                    <i class="fa fa-user"></i> Log in
                   </a>
                 </div>
                 <!-- Kiểm tra nếu đã đăng nhập -->
@@ -128,10 +137,10 @@
                   <a class="dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-user"></i> <span th:text="${user.getUsername()}">Username</span>
                   </a>
-                  <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                    <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
-                    <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
-                  </ul>
+                  <div class="dropdown-menu" >
+                    <a  th:href="@{/profile}">Profile</a>
+                    <a  th:href="@{/logout}">Log out</a>
+                  </div>
                 </div>
               </li>
               <!--                      -->
@@ -254,20 +263,17 @@
           </fieldset>
         </div>
       </div>
-
-      <div class="row">
         <!-- Buttons -->
-        <div class="col-lg-6">
+        <div class="col-xs-6">
           <button type="button" id="closeForm2" class="orange-button">
             <a style="color: white" th:href="@{/properties/{id}(id=${accommodation.getAccommodationID()})}">
               Close
             </a>
           </button>
           <button type="submit" id="payment" class="orange-button">
-              Payment
+            Payment
           </button>
         </div>
-      </div>
 
     </form>
   </div>

@@ -71,6 +71,7 @@ CREATE TABLE Accommodation (
     size DECIMAL(10,2),
     numberOfRooms INT,
     status ENUM('Available', 'Unavailable', 'Occupied', 'Pending_Approval') default 'Available',
+	image VARCHAR(255),
 	lessorID INT,
     salesID INT,
     accomTypeID INT

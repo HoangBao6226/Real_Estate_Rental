@@ -11,7 +11,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/lessee/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!---->
+
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="/lessee/assets/css/property-details.css">
     <link rel="stylesheet" href="/lessee/assets/css/fontawesome.css">
@@ -58,7 +58,7 @@
                         <!-- Kiểm tra nếu chưa đăng nhập -->
                         <div th:if="${user == null}">
                           <a th:href="@{/login}">
-                            <i class="fa fa-calendar"></i> Log in
+                            <i class="fa fa-user"></i> Log in
                           </a>
                         </div>
                         <!-- Kiểm tra nếu đã đăng nhập -->
@@ -66,10 +66,10 @@
                           <a class="dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-user"></i> <span th:text="${user.getUsername()}">Username</span>
                           </a>
-                          <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
-                            <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
-                          </ul>
+                          <div class="dropdown-menu" >
+                            <a  th:href="@{/profile}">Profile</a>
+                            <a  th:href="@{/logout}">Log out</a>
+                          </div>
                         </div>
                       </li>
                       <!--                      -->
@@ -101,7 +101,7 @@
       <div class="row">
         <div class="col-lg-8">
           <div class="main-image">
-            <img src="/lessee/assets/images/single-property.jpg" alt="">
+            <img th:src="'/lessee/assets/images/' + ${accommodation.getImage()}" alt="">
           </div>
           <div class="main-content">
             <span class="category" th:text="${accommodation.getAccomType()}"></span>
@@ -114,10 +114,10 @@
                 <i class="fa fa-calendar"></i> Đặt lịch
               </a>
             </div>
-            <p>Address: <strong th:text="${accommodation.getAddress()}"></strong></p>
-            <p>Direction: <strong th:text="${accommodation.getDirection()}"></strong></p>
-            <p>Rooms: <strong th:text="${accommodation.getNumberOfRooms()}"></strong></p>
-            <p>Amenity: <strong th:text="${accommodation.getAmenity()}"></strong></p>
+            <p style="font-size: 19px">Address: <strong th:text="${accommodation.getAddress()}"></strong></p>
+            <p style="font-size: 19px">Direction: <strong th:text="${accommodation.getDirection()}"></strong></p>
+            <p style="font-size: 19px">Rooms: <strong th:text="${accommodation.getNumberOfRooms()}"></strong></p>
+            <p style="font-size: 19px">Amenity: <strong th:text="${accommodation.getAmenity()}"></strong></p>
           </div>
         </div>
         <div class="col-lg-4">
@@ -148,8 +148,10 @@
   </div>
 
   <div class="container2">
-    <div class="map"> <!-- Thay thế src bằng URL của bản đồ hoặc nhúng bản đồ Google Maps -->
-      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15677.487059339399!2d106.61734189999999!3d10.782812250000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1733411804569!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="map">
+      <!-- Thay thế src bằng URL của bản đồ hoặc nhúng bản đồ Google Maps -->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15677.487059339399!2d106.61734189999999!3d10.782812250000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1733411804569!5m2!1svi!2s"
+              width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <div class="table-container">
       <table>
@@ -194,18 +196,18 @@
     <div class="contact-content" id="schedule-Form">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12" >
+          <div class="col-xs-12" >
             <form id="appointmentForm" th:action="@{/save-date/{accommodationID}(accommodationID=${accommodation.getAccommodationID()})}" method="post">
               <div class="row">
-                <div class="col-lg-12">
+                <div class="col-xs-12">
                   <fieldset>
-                    <label for="viewDate">View date</label>
+                    <label class="title1" for="viewDate">View date</label>
                     <input type="datetime-local" name="viewDate" id="viewDate" placeholder="View date..." autocomplete="on" required>
                   </fieldset>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-xs-12">
                   <fieldset>
-                    <label for="note">Note</label>
+                    <label class="title1" for="note">Note</label>
                     <textarea name="note" id="note" placeholder="Your message..."></textarea>
                   </fieldset>
                 </div>

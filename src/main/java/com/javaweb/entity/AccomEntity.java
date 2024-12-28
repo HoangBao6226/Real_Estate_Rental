@@ -41,6 +41,9 @@ public class AccomEntity {
 	@Column(name = "numberOfRooms")
     private int numberOfRooms;
 
+	@Column(name = "image")
+	private String image;
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	private Status status;
@@ -141,6 +144,14 @@ public class AccomEntity {
 
 	public void setNumberOfRooms(int numberOfRooms) {
 		this.numberOfRooms = numberOfRooms;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public Status getStatus() {

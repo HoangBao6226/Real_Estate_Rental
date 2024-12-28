@@ -11,7 +11,6 @@ th, td {
     text-align: center;
     padding: 8px;
 }
-
 th {
     background-color: #ffe69c;
     font-weight: bold;
@@ -25,113 +24,191 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
-/*Định dạnh table giá thuê------HTMC*/
 .container2 {
     display: flex;
-    flex-wrap: nowrap;
-    gap: 20px; /* Khoảng cách giữa các phần tử */
+    flex-wrap: wrap; /* Allow elements to wrap on smaller screens */
+    gap: 20px; /* Gap between items */
+    justify-content: space-between;
+    margin: 20px;
 }
-/* Định dạng cho map */
+
+/* Map styling */
 .map {
-    flex: 1; /* Chiếm một phần không gian */
-    min-width: 300px; /* Chiều rộng tối thiểu */
+    flex: 1;
+    min-width: 300px;
     margin-top: 50px;
-    margin-left: 100px;
+    margin-left: 55px;
 }
-/* Định dạng cho bảng */
+
+/* Table styling */
 .table-container {
     margin-top: 50px;
-    flex: 1; /* Chiếm một phần không gian */
-    min-width: 300px; /* Chiều rộng tối thiểu */
+    flex: 1;
+    min-width: 300px;
 }
-/* Định dạng bảng */
+
+/* Table styles */
 table {
-    width: 500px;
+    width: 100%;
+    max-width: 500px; /* Max width for larger screens */
     border-collapse: collapse;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #fff; /* Màu nền trắng */
-    font-size: 14px; /* Giảm kích thước chữ */
-    margin-left: 100px;
+    background-color: #fff;
+    font-size: 14px;
+    /*margin-left: 100px;*/
     height: 450px;
     margin-top: -1px;
-    margin-bottom: 10px ;
+    margin-bottom: 10px;
     border: #1a1e21;
+}
 
-}
-/* Định dạng header của bảng */
+/* Table header styles */
 thead {
-    background-color: #F2DDDC; /* Màu nền cam pastel */
-    color: white; /* Màu chữ trắng cho header */
+    background-color: #F2DDDC; /* Pastel orange background */
+    color: white;
 }
-/* Định dạng các ô header */
+
 th {
-    padding: 8px; /* Giảm khoảng cách trong */
-    text-align: left;
-    border-bottom: 2px solid #FFA500; /* Đường viền dưới cam */
-} /* Định dạng các ô dữ liệu */
+    padding: 8px;
+    text-align: center;
+    color: #f35525;
+    border-bottom: 2px solid #FFA500; /* Orange border at the bottom */
+}
+
+/* Table data styles */
 td {
-    padding: 8px; /* Giảm khoảng cách trong */
+    padding: 8px;
     border-bottom: 1px solid #ddd;
 }
-/* Định dạng các hàng */
+
+/* Row striping for even rows */
 tr:nth-child(even) {
-    background-color: #FFFACD; /* Màu nền xen kẽ nhạt */
+    background-color: #FFFACD; /* Light yellow background for even rows */
 }
+
+/* Hover effect for rows */
 tr:hover {
-    background-color: #FFEFD5; /* Màu nền khi hover nhạt */
+    background-color: #FFEFD5; /* Light color on hover */
 }
-/* Định dạng nút trong bảng */
+
+/* Button styles */
 .button {
-    background-color: #FFA500; /* Màu nền cam cho nút */
-    color: white; /* Màu chữ trắng */
+    background-color: #FFA500;
+    color: white;
     border: none;
-    padding: 6px 12px; /* Giảm kích thước nút */
+    padding: 6px 12px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px; /* Giảm kích thước chữ */
-    margin: 2px 1px; /* Giảm khoảng cách ngoài */
+    font-size: 14px;
+    margin: 2px 1px;
     cursor: pointer;
-    border-radius: 5px; /* Bo tròn góc */
+    border-radius: 5px;
 }
+
 .button:hover {
-    background-color: #FF8C00; /* Màu nền cam đậm khi hover cho nút */ }
-/*định dạng cho button thuê
- */
-/* From Uiverse.io by JasonMep */
+    background-color: #FF8C00;
+}
+
+/* Button style for rent button */
 .button {
     color: #ecf0f1;
-    font-size: 13.6px; /* Giảm kích thước chữ 20% */
+    font-size: 13.6px;
     background-color: #e67e22;
     border: 1px solid #f39c12;
     border-radius: 5px;
     cursor: pointer;
-    padding: 8px; /* Giảm padding 20% */
-    box-shadow: 0px 4.8px 0px #d35400; /* Giảm độ sâu của bóng 20% */
+    padding: 8px;
+    box-shadow: 0px 4.8px 0px #d35400;
     transition: all 0.1s;
 }
 
 .button:active {
-    box-shadow: 0px 1.6px 0px #d35400; /* Giảm độ sâu của bóng khi nhấn 20% */
+    box-shadow: 0px 1.6px 0px #d35400;
     position: relative;
-    top: 1.6px; /* Giảm vị trí khi nhấn 20% */
-
+    top: 1.6px;
 }
 
+/* Warning button styles */
 .btn-warning {
-    background-color: #FF9800; /* Màu cam */
+    background-color: #FF9800;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
 }
 
 .btn-warning:hover {
-    background-color: #F57C00; /* Màu cam đậm hơn khi hover */
+    background-color: #F57C00;
     color: #fff;
 }
+
+/* Content title styles */
 .single-property .main-content h4 {
     width: 80%;
 }
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    /* Stack items vertically on smaller screens */
+    .container2 {
+        flex-direction: column;
+        margin: 10px;
+    }
+
+    /* Adjust the map iframe for smaller screens */
+    .map iframe {
+        width: 100%;
+        height: 300px;
+        margin: 0;
+    }
+
+    /* Adjust table width and padding */
+    table {
+        width: 100%;
+        margin-left: 0; /* Remove left margin */
+        margin-top: 20px;
+    }
+
+    th, td {
+        font-size: 12px; /* Smaller font size */
+        padding: 6px; /* Reduced padding */
+    }
+
+    /* Reduce button size for smaller screens */
+    .button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    /* Adjust buttons to be full width on smaller screens */
+    .button, .btn-warning {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* On very small screens, further adjustments */
+    .container2 {
+        gap: 10px; /* Reduce the gap */
+    }
+
+    /* Further reduce table font size */
+    th, td {
+        font-size: 10px; /* Even smaller font size */
+    }
+
+    /* Make buttons larger and more touch-friendly */
+    .button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    .btn-warning {
+        padding: 12px 20px;
+    }
+}
+
 /*css cho form dat lich
  */
 
@@ -219,4 +296,26 @@ label {
     height: 100%;
     background: rgba(0, 0, 0, 0.8); /* Nền đen mờ */
     z-index: 9; /* Phải nằm phía sau form */
+}
+a{
+    color: #ffffff;
+}
+.col-lg-12 fieldset {
+    display: flex;
+    justify-content: flex-end; /* Canh nút sang bên phải */
+}
+
+.orange-button {
+    margin-left: 10px;
+    justify-content: flex-end;/* Tạo khoảng cách giữa các nút */
+}
+
+.orange-button a {
+    text-decoration: none;
+    color: white; /* Đảm bảo màu chữ trên liên kết */
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+    background-color: #1e1e1e;
+    width: 200px;
 }

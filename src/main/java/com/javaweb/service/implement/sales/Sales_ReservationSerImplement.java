@@ -7,7 +7,9 @@ import com.javaweb.entity.ReservationEntity;
 import com.javaweb.repository.itface.AccomRepository;
 import com.javaweb.repository.itface.AccountRepository;
 import com.javaweb.repository.itface.ReservationRepository;
+import com.javaweb.service.converter.AccomConverter;
 import com.javaweb.service.itface.sales.Sales_ReservationService;
+import com.javaweb.service.model.AccomDTO;
 import com.javaweb.service.model.sales.Sales_ReservationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,9 @@ public class Sales_ReservationSerImplement implements Sales_ReservationService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private AccomConverter accomConverter;
 
     @Override
     public List<Sales_ReservationDTO> findBySalesID(String username) {
@@ -49,7 +54,9 @@ public class Sales_ReservationSerImplement implements Sales_ReservationService {
             sr.setReservationID(item3.getReservationID());
             sr.setViewDate(item3.getViewDate());
             sr.setNote(item3.getNote());
-            sr.setAccom(item3.getAccommodationID());
+            AccomEntity ac = accomRepository.findById(item3.getAccommodationID().getAccommodationID()).get();
+            AccomDTO accomDTO = accomConverter.toAccomDTO(ac);
+            sr.setAccom(accomDTO);
             sr.setLessee(item3.getLesseeID());
             rs.add(sr);
         }

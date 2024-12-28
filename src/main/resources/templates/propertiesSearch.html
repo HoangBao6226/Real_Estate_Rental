@@ -11,6 +11,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/lessee/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
     <!--Style-->
     <style>
 
@@ -69,13 +70,11 @@
         gap: 10px;
         /*margin-bottom: 10px; !* Thêm khoảng cách dưới mỗi checkbox *!*/
       }
-
       .search-form {
-        max-height: 500px; /* Điều chỉnh chiều cao tối đa */
+        max-height: 600px; /* Điều chỉnh chiều cao tối đa */
         overflow-y: auto; /* Thêm thanh cuộn dọc nếu nội dung vượt quá chiều cao */
         overflow-x: hidden; /* Vô hiệu hóa cuộn ngang */
-        padding: 10px;
-        border: 1px solid #ccc; /* Tùy chọn: Thêm viền cho dễ nhìn */
+        /*padding-left: -10px;*/
         border-radius: 5px; /* Tùy chọn: Bo góc */
       }
 
@@ -89,8 +88,75 @@
       .search-form {
         scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
       }
-      
+      #searchForm {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.4s ease-in-out;
+      }
+
+      #searchForm.active {
+        max-height: 2000px; /* Giá trị đủ lớn để hiển thị toàn bộ form */
+      }
+
+      #toggleIcon {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      #toggleIcon.rotate {
+        transform: rotate(180deg); /* Xoay ngược mũi tên khi form mở */
+      }
+
+      /* Hiển thị nội dung khi hover vào dropdown */
+      .dropdown:hover .dropdown-menu {
+        display: block;
+        background-color: #1e1e1e;
+        width: 200px;
+      }
+
     </style>
+
+    <style>
+
+      .pagination {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      button {
+        padding: 10px 15px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      #pagination-numbers {
+        display: flex;
+        gap: 5px;
+      }
+
+      #pagination-numbers button {
+        background-color: #f1f1f1;
+        color: #000;
+      }
+
+      #pagination-numbers button.active {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+    </style>
+
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="/lessee/assets/css/fontawesome.css">
     <link rel="stylesheet" href="/lessee/assets/css/templatemo-villa-agency.css">
@@ -135,7 +201,7 @@
                         <!-- Kiểm tra nếu chưa đăng nhập -->
                         <div th:if="${user == null}">
                           <a th:href="@{/login}">
-                            <i class="fa fa-calendar"></i> Log in
+                            <i class="fa fa-user"></i> Log in
                           </a>
                         </div>
                         <!-- Kiểm tra nếu đã đăng nhập -->
@@ -143,10 +209,10 @@
                           <a class="dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-user"></i> <span th:text="${user.getUsername()}">Username</span>
                           </a>
-                          <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
-                            <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
-                          </ul>
+                          <div class="dropdown-menu" >
+                            <a  th:href="@{/profile}">Profile</a>
+                            <a  th:href="@{/logout}">Log out</a>
+                          </div>
                         </div>
                       </li>
                       <!--                      -->
@@ -162,23 +228,39 @@
   </header>
   <!-- ***** Header Area End ***** -->
 
+  <div class="page-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <span class="breadcrumb"><a href="#">Home</a>  /  Properties</span>
+          <h3>Properties</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!--  Search Form-->
   <div class="properties section">
     <div class="container">
       <div class="search-form" id="search-Form">
       <div class="container">
-        <h2>Search Accommodation</h2>
-        <form id="searchForm" method="get"
-              >
+        <h2>
+          Search Accommodation
+          <svg id="toggleIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+          </svg>
+        </h2>
+        <form id="searchForm" method="get">
           <!-- Name -->
           <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-7">
               <fieldset>
                 <label>Name</label>
                 <input type="text" name="accommodationName" id="name" placeholder="Enter name">
               </fieldset>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <fieldset>
                 <label>Room Number</label>
                 <input type="number" name="numberOfRooms" id="room" placeholder="Enter room number">
@@ -188,13 +270,14 @@
 
           <!-- Address -->
           <div class="row">
+            <div class="col-lg-1"></div>
             <div class="col-lg-3">
               <fieldset>
                 <label>Street</label>
                 <input type="text" name="street" id="street" placeholder="Enter street">
               </fieldset>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
               <fieldset>
                 <label>Ward</label>
                 <input type="text" name="ward" id="ward" placeholder="Enter ward">
@@ -206,7 +289,7 @@
                 <input type="text" name="district" id="district" placeholder="Enter district">
               </fieldset>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
               <fieldset>
                 <label>City</label>
                 <input type="text" name="city" id="city" placeholder="Enter city">
@@ -216,6 +299,7 @@
 
           <!-- Address2 -->
           <div class="row">
+            <div class="col-lg-1"></div>
             <div class="col-lg-5">
               <fieldset>
                 <label>Direction</label>
@@ -223,7 +307,7 @@
               </fieldset>
             </div>
             <!-- Accommodation Type -->
-            <div class="col-lg-7">
+            <div class="col-lg-5">
               <fieldset>
                 <label>Accommodation Type</label>
                 <select name="accomType" id="accomType" class="form-control">
@@ -237,9 +321,11 @@
               </fieldset>
             </div>
           </div>
+
           <!-- Rent Type -->
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
               <fieldset>
                 <label>Rent Type</label>
                 <div class="checkbox-group">
@@ -253,59 +339,70 @@
               </fieldset>
             </div>
           </div>
+
           <!-- Area  -->
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5">
               <fieldset>
                 <label>Area From (m²)</label>
                 <input type="number" name="minSize" id="areaFrom" placeholder="Min area">
               </fieldset>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
               <fieldset>
                 <label>Area To (m²)</label>
                 <input type="number" name="maxSize" id="areaTo" placeholder="Max area">
               </fieldset>
             </div>
           </div>
+
+          <!-- Price  -->
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5">
               <fieldset>
                 <label>Price From</label>
                 <input type="number" name="minPrice" id="priceFrom" placeholder="Min price">
               </fieldset>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
               <fieldset>
                 <label>Price To</label>
                 <input type="number" name="maxPrice" id="priceTo" placeholder="Max price">
               </fieldset>
             </div>
           </div>
+
           <!-- Amenity -->
-          <div class="form-group">
-            <label>Amenity</label>
-            <div class="checkbox-group">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div><input type="checkbox" name="amenityName" value="Interior" id="interior"> Interior</div>
-                  <div><input type="checkbox" name="amenityName" value="Wifi" id="wifi"> Wifi</div>
-                  <div><input type="checkbox" name="amenityName" value="Parking" id="parking"> Parking</div>
-                  <div><input type="checkbox" name="amenityName" value="Gym" id="gym"> Gym</div>
-                  <div><input type="checkbox" name="amenityName" value="Spa" id="spa"> Spa</div>
-                  <div><input type="checkbox" name="amenityName" value="Restaurant" id="restaurant"> Restaurant</div>
-                  <div><input type="checkbox" name="amenityName" value="Bar" id="bar"> Bar</div>
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5">
+              <fieldset>
+                <div class="form-group">
+                  <label>Amenity</label>
+                  <div class="checkbox-group">
+                    <div class="col-lg-4">
+                      <div><input type="checkbox" name="amenityName" value="Interior" id="interior"> Interior</div>
+                      <div><input type="checkbox" name="amenityName" value="Wifi" id="wifi"> Wifi</div>
+                      <div><input type="checkbox" name="amenityName" value="Parking" id="parking"> Parking</div>
+                      <div><input type="checkbox" name="amenityName" value="Gym" id="gym"> Gym</div>
+                      <div><input type="checkbox" name="amenityName" value="Spa" id="spa"> Spa</div>
+                      <div><input type="checkbox" name="amenityName" value="Restaurant" id="restaurant"> Restaurant</div>
+                      <div><input type="checkbox" name="amenityName" value="Bar" id="bar"> Bar</div>
+                    </div>
+                    <div class="col-lg-8">
+                      <div><input type="checkbox" name="amenityName" value="Swimming Pool" id="pool"> Swimming_Pool</div>
+                      <div><input type="checkbox" name="amenityName" value="Laundry Service" id="laundry"> Laundry_Service</div>
+                      <div><input type="checkbox" name="amenityName" value="Concierge Service" id="concierge"> Concierge_Service</div>
+                      <div><input type="checkbox" name="amenityName" value="Room Service" id="room-service"> Room_Service</div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <div><input type="checkbox" name="amenityName" value="Swimming Pool" id="pool"> Swimming Pool</div>
-                  <div><input type="checkbox" name="amenityName" value="Laundry Service" id="laundry"> Laundry Service</div>
-                  <div><input type="checkbox" name="amenityName" value="Concierge Service" id="concierge"> Concierge Service</div>
-                  <div><input type="checkbox" name="amenityName" value="Room Service" id="room-service"> Room Service</div>
-                </div>
-              </div>
+              </fieldset>
             </div>
+
+
           </div>
           <!-- Search Button -->
           <div class="row">
@@ -330,7 +427,7 @@
                 th:each="ac : ${ac}"
                 th:class="'col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 ' ">
           <div class="item">
-            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><img src="/lessee/assets/images/property-01.jpg" alt=""></a>
+            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><img th:src="'/lessee/assets/images/' + ${ac.getImage()}" alt=""></a>
             <span class="category"><p th:text="${ac.getAccomType()}"></p></span>
             <h6></h6>
             <h4><a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><h3 th:text="${ac.getAccommodationName()}"></h3></a></h4>
@@ -347,12 +444,11 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <ul class="pagination">
-            <li><a href="#!">1</a></li>
-            <li><a class="is_active" href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">>></a></li>
-          </ul>
+          <div class="pagination">
+            <button id="prev-btn">Previous</button>
+            <div id="pagination-numbers"></div>
+            <button id="next-btn">Next</button>
+          </div>
         </div>
       </div>
     </div>
@@ -369,6 +465,7 @@
   </footer>
 
   <!-- Scripts -->
+
   <!-- Bootstrap core JavaScript -->
   <script src="/lessee/vendor/jquery/jquery.min.js"></script>
   <script src="/lessee/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -376,6 +473,15 @@
   <script src="/lessee/assets/js/owl-carousel.js"></script>
   <script src="/lessee/assets/js/counter.js"></script>
   <script src="/lessee/assets/js/custom.js"></script>
+  <script>
+    document.getElementById("toggleIcon").addEventListener("click", function () {
+      const form = document.getElementById("searchForm");
+      const icon = document.getElementById("toggleIcon");
 
+      form.classList.toggle("active");
+      icon.classList.toggle("rotate");
+    });
+
+  </script>
   </body>
 </html>

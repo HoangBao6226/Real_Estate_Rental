@@ -6,6 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation</title>
@@ -15,11 +16,15 @@
     <link rel="stylesheet" href="/lessee/assets/css/owl.css">
     <link rel="stylesheet" href="/lessee/assets/css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+
     <style>
-        .table td, .table th {
-            border-right: 1px solid #dee2e6; /* Đường viền giữa các cột */
-            border-bottom: 1px solid #dee2e6;
+        .table  {
+            border-collapse: collapse; /* Collapse borders between cells */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
+        /*.table td {*/
+        /*    text-align: center;*/
+        /*}*/
 
         button {
             float: right;
@@ -33,21 +38,56 @@
         /* Bảng chi tiết xổ xuống */
         .details-table {
             position: absolute;
-            top: 100%; /* Hiển thị ngay dưới ô */
-            left: 0;
-            width: 100%; /* Kích thước bằng với ô chứa */
+            top: 100%;
+            left: 0%;
+            width: 29%;
             z-index: 10;
             background: #fff;
             border: 1px solid #dee2e6;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            display: none; /* Ẩn bảng mặc định */
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            overflow-y: auto;
         }
-
+        .details-table .details-table{
+            position: absolute;
+            top: 100%;
+            /*width: 150px;*/
+            z-index: 10;
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            overflow-y: auto;
+        }
         .details-table.show {
             display: table; /* Hiển thị bảng khi cần */
+            max-height: 500px; /* Chiều cao tối đa khi hiển thị */
         }
-
+        @media (min-width: 1200px) {
+            .container, .container-lg, .container-md, .container-sm, .container-xl {
+                max-width: 1400px;
+            }
+        }
+        ul , li {
+            margin-left: 20px;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            background-color: #1e1e1e;
+            width: 200px;
+        }
+        .thead-orange {
+            background-color: #fd7e14;
+            /*text-align: center;*/
+        }
     </style>
+
 </head>
 <body>
 
@@ -55,39 +95,39 @@
 <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-lg-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a th:href="@{/}" class="logo">
                         <h1>RER</h1>
                     </a>
                     <!-- ***** Logo End ***** -->
+
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li><a th:href="@{/}">Home</a></li>
                         <li><a th:href="@{/sales/list-reservation}" class="active">Reservation</a></li>
-                        <!--                      -->
+
+                        <!-- User Authentication -->
                         <li>
-                            <!-- Kiểm tra nếu chưa đăng nhập -->
                             <div th:if="${user == null}">
                                 <a th:href="@{/login}">
-                                    <i class="fa fa-calendar"></i> Log in
+                                    <i class="fa fa-user"></i> Log in
                                 </a>
                             </div>
-                            <!-- Kiểm tra nếu đã đăng nhập -->
                             <div th:if="${user != null}" class="dropdown">
                                 <a class="dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa fa-user"></i> <span th:text="${user.getUsername()}">Username</span>
                                 </a>
-                                <div class="dropdown-menu" >
-                                    <a  th:href="@{/profile}">Profile</a>
-                                    <a  th:href="@{/logout}">Log out</a>
+                                <div class="dropdown-menu">
+                                    <a th:href="@{/profile}">Profile</a>
+                                    <a th:href="@{/logout}">Log out</a>
                                 </div>
                             </div>
                         </li>
-                        <!--                      -->
                     </ul>
-                    <a class='menu-trigger'>
+
+                    <a class="menu-trigger">
                         <span>Menu</span>
                     </a>
                     <!-- ***** Menu End ***** -->
@@ -100,89 +140,134 @@
 
 <div>
     <table class="table">
-        <thead class="thead-dark">
+        <thead class="thead-orange">
         <tr>
             <th scope="col">Status</th>
             <th scope="col">Reservation ID</th>
-            <th scope="col">Lessee</th>
-            <th scope="col"></th>
-            <th scope="col">Accommodation</th>
-            <th scope="col"></th>
+            <th colspan="2" scope="col">Lessee</th>
+            <th colspan="2" scope="col">Accommodation</th>
             <th scope="col">View Date</th>
             <th scope="col">Note</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="re : ${saRe}">
-            <th th:text="${re.getStatus()}"></th>
-            <td th:text="${re.getReservationID()}"></td>
-            <td th:text="${re.getLessee().getLastName()} + ' ' + ${re.getLessee().getFirstName()}"></td>
-            <td class="details-container">
-                <button class="btn btn-link p-0 toggle-details" type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                        <path d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659"/>
-                    </svg>
-                </button>
-                <table class="table details-table">
-                    <thead>
-                    <tr>
-                        <th th:text="${re.getLessee().getAddress()}"></th>
-                    </tr>
-                    <tr>
-                        <th th:text="${re.getLessee().getEmail()}"></th>
-                    </tr>
-                    <tr>
-                        <th th:text="${re.getLessee().getPhoneNumber()}"></th>
-                    </tr>
-                    </thead>
-                </table>
-            </td>
-            <td th:text="${re.getAccom().getAccommodationName()}"></td>
-            <td class="details-container">
-                <button class="btn btn-link p-0 toggle-details" type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                        <path d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659"/>
-                    </svg>
-                </button>
-                <table class="table details-table">
-                    <thead>
-                    <tr>
-                        <th th:text="'Accommodation ID: ' + ${re.getAccom().getAccommodationID()}"></th>
-                    </tr>
-                    <tr>
-                        <th style="white-space: nowrap;" th:text="'Address: ' + ${re.getAccom().getStreet()} + ' ' +${re.getAccom().getWard()} + ' ' + ${re.getAccom().getDistrict()} + ' ' + ${re.getAccom().getCity()}"></th>
-                    </tr>
-                    <tr>
-                        <th th:text="'Direction: ' + ${re.getAccom().getDirection()}"></th>
-                    </tr>
-                    <tr>
-                        <th th:text="'Size (m²): ' + ${re.getAccom().getSize()}"></th>
-                    </tr>
-                    <tr>
-                        <th th:text="'Number of Rooms: ' + ${re.getAccom().getNumberOfRooms()}"></th>
-                    </tr>
-                    <tr>
-                        <th th:text="'Lessor: ' + ${re.getAccom().getLessorID().getLastName()} + ' ' + ${re.getAccom().getLessorID().getFirstName()}">
-                    </tr>
-                    <tr>
-                        <th th:text="'Type: ' + ${re.getAccom().getAccomTypeID().getType()}"></th>
-                    </tr>
-                    </thead>
-                </table>
-            </td>
-            <td th:text="${re.getViewDate()}"></td>
-            <td th:text="${re.getNote()}"></td>
-        </tr>
+            <tr th:each="re : ${saRe}">
+                <td th:text="${re.getStatus()}"></td>
+                <td th:text="${re.getReservationID()}"></td>
+                <!--Lessee-->
+                <td colspan="2" class="details-container">
+                    <!-- Tên Lessee -->
+                    <span th:text="${re.getLessee().getLastName()} + ' ' + ${re.getLessee().getFirstName()}"></span>
+                    <!-- Nút toggle -->
+                    <button class="btn btn-link p-0 toggle-details" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                            <path d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659"/>
+                        </svg>
+                    </button>
+                    <table class="table details-table">
+                        <thead>
+                        <tr>
+                            <th>Address: </th>
+                            <td th:text="${re.getLessee().getAddress()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Email: </th>
+                            <td th:text="${re.getLessee().getEmail()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Phone: </th>
+                            <td th:text="${re.getLessee().getPhoneNumber()}"></td>
+                        </tr>
+                        </thead>
+                    </table>
+                </td>
+                <!--Accom-->
+                <td colspan="2" class="details-container">
+                    <!-- Tên Accommodation -->
+                    <span th:text="${re.getAccom().getAccommodationName()}"></span>
+                    <!-- Nút toggle -->
+                    <button class="btn btn-link p-0 toggle-details" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                            <path d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659"/>
+                        </svg>
+                    </button>
+                    <!-- Bảng chi tiết -->
+                    <table class="table details-table">
+                        <thead>
+                        <tr>
+                            <th>Accommodation ID: </th>
+                            <td th:text="${re.getAccom().getAccommodationID()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Address: </th>
+                            <td style="white-space: nowrap;" th:text="${re.getAccom().getAddress()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Direction: </th>
+                            <td th:text="${re.getAccom().getDirection()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Size (m²): </th>
+                            <td th:text="${re.getAccom().getSize()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Number of Rooms: </th>
+                            <td th:text="${re.getAccom().getNumberOfRooms()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Lessor: </th>
+                            <td th:text="${re.getAccom().getLessorID().getLastName()} + ' '+ ${re.getAccom().getLessorID().getFirstName()}"></td>
+                        </tr>
+                        <tr>
+                            <th style="white-space: nowrap;">Accommodation Type: </th>
+                            <td th:text="${re.getAccom().getAccomType()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Amenity: </th>
+                            <td th:text="${re.getAccom().getAmenity()}"></td>
+                        </tr>
+                        <tr th:each="renttype, start : ${re.getAccom().getRentType()}">
+                            <th th:if="${start.index == 0}">Rent Information:</th>
+                            <th th:if="${start.index != 0}"></th>
+                            <td style="white-space: nowrap;" th:text="'Rent Type: ' + ${renttype} + ' - Price: ' + ${re.getAccom().getPrice()[start.index]} + ' - Deposit: ' + ${re.getAccom().getDeposit()[start.index]}"></td>
+                        </tr>
+                        </thead>
+                    </table>
+                </td>
+                <td th:text="${re.getViewDate()}"></td>
+                <td th:text="${re.getNote()}"></td>
+            </tr>
         </tbody>
     </table>
 </div>
 
 <script>
     document.querySelectorAll('.toggle-details').forEach(button => {
-        button.addEventListener('click', function () {const detailsTable = this.closest('.details-container').querySelector('.details-table');
-            detailsTable.classList.toggle('show');
+        button.addEventListener('click', function () {
+            // Tìm bảng chi tiết trong container hiện tại
+            const detailsTable = this.closest('.details-container').querySelector('.details-table');
+
+            // Kiểm tra nếu bảng tồn tại
+            if (detailsTable) {
+                detailsTable.classList.toggle('show'); // Thêm/xóa lớp 'show'
+            } else {
+                console.error('Details table not found for this button.');
+            }
         });
     });
+
+</script>
+<script>
+    document.querySelectorAll('.toggle-icon').forEach(icon => {
+        icon.addEventListener('click', function () {
+            // Tìm bảng chi tiết trong container
+            const detailsTable = this.closest('.details-container').querySelector('.details-table');
+            if (detailsTable) {
+                detailsTable.classList.toggle('show');
+            }
+        });
+    });
+
 </script>
 </body>
 </html>

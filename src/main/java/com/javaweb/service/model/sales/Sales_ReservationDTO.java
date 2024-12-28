@@ -2,6 +2,7 @@ package com.javaweb.service.model.sales;
 
 import com.javaweb.entity.AccomEntity;
 import com.javaweb.entity.LesseeEntity;
+import com.javaweb.service.model.AccomDTO;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
@@ -21,7 +22,7 @@ public class Sales_ReservationDTO {
     private Status status = Status.In_progress;
 
     private LesseeEntity lessee;
-    private AccomEntity accom;
+    private AccomDTO accom;
 
     public int getReservationID() {
         return reservationID;
@@ -63,11 +64,11 @@ public class Sales_ReservationDTO {
         this.lessee = lessee;
     }
 
-    public AccomEntity getAccom() {
+    public AccomDTO getAccom() {
         return accom;
     }
 
-    public void setAccom(AccomEntity accom) {
+    public void setAccom(AccomDTO accom) {
         this.accom = accom;
     }
 }

@@ -1,5 +1,7 @@
 package com.javaweb.service.model;
 
+import com.javaweb.entity.LessorEntity;
+
 public class AccomDTO {
 
 	private int accommodationID;
@@ -8,7 +10,8 @@ public class AccomDTO {
 	private String direction;
 	private float size;
 	private int numberOfRooms;
-	private int lessorID;
+	private String image;
+	private LessorEntity lessorID;
 	private int salesID;
 	private String amenity;
 	private String[] rentType;
@@ -64,11 +67,19 @@ public class AccomDTO {
 		this.numberOfRooms = numberOfRooms;
 	}
 
-	public int getLessorID() {
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public LessorEntity getLessorID() {
 		return lessorID;
 	}
 
-	public void setLessorID(int lessorID) {
+	public void setLessorID(LessorEntity lessorID) {
 		this.lessorID = lessorID;
 	}
 

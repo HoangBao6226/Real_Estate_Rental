@@ -77,25 +77,25 @@ VALUES
     ('Dễ dàng tìm kiếm', 'Có rất nhiều phòng trọ trên thị trường.', 5),	
 	('Môi trường sống đa dạng', 'Có cơ hội làm quen và giao lưu với nhiều người từ khắp nơi, tạo ra một môi trường sống đa dạng và sôi động.', 5);
 
-INSERT INTO Accommodation (accommodationName, street, ward, district, city, direction, size, numberOfRooms, lessorID, salesID, accomTypeID)
+INSERT INTO Accommodation (accommodationName, street, ward, district, city, direction, size, numberOfRooms, lessorID, salesID, accomTypeID,image)
 VALUES
-	('The Elysian Apartment', '46 Nguyễn Huệ', 'Bến Nghé', 'Quận 1', 'Hồ Chí Minh', 'Nam', 75.00, 2, 1, 2, 1),
-	('Azure Skies Studio', '123 Thảo Điền', 'An Thú', 'Quận 2', 'Hồ Chí Minh', 'Đông', 40.00, 1, 3, 2, 2),
-	('The Haven Villa', '225 Nguyễn Văn Linh', 'Tân Phú', 'Quận 7', 'Hồ Chí Minh', 'Nam', 250.00, 5, 3, 2, 3),
-	('The Grandiose House', '79 Nguyễn Thị Minh Khai', '6', 'Quận 3', 'Hồ Chí Minh', 'Bắc', 120.00, 3, 3, 2, 4),
-	('The Pinnacle Room', '88 Phạm Ngọc Thạch', 'Phú Nhuận', 'Quận 5', 'Hồ Chí Minh', 'Tây', 30.00, 1, 5, 2, 5),
+	('The Elysian', '46 Nguyễn Huệ', 'Bến Nghé', 'Quận 1', 'Hồ Chí Minh', 'Nam', 75.00, 2, 1, 2, 1,"Apartment_1.jpg"),
+	('Azure Skies', '123 Thảo Điền', 'An Thú', 'Quận 2', 'Hồ Chí Minh', 'Đông', 40.00, 1, 3, 2, 2,"Studio_1.jpg"),
+	('The Haven', '225 Nguyễn Văn Linh', 'Tân Phú', 'Quận 7', 'Hồ Chí Minh', 'Nam', 250.00, 5, 3, 2, 3,"Villa_1.jpg"),
+	('The Grandiose', '79 Nguyễn Thị Minh Khai', '6', 'Quận 3', 'Hồ Chí Minh', 'Bắc', 120.00, 3, 3, 2, 4,"House_1.jpg"),
+	('The Pinnacle', '88 Phạm Ngọc Thạch', 'Phú Nhuận', 'Quận 5', 'Hồ Chí Minh', 'Tây', 30.00, 1, 5, 2, 5,"Room_1.jpg"),
 	
-    ('The Willow Creek Apartment', 'Phố Hàng Trọng', 'Hàng Trọng', 'Hoàn Kiếm', 'Hà Nội', 'Bắc', 60.00, 2, 2, 3, 1),
-	('Ocean Breeze Studio', 'Hồ Trúc Bạch', 'Trúc Bạch', 'Tây Hồ', 'Hà Nội', 'Tây', 45.00, 1, 6, 3, 2),
-	('The Forest Retreat Villa', '1162 Nguyễn Du', 'Đống Đa', 'Đống Đa', 'Hà Nội', 'Nam', 180.00, 4, 4, 3, 3),
-	('Mountain View House', '80 Võ Chí Công', 'Cửa Lò', 'Bắc Từ Liêm', 'Hà Nội', 'Đông', 100.00, 3, 4, 3, 4),
-	('The Sunnyside Room', '638 Trường Chinh', 'Thanh Xuân Trung', 'Thanh Xuân', 'Hà Nội', 'Nam', 25.00, 1, 7, 3, 5),
+    ('The Willow Creek', 'Phố Hàng Trọng', 'Hàng Trọng', 'Hoàn Kiếm', 'Hà Nội', 'Bắc', 60.00, 2, 2, 3, 1,"Apartment_2.jpg"),
+	('Ocean Breeze', 'Hồ Trúc Bạch', 'Trúc Bạch', 'Tây Hồ', 'Hà Nội', 'Tây', 45.00, 1, 6, 3, 2,"Studio_2.jpg"),
+	('The Forest Retreat', '1162 Nguyễn Du', 'Đống Đa', 'Đống Đa', 'Hà Nội', 'Nam', 180.00, 4, 4, 3, 3,"Villa_2.jpg"),
+	('Mountain View', '80 Võ Chí Công', 'Cửa Lò', 'Bắc Từ Liêm', 'Hà Nội', 'Đông', 100.00, 3, 4, 3, 4,"House_2.jpg"),
+	('The Sunnyside', '638 Trường Chinh', 'Thanh Xuân Trung', 'Thanh Xuân', 'Hà Nội', 'Nam', 25.00, 1, 7, 3, 5,"Room_2.jpg"),
 	
-    ('The Wanderlust Apartment', '980 Võ Nguyên Giáp', 'Khai Hương', 'Ngũ Hành Sơn', 'Đà Nẵng', 'Đông', 80.00, 2, 7, 3, 1),
-	('The Nomad Studio', '76 Trường Sa', 'An Hải Bắc', 'Sơn Trà', 'Đà Nẵng', 'Nam', 35.00, 1, 5, 3, 2),
-	('The Eccentric Villa', '90 Hoàng Hoa Thắm', 'Thanh Khê Tây', 'Thanh Khê', 'Đà Nẵng', 'Bắc', 200.00, 4, 4, 3, 3),
-	('The Bohemian House', '764 Nguyễn Văn Linh', 'Liên Chiều', 'Liên Chiều', 'Đà Nẵng', 'Tây', 150.00, 3, 1, 3, 4),
-	('The Enigma Room', '912 Nguyễn Văn Linh', 'Cẩm Lệ', 'Cẩm Lệ', 'Đà Nẵng', 'Đông', 20.00, 1, 3, 3, 5);
+    ('The Wanderlust', '980 Võ Nguyên Giáp', 'Khai Hương', 'Ngũ Hành Sơn', 'Đà Nẵng', 'Đông', 80.00, 2, 7, 3, 1,"Apartment_3.jpg"),
+	('The Nomad', '76 Trường Sa', 'An Hải Bắc', 'Sơn Trà', 'Đà Nẵng', 'Nam', 35.00, 1, 5, 3, 2,"Studio_3.jpg"),
+	('The Eccentric', '90 Hoàng Hoa Thắm', 'Thanh Khê Tây', 'Thanh Khê', 'Đà Nẵng', 'Bắc', 200.00, 4, 4, 3, 3,"Villa_3.jpg"),
+	('The Bohemian', '764 Nguyễn Văn Linh', 'Liên Chiều', 'Liên Chiều', 'Đà Nẵng', 'Tây', 150.00, 3, 1, 3, 4,"House_3.jpg"),
+	('The Enigma', '912 Nguyễn Văn Linh', 'Cẩm Lệ', 'Cẩm Lệ', 'Đà Nẵng', 'Đông', 20.00, 1, 3, 3, 5,"Room_3.jpg");
 
 INSERT INTO Amenity (amenityName, description)
 VALUES
@@ -290,12 +290,13 @@ ORDER BY RAND()
 LIMIT 3;
 
 select * from status where statusID = 2;
-
+select * from accommodation;
+select count(accommodationID) from accommodation where accommodation.accomtypeID = '2';
 select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accommodation.accomTypeID 
 from accommodation  join accomtype on accommodation.accomTypeID = accomtype.accomTypeID 
 where 1 = 1  AND accomType LIKE '%Studio%' AND type like'%Studio%'
 group by accommodation.accommodationID;
-
+select * from accommodation;
 select accommodation.accommodationID, accommodationName, street, ward, district, city, province, size, numberOfRooms, lessorID, direction, accommodation.accomTypeID 
 from accommodation  join accomtype on accommodation.accomTypeID = accomtype.accomTypeID join detailrenttype on accommodation.accommodationID = detailrenttype.accommodationID join renttype on detailrenttype.renttypeID = renttype.renttypeID join detailstatus on accommodation.accommodationID = detailstatus.accommodationID 
 where detailstatus.statusID = 1  AND numberOfRooms = 2 AND `type` like'%Apartment%' AND (rentTypeName like'%Yearly%' )  

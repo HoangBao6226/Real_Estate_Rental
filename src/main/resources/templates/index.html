@@ -66,7 +66,7 @@
                         <!-- Kiểm tra nếu chưa đăng nhập -->
                         <div th:if="${user == null}">
                           <a th:href="@{/login}">
-                            <i class="fa fa-calendar"></i> Log in
+                            <i class="fa fa-user"></i> Log in
                           </a>
                         </div>
                         <!-- Kiểm tra nếu đã đăng nhập -->
@@ -153,17 +153,14 @@
               <div class="tab-content" id="myTabContent" th:each="item : ${accomType}">
                 <div class="tab-pane fade" th:class="${item.getType() == 'Apartment'} ? 'tab-pane fade show active' : 'tab-pane fade'" th:id="${item.getType()}" role="tabpanel" th:aria-labelledby="${item.getType()} + '-tab'">
                   <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                       <div class="info-table">
                         <ul>
                           <li th:each="code : ${item.getAdCode()}"><p th:text="${code}"></p></li>
                         </ul>
                       </div>
                     </div>
-                    <div class="col-lg-6">
-                      <img src="/lessee/assets/images/deal-01.jpg" alt="">
-                    </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-8">
                       <h4>Extra Info About <p th:text="${item.getType()}" style="font-size: 20px"></p></h4>
                       <ul>
                         <li th:each="des : ${item.getAdDes()}"><p th:text="${des}" style="text-align: justify"></p><hr></li>
@@ -194,7 +191,7 @@
 <!--        DANH SÁCH BĐS NỔI BẬT-->
         <div class="col-lg-4 col-md-6" th:each="ac : ${accommodation}">
           <div class="item">
-            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><img src="/lessee/assets/images/property-01.jpg" alt=""></a>
+            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><img th:src="'/lessee/assets/images/' + ${ac.getImage()}" alt=""></a>
             <span class="category"><p th:text="${ac.getAccomType()}"></p></span>
             <h6></h6>
             <h4><a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><h3 th:text="${ac.getAccommodationName()}"></h3></a></h4>
@@ -232,7 +229,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div id="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7839.904952739309!2d106.67464379575955!3d10.73814625599458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f62a90e5dbd%3A0x674d5126513db295!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgU8OgaSBHw7Ju!5e0!3m2!1svi!2s!4v1732886957259!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7839.904952739309!2d106.67464379575955!3d10.73814625599458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f62a90e5dbd%3A0x674d5126513db295!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgU8OgaSBHw7Ju!5e0!3m2!1svi!2s!4v1732886957259!5m2!1svi!2s" width="1110" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
@@ -264,7 +261,6 @@
   </footer>
 
   <!-- Scripts -->
-
   <!-- Bootstrap core JavaScript -->
   <script src="/lessee/vendor/jquery/jquery.min.js"></script>
   <script src="/lessee/vendor/bootstrap/js/bootstrap.min.js"></script>
