@@ -11,6 +11,7 @@ public class AccomDTO {
 	private float size;
 	private int numberOfRooms;
 	private String image;
+	private String map;
 	private LessorEntity lessorID;
 	private int salesID;
 	private String amenity;
@@ -73,6 +74,14 @@ public class AccomDTO {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getMap() {
+		return map;
+	}
+
+	public void setMap(String map) {
+		this.map = map;
 	}
 
 	public LessorEntity getLessorID() {

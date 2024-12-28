@@ -122,7 +122,7 @@ public class AccomRepoImplement implements AccomRepoCustom {
 	@Override
 	public List<AccomEntity> findAllAccomAvailable() {
 
-		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, image, accommodation.accomTypeID from accommodation ");
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, image, map, accommodation.accomTypeID from accommodation ");
 		StringBuilder where = new StringBuilder(" where status = 'Available' ");
 		sql.append(where);
 		Query query = entityManager.createNativeQuery(sql.toString(), AccomEntity.class);
@@ -139,7 +139,7 @@ public class AccomRepoImplement implements AccomRepoCustom {
 		}
 		List<Integer> randomIds = new ArrayList<>(randomIdsSet);
 
-		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, image, accommodation.accomTypeID from accommodation ");
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, image, map, accommodation.accomTypeID from accommodation ");
 		StringBuilder where = new StringBuilder(" where status = 'Available' ORDER BY RAND() LIMIT 3");
 		sql.append(where);
 		System.out.println(sql.toString());
@@ -151,7 +151,7 @@ public class AccomRepoImplement implements AccomRepoCustom {
 	@Override
 	public List<AccomEntity> searchAccom(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName) {
 
-		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, image, accommodation.accomTypeID from accommodation ");
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, image, map, accommodation.accomTypeID from accommodation ");
 		joinTableAccom(params, amenityName, rentTypeName, sql);
 		StringBuilder where = new StringBuilder(" where 1 = 1 ");
 		queryNormal(params, where);
@@ -168,7 +168,7 @@ public class AccomRepoImplement implements AccomRepoCustom {
 	@Override
 	public List<AccomEntity> searchAccomAvailable(Map<String, Object> params, List<String> amenityName, List<String> rentTypeName) {
 
-		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, image, accommodation.accomTypeID from accommodation ");
+		StringBuilder sql = new StringBuilder("select accommodation.accommodationID, accommodationName, street, ward, district, city, size, numberOfRooms, status, lessorID, salesID, direction, image, map, accommodation.accomTypeID from accommodation ");
 		joinTableAccom(params, amenityName, rentTypeName, sql);
 		StringBuilder where = new StringBuilder(" where status = 'Available' ");
 		queryNormal(params, where);

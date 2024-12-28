@@ -74,7 +74,8 @@ CREATE TABLE Accommodation (
 	image VARCHAR(255),
 	lessorID INT,
     salesID INT,
-    accomTypeID INT
+    accomTypeID INT, 
+    map TEXT
 ) ENGINE=InnoDB;
 
 CREATE TABLE Amenity (

@@ -44,6 +44,9 @@ public class AccomEntity {
 	@Column(name = "image")
 	private String image;
 
+	@Column(name = "map")
+	private String map;
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	private Status status;
@@ -152,6 +155,14 @@ public class AccomEntity {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getMap() {
+		return map;
+	}
+
+	public void setMap(String map) {
+		this.map = map;
 	}
 
 	public Status getStatus() {
