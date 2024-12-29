@@ -51,29 +51,58 @@ public class InvoiceSerImplement implements InvoiceService {
         LocalDateTime startDate = LocalDateTime.parse(start);
         LocalDateTime endDate = LocalDateTime.parse(end);
 
-        try {
-            AccomEntity accomEntity = accomRepository.findAvailableByaccommodationID(accomID);
+        AccomEntity accomEntity = accomRepository.findAvailableByaccommodationID(accomID);
 
-            RentTypeEntity rentTypeEntity = rentTypeRepository.findById(rtID).get();
-            AccountEntity accountEntity = accountRepository.findByUsername(username);
-            LesseeEntity lesseeID = accountEntity.getLesseeID();
+//        if(accomEntity != null) {
+            try {
+                RentTypeEntity rentTypeEntity = rentTypeRepository.findById(rtID).get();
+                AccountEntity accountEntity = accountRepository.findByUsername(username);
+                LesseeEntity lesseeID = accountEntity.getLesseeID();
 
-            InvoiceEntity invoiceEntity = new InvoiceEntity();
-            invoiceEntity.setAccommodationID(accomEntity);
-            invoiceEntity.setRentTypeID(rentTypeEntity);
-            invoiceEntity.setLesseeID(lesseeID);
-            invoiceEntity.setTotalPrice(price);
-            invoiceEntity.setInvoiceDate(date);
-            invoiceEntity.setStartDate(startDate);
-            invoiceEntity.setEndDate(endDate);
+                InvoiceEntity invoiceEntity = new InvoiceEntity();
+                invoiceEntity.setAccommodationID(accomEntity);
+                invoiceEntity.setRentTypeID(rentTypeEntity);
+                invoiceEntity.setLesseeID(lesseeID);
+                invoiceEntity.setTotalPrice(price);
+                invoiceEntity.setInvoiceDate(date);
+                invoiceEntity.setStartDate(startDate);
+                invoiceEntity.setEndDate(endDate);
 
-            accomEntity.setStatus(AccomEntity.Status.Occupied);
-            accomRepository.save(accomEntity);
+                accomEntity.setStatus(AccomEntity.Status.Occupied);
+                accomRepository.save(accomEntity);
 
-            return invoiceRepository.save(invoiceEntity);
+                return invoiceRepository.save(invoiceEntity);
 
-        } catch (Exception e) {
-            throw new RuntimeException("Accommodation is not available for deposit");
-        }
+            } catch (Exception e) {
+                throw new RuntimeException("Accommodation is not available for deposit");
+            }
+//        } else {
+//            AccomEntity accom = accomRepository.findById(accomID).get();
+//            InvoiceEntity invoiceEntity = invoiceRepository.findByAccommodationID(accom);
+////            if(invoiceEntity.getStatus().equals(InvoiceEntity.Status.In_progress)) {
+//                if(startDate.isAfter(invoiceEntity.getEndDate()) || endDate.isBefore(invoiceEntity.getStartDate())) {
+//                    try {
+//                        RentTypeEntity rentTypeEntity = rentTypeRepository.findById(rtID).get();
+//                        AccountEntity accountEntity = accountRepository.findByUsername(username);
+//                        LesseeEntity lesseeID = accountEntity.getLesseeID();
+//
+//                        InvoiceEntity invoiceEntity2 = new InvoiceEntity();
+//                        invoiceEntity2.setAccommodationID(accom);
+//                        invoiceEntity2.setRentTypeID(rentTypeEntity);
+//                        invoiceEntity2.setLesseeID(lesseeID);
+//                        invoiceEntity2.setTotalPrice(price);
+//                        invoiceEntity2.setInvoiceDate(date);
+//                        invoiceEntity2.setStartDate(startDate);
+//                        invoiceEntity2.setEndDate(endDate);
+//
+//                        return invoiceRepository.save(invoiceEntity2);
+//
+//                    } catch (Exception e) {
+//                        throw new RuntimeException("Accommodation is not available for deposit");
+//                    }
+//                }
+////            }
+//        }
+//        return null;
     }
 }

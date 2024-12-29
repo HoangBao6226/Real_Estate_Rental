@@ -26,6 +26,9 @@ import java.util.Map;
 public class PaymentController {
 
     @Autowired
+    private AccomService accomService;
+
+    @Autowired
     private InvoiceService invoiceService;
 
     @Autowired
@@ -50,12 +53,18 @@ public class PaymentController {
         session.setAttribute("startDate", params.get("startDate"));
         session.setAttribute("endDate", params.get("endDate"));
 
-        String deposit = (String) session.getAttribute("deposit");
-        int amount = Integer.parseInt(deposit);
-        String payment = paymentService.createPayment(req, amount);
+        String id = (String) session.getAttribute("accommodationID");
 
-        res.sendRedirect(payment);
 
+        if (accomService.checkAccomAvailability(Integer.parseInt(id))) {
+            String deposit = (String) session.getAttribute("deposit");
+            int amount = Integer.parseInt(deposit);
+            String payment = paymentService.createPayment(req, amount);
+
+            res.sendRedirect(payment);
+        } else {
+            throw new RuntimeException("Accommodation is not available for deposit");
+        }
     }
 
     @GetMapping("/vn-pay-callback")

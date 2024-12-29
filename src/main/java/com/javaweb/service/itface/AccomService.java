@@ -27,4 +27,6 @@ public interface AccomService {
 	void updateAccom(int id, NewAccomDTO accommodation, LessorEntity lessorID);
 
 	void deleteAccom(int id);
+
+	boolean checkAccomAvailability(int accomId);
 }

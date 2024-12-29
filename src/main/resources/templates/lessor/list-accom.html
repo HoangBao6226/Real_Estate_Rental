@@ -245,7 +245,7 @@
         table.table td a.edit {
             color: #FFC107;
         } */
-        table.table td a.view {
+        table.table td a.continue {
             color: #ffc720;
         }
         table.table td a.edit {
@@ -323,12 +323,13 @@
             background-color: #e9f7df; /* Màu nền cho các dòng chẵn */
         }
     </style>
+
     <script type="text/javascript">
         $(document).ready(function() {
             var selectedRow = null;
 
             // Open modal for adding or editing
-            $(".add-new, .edit").click(function () {
+            $(".add-new, .edit, .continue").click(function () {
                 $("#editModal").modal("show");
 
                 if ($(this).hasClass("add-new")) {
@@ -579,6 +580,74 @@
                 location.reload();
             });
 
+            // Continue renting
+            $("#continue").click(function () {
+                var isValid = true;
+                var formData = {
+                    accommodationName: $("#accommodationName").val().trim(),
+                    street: $("#street").val().trim(),
+                    ward: $("#ward").val().trim(),
+                    district: $("#district").val().trim(),
+                    city: $("#city").val().trim(),
+                    direction: $("#direction").val().trim(),
+                    size: $("#size").val().trim(),
+                    numberOfRooms: $("#numberOfRooms").val().trim(),
+                    type: $("#type").val().trim(),
+                    rentTypeName: [],
+                    deRTs: []
+                };
+
+                $(".rentTypeRow").each(function () {
+                    const rentTypeName = $(this).find(".rentTypeName").val().trim();
+                    const price = parseFloat($(this).find(".price").val().trim());
+                    const deposit = parseFloat($(this).find(".deposit").val().trim());
+
+                    if (rentTypeName && price && deposit) {
+                        formData.rentTypeName.push(rentTypeName);
+                        formData.deRTs.push({price, deposit});
+                    } else {
+                        isValid = false;
+                    }
+                });
+
+                // Xóa lớp lỗi trước khi kiểm tra
+                $(".form-control").removeClass("error");
+
+                // Kiểm tra từng trường
+                $.each(formData, function (key, value) {
+                    var field = $("#" + key);
+                    if (!value) {
+                        field.addClass("error");
+                        isValid = false;
+                        if (!field.is(":focus")) {
+                            field.focus(); // Đặt focus vào trường đầu tiên bị lỗi
+                        }
+                        return false; // Thoát vòng lặp nếu gặp lỗi
+                    }
+                });
+
+                if (!isValid) return; // Không lưu nếu có lỗi
+
+                var url = selectedRow ? `/lessor/list-accom/${selectedRow.data("id")}` : `/lessor/list-accom`;
+                var method = selectedRow ? "PUT" : "POST";
+
+                // Gửi yêu cầu tới server
+                fetch(url, {
+                    method: method,
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                }).then(response => response.json())
+                $("#editModal").modal("hide");
+                if (selectedRow) {
+                    alert("Continue renting success");
+                } else {
+                    alert("Add success");
+                }
+                location.reload();
+            });
+
             // Delete row on delete button click
             $(document).on("click", ".delete", function () {
                 var confirmation = confirm("Are you sure you want to delete this accommodation?");
@@ -696,9 +765,19 @@
                         <td th:text="${rt.getPrice()}"></td>
                         <td th:text="${rt.getDeposit()}"></td>
                         <td th:text="${ac.getStatus().toString()}" th:rowspan="${#lists.size(ac.getListDetailRT())}"></td>
-                        <td th:if="${ac.getStatus().toString() != 'Occupied'}" th:rowspan="${#lists.size(ac.getListDetailRT())}">
+                        <td th:if="${ac.getStatus().toString() == 'Available'}" th:rowspan="${#lists.size(ac.getListDetailRT())}">
                             <!-- Actions -->
                             <a class="edit" title="Edit"><i class="material-icons">&#xE254;</i></a>
+                            <a class="delete" title="Delete"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                        <td th:if="${ac.getStatus().toString() == 'Pending_Approval'}" th:rowspan="${#lists.size(ac.getListDetailRT())}">
+                            <!-- Actions -->
+                            <a class="edit" title="Edit"><i class="material-icons">&#xE254;</i></a>
+                            <a class="delete" title="Delete"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                        <td th:if="${ac.getStatus().toString() == 'Unavailable'}" th:rowspan="${#lists.size(ac.getListDetailRT())}">
+                            <!-- Actions -->
+                            <a class="continue" title="Continue renting" id="continue"><i class="material-icons">&#xE037;</i></a>
                             <a class="delete" title="Delete"><i class="material-icons">&#xE872;</i></a>
                         </td>
                     </tr>
@@ -719,10 +798,9 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="modalTitle" class="modal-title">Edit Accommodation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 id="modalTitle" class="modal-title">
+                        Edit Accommodation
+                    </h5>
                 </div>
                 <div class="modal-body">
                     <form id="editForm">

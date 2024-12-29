@@ -183,6 +183,7 @@ VALUES
 
 use real_estate;
 
+select * from Invoice;
 select * from Accommodation order by accommodationID DESC;
 select * from DetailRentType order by accommodationID DESC;
 select * from AccomType;
@@ -191,7 +192,6 @@ select * from Account;
 select * from Advantage;
 select * from Amenity;
 select * from DetailAmenity;
-select * from Invoice;
 select * from Lessee;
 select * from Lessor;
 select * from Payment;

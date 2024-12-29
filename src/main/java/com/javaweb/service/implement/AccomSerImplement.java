@@ -198,4 +198,16 @@ public class AccomSerImplement implements AccomService {
 		accomRepo.deleteById(id);
 	}
 
+	@Override
+	public boolean checkAccomAvailability(int accomId) {
+
+		AccomEntity accomEntity = accomRepo.findAvailableByaccommodationID(accomId);
+        if(accomEntity != null) {
+			return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }
