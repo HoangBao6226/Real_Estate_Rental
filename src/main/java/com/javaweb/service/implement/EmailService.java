@@ -7,6 +7,7 @@ import com.javaweb.repository.itface.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 
@@ -22,6 +23,7 @@ public class EmailService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Async
     public void sendPaymentEmail(String to, int id, int amount) {
 
         InvoiceEntity re = invoiceRepository.findById(id).get();
@@ -41,11 +43,12 @@ public class EmailService {
                 + "- Tiền cọc (đã chuyển khoản): " + amount/100 + "\n"
                 + "- Người phụ trách: " + re.getAccommodationID().getSalesID().getLastName() + " " + re.getAccommodationID().getSalesID().getFirstName() + "\n"
                 + "- Số điện thoại liên hệ: " + re.getAccommodationID().getSalesID().getPhoneNumber() + "\n\n"
-                + "Nếu quý khách cần thêm thông tin về bất động sản hoặc có bất kỳ thay đổi nào về lịch hẹn, xin vui lòng liên hệ với chúng tôi qua email này hoặc số điện thoại hỗ trợ.\n\n"
+                + "Nếu quý khách cần thêm thông tin về bất động sản xin vui lòng liên hệ với chúng tôi qua email này hoặc số điện thoại hỗ trợ.\n\n"
                 + "Chúng tôi cam kết mang đến sự hài lòng và trải nghiệm tốt nhất cho quý khách. Một lần nữa, xin cảm ơn quý khách đã lựa chọn dịch vụ của chúng tôi!\n\n"
                 + "Trân trọng,\n"
                 + "[RER]\n"
-                + "[Email liên hệ] | [Số điện thoại liên hệ]\n"
+                + "[Email liên hệ: yoonhoang6226@gmail.com]\n"
+                + "[Số điện thoại liên hệ: 0937877312]\n"
                 + "[Website công ty]";
 
         // Tạo email
@@ -59,6 +62,7 @@ public class EmailService {
         mailSender.send(message);
     }
 
+    @Async
     public void sendThankYouEmail(String to, int id) {
 
         ReservationEntity re = reservationRepository.findById(id).get();

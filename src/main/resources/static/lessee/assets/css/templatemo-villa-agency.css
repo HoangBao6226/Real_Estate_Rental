@@ -1168,7 +1168,8 @@ Properties Style
   background-color: #fafafa;
   border-radius: 10px;
   padding: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 150px;
+  /*margin-bottom: 30px;*/
 }
 
 .properties .item img {
@@ -1226,6 +1227,42 @@ Properties Style
   text-align: center;
 }
 
+.pagination {
+  margin-top: 50px;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Dùng flex để căn giữa */
+  gap: 10px; /* Khoảng cách giữa các phần tử */
+}
+
+.pagination button {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #1e1e1e;
+  border: none;
+  border-radius: 5px; /* Bo góc mềm mại hơn */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 10000;
+}
+
+.pagination button:hover {
+  background-color: #f35525;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination #pagination-numbers {
+  margin-top: 8px;
+  display: flex;
+  gap: 5px;
+  z-index: 10000;
+}
 
 /* 
 ---------------------------------------------
@@ -1469,84 +1506,6 @@ Page Header Style
   color: #fff;
 }
 
-
-/* 
----------------------------------------------
-Properties Style
---------------------------------------------- 
-*/
-
-.properties ul.properties-filter {
-  list-style: none;
-  text-align: center;
-  margin-bottom: 70px;
-}
-
-.properties ul.properties-filter li {
-  display: inline-block;
-  margin: 5px 8px;
-}
-
-.properties ul.properties-filter li a {
-  display: inline-block;
-  text-align: center;
-  font-size: 15px;
-  text-transform: capitalize;
-  font-weight: 500;
-  color: #fff;
-  background-color: #1e1e1e;
-  padding: 12px 25px;
-  border-radius: 5px;
-  transition: all .3s;
-}
-
-.properties ul.properties-filter li a.is_active {
-  background-color: #f35525;
-  color: #fff;
-}
-
-.properties ul.properties-filter li a.is_active:hover {
-  color: #fff;
-}
-
-.properties ul.properties-filter li a:hover {
-  color: #f35525;
-}
-
-.pagination {
-  margin-top: 50px;
-  text-align: center;
-  width: 100%;
-  display: flex;
-  justify-content: center; /* Dùng flex để căn giữa */
-  gap: 10px; /* Khoảng cách giữa các phần tử */
-}
-
-.pagination button {
-  padding: 10px 15px;
-  font-size: 14px;
-  color: #fff;
-  background-color: #1e1e1e;
-  border: none;
-  border-radius: 5px; /* Bo góc mềm mại hơn */
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.pagination button:hover {
-  background-color: #f35525;
-}
-
-.pagination button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.pagination #pagination-numbers {
-  margin-top: 8px;
-  display: flex;
-  gap: 5px;
-}
 
 /* 
 ---------------------------------------------

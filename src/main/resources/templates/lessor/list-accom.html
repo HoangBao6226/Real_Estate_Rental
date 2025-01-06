@@ -582,70 +582,73 @@
 
             // Continue renting
             $("#continue").click(function () {
-                var isValid = true;
-                var formData = {
-                    accommodationName: $("#accommodationName").val().trim(),
-                    street: $("#street").val().trim(),
-                    ward: $("#ward").val().trim(),
-                    district: $("#district").val().trim(),
-                    city: $("#city").val().trim(),
-                    direction: $("#direction").val().trim(),
-                    size: $("#size").val().trim(),
-                    numberOfRooms: $("#numberOfRooms").val().trim(),
-                    type: $("#type").val().trim(),
-                    rentTypeName: [],
-                    deRTs: []
-                };
+                var confirmation = confirm("Are you sure you want to continue renting this accommodation?");
+                if (confirmation) {
+                    var isValid = true;
+                    var formData = {
+                        accommodationName: $("#accommodationName").val().trim(),
+                        street: $("#street").val().trim(),
+                        ward: $("#ward").val().trim(),
+                        district: $("#district").val().trim(),
+                        city: $("#city").val().trim(),
+                        direction: $("#direction").val().trim(),
+                        size: $("#size").val().trim(),
+                        numberOfRooms: $("#numberOfRooms").val().trim(),
+                        type: $("#type").val().trim(),
+                        rentTypeName: [],
+                        deRTs: []
+                    };
 
-                $(".rentTypeRow").each(function () {
-                    const rentTypeName = $(this).find(".rentTypeName").val().trim();
-                    const price = parseFloat($(this).find(".price").val().trim());
-                    const deposit = parseFloat($(this).find(".deposit").val().trim());
+                    $(".rentTypeRow").each(function () {
+                        const rentTypeName = $(this).find(".rentTypeName").val().trim();
+                        const price = parseFloat($(this).find(".price").val().trim());
+                        const deposit = parseFloat($(this).find(".deposit").val().trim());
 
-                    if (rentTypeName && price && deposit) {
-                        formData.rentTypeName.push(rentTypeName);
-                        formData.deRTs.push({price, deposit});
-                    } else {
-                        isValid = false;
-                    }
-                });
-
-                // Xóa lớp lỗi trước khi kiểm tra
-                $(".form-control").removeClass("error");
-
-                // Kiểm tra từng trường
-                $.each(formData, function (key, value) {
-                    var field = $("#" + key);
-                    if (!value) {
-                        field.addClass("error");
-                        isValid = false;
-                        if (!field.is(":focus")) {
-                            field.focus(); // Đặt focus vào trường đầu tiên bị lỗi
+                        if (rentTypeName && price && deposit) {
+                            formData.rentTypeName.push(rentTypeName);
+                            formData.deRTs.push({price, deposit});
+                        } else {
+                            isValid = false;
                         }
-                        return false; // Thoát vòng lặp nếu gặp lỗi
+                    });
+
+                    // Xóa lớp lỗi trước khi kiểm tra
+                    $(".form-control").removeClass("error");
+
+                    // Kiểm tra từng trường
+                    $.each(formData, function (key, value) {
+                        var field = $("#" + key);
+                        if (!value) {
+                            field.addClass("error");
+                            isValid = false;
+                            if (!field.is(":focus")) {
+                                field.focus(); // Đặt focus vào trường đầu tiên bị lỗi
+                            }
+                            return false; // Thoát vòng lặp nếu gặp lỗi
+                        }
+                    });
+
+                    if (!isValid) return; // Không lưu nếu có lỗi
+
+                    var url = selectedRow ? `/lessor/list-accom/${selectedRow.data("id")}` : `/lessor/list-accom`;
+                    var method = selectedRow ? "PUT" : "POST";
+
+                    // Gửi yêu cầu tới server
+                    fetch(url, {
+                        method: method,
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(formData)
+                    }).then(response => response.json())
+                    $("#editModal").modal("hide");
+                    if (selectedRow) {
+                        alert("Continue renting success");
+                    } else {
+                        alert("Add success");
                     }
-                });
-
-                if (!isValid) return; // Không lưu nếu có lỗi
-
-                var url = selectedRow ? `/lessor/list-accom/${selectedRow.data("id")}` : `/lessor/list-accom`;
-                var method = selectedRow ? "PUT" : "POST";
-
-                // Gửi yêu cầu tới server
-                fetch(url, {
-                    method: method,
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(formData)
-                }).then(response => response.json())
-                $("#editModal").modal("hide");
-                if (selectedRow) {
-                    alert("Continue renting success");
-                } else {
-                    alert("Add success");
+                    location.reload();
                 }
-                location.reload();
             });
 
             // Delete row on delete button click
@@ -743,6 +746,7 @@
                     <th>Rent Type</th>
                     <th>Price</th>
                     <th>Deposit</th>
+                    <th>Image</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -764,6 +768,9 @@
                         <td th:text="${rt.getRentTypeID().getRentTypeName()}"></td>
                         <td th:text="${rt.getPrice()}"></td>
                         <td th:text="${rt.getDeposit()}"></td>
+                        <td th:rowspan="${#lists.size(ac.getListDetailRT())}">
+                            <img width="100%" th:src="@{/s3/image/{key}(key=${ac.getImage()})}" alt="">
+                        </td>
                         <td th:text="${ac.getStatus().toString()}" th:rowspan="${#lists.size(ac.getListDetailRT())}"></td>
                         <td th:if="${ac.getStatus().toString() == 'Available'}" th:rowspan="${#lists.size(ac.getListDetailRT())}">
                             <!-- Actions -->

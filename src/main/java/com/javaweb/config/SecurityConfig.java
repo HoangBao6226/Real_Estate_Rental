@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/lessee/assets/**", "/lessee/vendor/**").permitAll()
                         .requestMatchers( "/", "/index", "/properties", "/propertiesSearch").permitAll()
-                        .requestMatchers("/login**", "/signup").permitAll()
+                        .requestMatchers("/login**", "/signup", "/s3/image/**").permitAll()
                         .requestMatchers("/properties/**").hasRole("LESSEE")
                         .requestMatchers("/manager**").hasRole("MANAGER")
                         .requestMatchers("/sales/**").hasRole("SALES")

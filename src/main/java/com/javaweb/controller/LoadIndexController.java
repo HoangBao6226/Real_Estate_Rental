@@ -1,5 +1,6 @@
 package com.javaweb.controller;
 
+import com.javaweb.service.implement.S3Service;
 import com.javaweb.service.itface.AccomService;
 import com.javaweb.service.itface.AccomTypeService;
 import com.javaweb.service.itface.AccountService;
@@ -23,9 +24,6 @@ public class LoadIndexController {
 
 	@Autowired
 	private AccomService accomSer;
-
-	@Autowired
-	private AccountService accountService;
 
 	@GetMapping(value = "/")
 	public String loadIndex(Model model, HttpServletRequest request) {
