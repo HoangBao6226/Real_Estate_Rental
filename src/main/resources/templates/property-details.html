@@ -102,7 +102,7 @@
         <div class="col-lg-8">
           <div class="main-image">
 <!--            <img th:src="'/lessee/assets/images/' + ${accommodation.getImage()}" alt="">-->
-            <img th:src="@{/s3/image/{key}(key=${accommodation.getImage()})}" alt="">
+<!--            <img th:src="@{/s3/image/{key}(key=${accommodation.getImage()})}" alt="">-->
           </div>
           <div class="main-content">
             <span class="category" th:text="${accommodation.getAccomType()}"></span>

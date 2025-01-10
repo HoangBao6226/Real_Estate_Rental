@@ -49,16 +49,9 @@ public class AccomSerImplement implements AccomService {
 	}
 
 	@Override
-	public List<AccomDTO> findAllAccom() {
-		
-		List<AccomEntity> listAccomEntity = accomRepo.findAll();
-		List<AccomDTO> listAccomDTO = new ArrayList<AccomDTO>();
-		
-		for(AccomEntity item : listAccomEntity) {
-			AccomDTO ac = accomConverter.toAccomDTO(item);
-			listAccomDTO.add(ac);
-		}
-		return listAccomDTO;
+	public List<AccomEntity> findAllAccom() {
+
+		return accomRepo.findAll();
 	}
 
 	@Override
@@ -209,5 +202,12 @@ public class AccomSerImplement implements AccomService {
         }
 
     }
+
+	@Override
+	public void updateStatusAccom(int accomId) {
+		AccomEntity a = accomRepo.findById(accomId).get();
+		a.setStatus(AccomEntity.Status.Available);
+		accomRepo.save(a);
+	}
 
 }

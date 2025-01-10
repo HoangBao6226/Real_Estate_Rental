@@ -10,7 +10,7 @@ import java.util.List;
 public class AccomEntity {
 
 	public enum Status {
-		Available, Unavailable, Occupied, Pending_Approval;
+		Available, Unavailable, Occupied, Pending_Approval
 	}
 
 	@Id

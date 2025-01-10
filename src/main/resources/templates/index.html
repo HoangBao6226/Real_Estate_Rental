@@ -193,7 +193,9 @@
           <div class="item">
 <!--            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><img th:src="'/lessee/assets/images/' + ${ac.getImage()}" alt=""></a>-->
 <!--            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><img th:src="'https://yoon-realestate.s3.ap-southeast-2.amazonaws.com/' + ${ac.getImage()}" alt=""></a>-->
-            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><img th:src="@{/s3/image/{key}(key=${ac.getImage()})}" alt=""></a>
+            <a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}">
+<!--              <img th:src="@{/s3/image/{key}(key=${ac.getImage()})}" alt="">-->
+            </a>
             <span class="category"><p th:text="${ac.getAccomType()}"></p></span>
             <h6></h6>
             <h4><a th:href="@{/properties/{id}(id=${ac.getAccommodationID()})}"><h3 th:text="${ac.getAccommodationName()}"></h3></a></h4>

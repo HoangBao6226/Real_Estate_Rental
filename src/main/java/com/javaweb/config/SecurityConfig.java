@@ -28,7 +28,7 @@ public class SecurityConfig {
                         .requestMatchers( "/", "/index", "/properties", "/propertiesSearch").permitAll()
                         .requestMatchers("/login**", "/signup", "/s3/image/**").permitAll()
                         .requestMatchers("/properties/**").hasRole("LESSEE")
-                        .requestMatchers("/manager**").hasRole("MANAGER")
+                        .requestMatchers("/manager/**").hasRole("MANAGER")
                         .requestMatchers("/sales/**").hasRole("SALES")
                         .requestMatchers("/lessor/**").hasRole("LESSOR")
                         .anyRequest().authenticated()

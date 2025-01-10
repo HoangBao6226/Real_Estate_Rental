@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 
+import com.javaweb.entity.AccomEntity;
 import com.javaweb.entity.LessorEntity;
 import com.javaweb.service.model.AccomDTO;
 import com.javaweb.service.model.lessor.NewAccomDTO;
@@ -12,7 +13,7 @@ public interface AccomService {
 
 	AccomDTO findAccomById(int id);
 
-	List<AccomDTO> findAllAccom();
+	List<AccomEntity> findAllAccom();
 
 	List<AccomDTO> findAllAccomAvailable();
 
@@ -29,4 +30,6 @@ public interface AccomService {
 	void deleteAccom(int id);
 
 	boolean checkAccomAvailability(int accomId);
+
+	void updateStatusAccom(int accomId);
 }

@@ -769,7 +769,7 @@
                         <td th:text="${rt.getPrice()}"></td>
                         <td th:text="${rt.getDeposit()}"></td>
                         <td th:rowspan="${#lists.size(ac.getListDetailRT())}">
-                            <img width="100%" th:src="@{/s3/image/{key}(key=${ac.getImage()})}" alt="">
+<!--                            <img width="100%" th:src="@{/s3/image/{key}(key=${ac.getImage()})}" alt="">-->
                         </td>
                         <td th:text="${ac.getStatus().toString()}" th:rowspan="${#lists.size(ac.getListDetailRT())}"></td>
                         <td th:if="${ac.getStatus().toString() == 'Available'}" th:rowspan="${#lists.size(ac.getListDetailRT())}">
